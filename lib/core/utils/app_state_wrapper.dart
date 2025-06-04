@@ -6,9 +6,7 @@ import 'package:plant_store/core/consts/const_texts.dart';
 class AppStateWrapper extends StatelessWidget {
   const AppStateWrapper({super.key, required this.builder});
   final Widget Function(
-      {required ConstColors colors,
-      required ConstTexts texts,
-      required ConstImgPaths images}) builder;
+      ConstColors colors, ConstTexts texts, ConstImgPaths images) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +14,6 @@ class AppStateWrapper extends StatelessWidget {
     ConstTexts texts = ConstTexts();
     ConstImgPaths images = ConstImgPaths();
 
-    return builder(colors: colors, texts: texts, images: images);
+    return builder(colors, texts, images);
   }
 }
