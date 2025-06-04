@@ -1,10 +1,1 @@
-{
-  "firestore": {
-    "database": "(default)",
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "database": {
-    "rules": "database.rules.json"
-  }
-}
+{"firestore":{"database":"(default)","rules":"firestore.rules","indexes":"firestore.indexes.json"},"database":{"rules":"database.rules.json"},"flutter":{"platforms":{"android":{"default":{"projectId":"my-plant-store-project","appId":"1:760981761202:android:a69b30b5589549ac0c2dab","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"my-plant-store-project","appId":"1:760981761202:ios:759be97c279744f80c2dab","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"my-plant-store-project","configurations":{"android":"1:760981761202:android:a69b30b5589549ac0c2dab","ios":"1:760981761202:ios:759be97c279744f80c2dab"}}}}}}
