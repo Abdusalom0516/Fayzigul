@@ -37,9 +37,13 @@ dependencies:
   dartz: ^0.10.1
   equatable: ^2.0.7
   firebase_core: ^2.15.0
-  firebase_auth: ^4.17.4  # for Auth (if you plan to use authentication)
-  cloud_firestore: ^4.7.0  # for Firestore (if you plan to use Firestore)
-  firebase_database: ^10.0.7 
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.7.0
+  firebase_database: ^10.0.7
+  flutter_bloc: ^9.1.1
+  build_runner: ^2.4.14
+  json_serializable: ^6.9.5
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
