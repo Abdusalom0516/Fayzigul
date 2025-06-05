@@ -14,7 +14,8 @@ class LoginScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isTyping = useState(false);
-    final focusNode = useFocusNode();
+    final emailFocusNode = useFocusNode();
+    final passwordFocusNode = useFocusNode();
     final isInvalidEmail = useState(false);
     final isInvalidPassword = useState(false);
     final emailController = useTextEditingController();
@@ -29,7 +30,7 @@ class LoginScreen extends HookWidget {
               // Login Top Image Section
               !isTyping.value
                   ? Expanded(
-                      flex: 2,
+                      flex: 6,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -38,21 +39,21 @@ class LoginScreen extends HookWidget {
                             images.loginPlant,
                             fit: BoxFit.cover,
                             width: 375.w,
-                            height: 310.h,
+                            height: 345.h,
                           ),
                         ],
                       ),
                     )
                   : Height(height: 55),
               Expanded(
-                flex: 3,
+                flex: 8,
                 child: Padding(
                   padding: EdgeInsetsGeometry.symmetric(
                     horizontal: 45.r,
-                    vertical: 25.r,
                   ),
                   child: Column(
                     children: [
+                      Height(height: 13),
                       // Login App Name Section
                       Text(
                         texts.appName,
@@ -83,10 +84,12 @@ class LoginScreen extends HookWidget {
                           ),
                         ),
                         child: TextField(
-                          focusNode: focusNode,
+                          controller: emailController,
+                          focusNode: emailFocusNode,
                           onTap: () => isTyping.value = true,
                           onTapOutside: (event) {
-                            focusNode.unfocus();
+                            emailFocusNode.unfocus();
+                            passwordFocusNode.unfocus();
                             isTyping.value = false;
                           },
                           cursorColor: colors.ff221fif,
@@ -142,10 +145,13 @@ class LoginScreen extends HookWidget {
                           ),
                         ),
                         child: TextField(
-                          focusNode: focusNode,
+                          controller: passwordController,
+                          focusNode: passwordFocusNode,
                           onTap: () => isTyping.value = true,
                           onTapOutside: (event) {
-                            focusNode.unfocus();
+                            emailFocusNode.unfocus();
+                            passwordFocusNode.unfocus();
+
                             isTyping.value = false;
                           },
                           cursorColor: colors.ff221fif,
@@ -175,7 +181,7 @@ class LoginScreen extends HookWidget {
                       ),
                       Height(height: 5),
                       // Login Password Invalid Section
-                      isInvalidEmail.value
+                      isInvalidPassword.value
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
