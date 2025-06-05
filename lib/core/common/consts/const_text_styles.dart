@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:plant_store/core/consts/const_font_names.dart';
+import 'package:plant_store/core/common/consts/const_font_names.dart';
 
 abstract class AppTextStyles {
-  static Lato urbanist = Lato();
+  static Lato lato = Lato();
 
   TextStyle regular({
     required Color color,
