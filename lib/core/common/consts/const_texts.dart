@@ -6,4 +6,6 @@ class ConstTexts {
   String loginRegister = "Login / Register";
   String notNow = "Not now";
   String emailInvalid = "Email invalid. Please try again.";
+  String passwordHint = "Password";
+  String passwordInvalid = "Password invalid. Please try again.";
 }
