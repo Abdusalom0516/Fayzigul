@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '18.0'  # Updated from '12.0' to a modern iOS version
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -39,5 +39,10 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    if target.name == 'BoringSSL-GRPC'  # Disable debugging symbols for BoringSSL-GRPC
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_GENERATE_DEBUGGING_SYMBOLS'] = 'NO'
+      end
+    end
   end
 end
