@@ -6,32 +6,39 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends HookWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isTyping = useState(false);
+    final focusNode = useFocusNode();
+    final isInvalidEmail = useState(false);
     return BlocBuilder<LoginBloc, LoginStates>(
       builder: (context, state) => AppStateWrapper(
         builder: (colors, texts, images) => Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Column(
             children: [
               // Login Top Image Section
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      images.loginPlant,
-                      fit: BoxFit.contain,
-                      width: 375.w,
-                      height: 391.h,
-                    ),
-                  ],
-                ),
-              ),
+              !isTyping.value
+                  ? Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Image.asset(
+                            images.loginPlant,
+                            fit: BoxFit.contain,
+                            width: 375.w,
+                            height: 391.h,
+                          ),
+                        ],
+                      ),
+                    )
+                  : Height(height: 55),
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsGeometry.symmetric(
@@ -45,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                         texts.appName,
                         style: AppTextStyles.lato.bold(
                           color: colors.ff007537,
-                          fontSize: 35.sp,
+                          fontSize: 37.sp,
                         ),
                       ),
                       Height(height: 25),
@@ -70,6 +77,12 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: TextField(
+                          focusNode: focusNode,
+                          onTap: () => isTyping.value = true,
+                          onTapOutside: (event) {
+                            focusNode.unfocus();
+                            isTyping.value = false;
+                          },
                           cursorColor: colors.ff221fif,
                           style: AppTextStyles.lato
                               .regular(
@@ -95,7 +108,23 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Height(height: 16),
+                      Height(height: 5),
+                      // Login Email Invalid Section
+                      isInvalidEmail.value
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  texts.emailInvalid,
+                                  style: AppTextStyles.lato.bold(
+                                    color: colors.ffff0000,
+                                    fontSize: 15.sp,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : SizedBox.shrink(),
+                      Height(height: 15),
                       // Login / Register Button
                       TextButton(
                         onPressed: () {},
