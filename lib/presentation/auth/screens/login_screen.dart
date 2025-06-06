@@ -5,6 +5,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_text_button.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
@@ -114,29 +115,15 @@ class LoginScreen extends HookWidget {
                           : SizedBox.shrink(),
                       Height(height: 15),
                       // Login / Register Button
-                      CustomButton(),
+                      CustomTextButton(
+                        buttonText: texts.loginRegister,
+                        textColor: colors.ffffffff,
+                        backgroundColor: colors.ff221fif,
+                        func: () {},
+                      ),
                       Height(height: 5),
                       // Login Not Now Text Section
-                      TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          overlayColor:
-                              WidgetStatePropertyAll(colors.transparent),
-                        ),
-                        child: Text(
-                          texts.notNow,
-                          style: AppTextStyles.lato
-                              .regular(
-                                color: colors.ff221fif,
-                                fontSize: 16.sp,
-                              )
-                              .copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationColor: colors.ff221fif,
-                                decorationThickness: 1.5.r,
-                              ),
-                        ),
-                      ),
+                      loginNotNowtextSection(colors, texts),
                     ],
                   ),
                 ),
@@ -144,6 +131,28 @@ class LoginScreen extends HookWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  TextButton loginNotNowtextSection(ConstColors colors, ConstTexts texts) {
+    return TextButton(
+      onPressed: () {},
+      style: ButtonStyle(
+        overlayColor: WidgetStatePropertyAll(colors.transparent),
+      ),
+      child: Text(
+        texts.notNow,
+        style: AppTextStyles.lato
+            .regular(
+              color: colors.ff221fif,
+              fontSize: 16.sp,
+            )
+            .copyWith(
+              decoration: TextDecoration.underline,
+              decorationColor: colors.ff221fif,
+              decorationThickness: 1.5.r,
+            ),
       ),
     );
   }
@@ -169,39 +178,3 @@ class LoginScreen extends HookWidget {
     );
   }
 }
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => TextButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          padding: WidgetStatePropertyAll(EdgeInsets.zero),
-        ),
-        child: Container(
-          height: 50.h,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: colors.ff221fif,
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: Text(
-            texts.loginRegister,
-            style: AppTextStyles.lato.regular(
-              color: colors.ffffffff,
-              fontSize: 16.sp,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
