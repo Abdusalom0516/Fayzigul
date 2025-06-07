@@ -13,18 +13,22 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
 
         final auth = FirebaseAuth.instance;
 
-        try {
+        if (auth.currentUser == null) {
           final credential = await auth.createUserWithEmailAndPassword(
             email: event.email,
             password: event.password,
           );
 
           await credential.user?.sendEmailVerification();
-        } on FirebaseAuthException catch (e) {
-          emit(LoginFailure(
-              e.message ?? "Error Occured on Auth Login / Register."));
-        } catch (e) {
-          emit(LoginFailure(e.toString()));
+        } else {
+          final credential = await auth.signInWithEmailAndPassword(
+            email: event.email,
+            password: event.password,
+          );
+
+          if(credential.user != null){
+            
+          }
         }
       },
     );
@@ -37,7 +41,7 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
         if (credentials != null) {
           if (credentials.emailVerified) {
           } else {
-            
+            log("Email is not verified");
           }
         }
       },
