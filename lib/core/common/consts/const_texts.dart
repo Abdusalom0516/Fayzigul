@@ -8,4 +8,5 @@ class ConstTexts {
   String emailInvalid = "Email invalid. Please try again.";
   String passwordHint = "Password";
   String passwordInvalid = "Password invalid. Please try again.";
+  String reload = "Reload";
 }

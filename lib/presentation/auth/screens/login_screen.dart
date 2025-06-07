@@ -8,6 +8,7 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
+import 'package:plant_store/presentation/auth/bloc/login/login_events.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:plant_store/presentation/auth/widgets/login_custom_text_field.dart';
@@ -29,107 +30,140 @@ class LoginScreen extends HookWidget {
       builder: (context, state) => AppStateWrapper(
         builder: (colors, texts, images) => Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Column(
-            children: [
-              // Login Top Image Section
-              !isTyping.value
-                  ? Expanded(
-                      flex: 6,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Image.asset(
-                            images.loginPlant,
-                            fit: BoxFit.cover,
-                            width: 375.w,
-                            height: 345.h,
-                          ),
-                        ],
-                      ),
-                    )
-                  : Height(height: 55),
-              Expanded(
-                flex: 8,
-                child: Padding(
-                  padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: 45.r,
-                  ),
+          body: state is LoginLoading
+              ? SizedBox(
+                  width: double.infinity,
                   child: Column(
+                    spacing: 85.h,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Height(height: 13),
-                      // Login App Name Section
-                      loginAppNameSection(texts, colors),
-                      Height(height: 25),
-                      // Login Sub Text Section
-                      loginSubTextSection(texts, colors),
-                      Height(height: 7),
-                      // Login Email TextField Section
-                      LoginCustomTextField(
-                        controller: emailController,
-                        primaryFocusNode: emailFocusNode,
-                        isTyping: isTyping,
-                        secondaryFocusNode: passwordFocusNode,
-                        hint: texts.emailHint,
+                      SizedBox(
+                        height: 25.h,
                       ),
-                      Height(height: 5),
-                      // Login Email Invalid Section
-                      isInvalidEmail.value
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  texts.emailInvalid,
-                                  style: AppTextStyles.lato.bold(
-                                    color: colors.ffff0000,
-                                    fontSize: 15.sp,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : SizedBox.shrink(),
-                      Height(height: 7),
-                      // Login Password TextField Section
-                      LoginCustomTextField(
-                        controller: passwordController,
-                        primaryFocusNode: passwordFocusNode,
-                        isTyping: isTyping,
-                        secondaryFocusNode: emailFocusNode,
-                        hint: texts.passwordHint,
+                      CircularProgressIndicator(
+                        color: colors.ff007537,
                       ),
-                      Height(height: 5),
-                      // Login Password Invalid Section
-                      isInvalidPassword.value
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  texts.passwordInvalid,
-                                  style: AppTextStyles.lato.bold(
-                                    color: colors.ffff0000,
-                                    fontSize: 15.sp,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : SizedBox.shrink(),
-                      Height(height: 15),
-                      // Login / Register Button
-                      CustomTextButton(
-                        buttonText: texts.loginRegister,
-                        textColor: colors.ffffffff,
-                        backgroundColor: colors.ff221fif,
-                        func: () {},
+                      SizedBox(
+                        width: 155.w,
+                        child: CustomTextButton(
+                          buttonText: texts.reload,
+                          textColor: colors.ffffffff,
+                          backgroundColor: colors.ff007537,
+                          func: () {},
+                        ),
                       ),
-                      Height(height: 5),
-                      // Login Not Now Text Section
-                      loginNotNowtextSection(colors, texts),
                     ],
                   ),
+                )
+              : Column(
+                  children: [
+                    // Login Top Image Section
+                    !isTyping.value
+                        ? Expanded(
+                            flex: 6,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Image.asset(
+                                  images.loginPlant,
+                                  fit: BoxFit.cover,
+                                  width: 375.w,
+                                  height: 345.h,
+                                ),
+                              ],
+                            ),
+                          )
+                        : Height(height: 55),
+                    Expanded(
+                      flex: 8,
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.symmetric(
+                          horizontal: 45.r,
+                        ),
+                        child: Column(
+                          children: [
+                            Height(height: 13),
+                            // Login App Name Section
+                            loginAppNameSection(texts, colors),
+                            Height(height: 25),
+                            // Login Sub Text Section
+                            loginSubTextSection(texts, colors),
+                            Height(height: 7),
+                            // Login Email TextField Section
+                            LoginCustomTextField(
+                              controller: emailController,
+                              primaryFocusNode: emailFocusNode,
+                              isTyping: isTyping,
+                              secondaryFocusNode: passwordFocusNode,
+                              hint: texts.emailHint,
+                            ),
+                            Height(height: 5),
+                            // Login Email Invalid Section
+                            isInvalidEmail.value
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        texts.emailInvalid,
+                                        style: AppTextStyles.lato.bold(
+                                          color: colors.ffff0000,
+                                          fontSize: 15.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox.shrink(),
+                            Height(height: 7),
+                            // Login Password TextField Section
+                            LoginCustomTextField(
+                              controller: passwordController,
+                              primaryFocusNode: passwordFocusNode,
+                              isTyping: isTyping,
+                              secondaryFocusNode: emailFocusNode,
+                              hint: texts.passwordHint,
+                            ),
+                            Height(height: 5),
+                            // Login Password Invalid Section
+                            isInvalidPassword.value
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        texts.passwordInvalid,
+                                        style: AppTextStyles.lato.bold(
+                                          color: colors.ffff0000,
+                                          fontSize: 15.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox.shrink(),
+                            Height(height: 15),
+                            // Login / Register Button
+                            CustomTextButton(
+                              buttonText: texts.loginRegister,
+                              textColor: colors.ffffffff,
+                              backgroundColor: colors.ff221fif,
+                              func: () {
+                                context.read<LoginBloc>().add(
+                                      OnLoginButtonClicked(
+                                        email: emailController.text.trim(),
+                                        password:
+                                            passwordController.text.trim(),
+                                      ),
+                                    );
+                              },
+                            ),
+                            Height(height: 5),
+                            // Login Not Now Text Section
+                            loginNotNowtextSection(colors, texts),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
         ),
       ),
     );
