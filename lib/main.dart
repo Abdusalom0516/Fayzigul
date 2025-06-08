@@ -28,26 +28,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = FirebaseAuth.instance;
-    return ScreenUtilInit(
-      designSize: Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: AppRouter.navigatorKey,
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => LoginBloc(),
-            ),
-            BlocProvider(
-              create: (context) => SignUpBloc(),
-            ),
-            BlocProvider(
-              create: (context) => VerifyEmailBloc(),
-            ),
-          ],
-          child: auth.currentUser == null ? AuthScreen() : HomeScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SignUpBloc(),
+        ),
+        BlocProvider(
+          create: (context) => VerifyEmailBloc(),
+        ),
+      ],
+      child: ScreenUtilInit(
+        designSize: Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: AppRouter.navigatorKey,
+          home: auth.currentUser == null ||
+                  auth.currentUser != null && !auth.currentUser!.emailVerified
+              ? AuthScreen()
+              : HomeScreen(),
         ),
       ),
     );

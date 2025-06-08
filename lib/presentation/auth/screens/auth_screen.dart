@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,8 +147,11 @@ class AuthScreen extends HookWidget {
                                         await auth.fetchSignInMethodsForEmail(
                                             emailController.text.trim());
 
+                                    log("Methods $methods");
+
                                     if (methods.isNotEmpty) {
                                       if (context.mounted) {
+                                        log("Using Login");
                                         context.read<LoginBloc>().add(
                                               OnLoginButtonClicked(
                                                 email:
@@ -159,6 +164,7 @@ class AuthScreen extends HookWidget {
                                       }
                                     } else {
                                       if (context.mounted) {
+                                        log("Using Sign Up");
                                         context.read<SignUpBloc>().add(
                                               OnSignUpButtonClicked(
                                                 email:
