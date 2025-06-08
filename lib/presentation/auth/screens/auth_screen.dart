@@ -185,6 +185,7 @@ class AuthScreen extends HookWidget {
                                                 password: passwordController
                                                     .text
                                                     .trim(),
+                                                context: context,
                                               ),
                                             );
                                       }
