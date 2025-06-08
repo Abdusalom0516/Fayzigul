@@ -1,5 +1,3 @@
 abstract class VerifyEmailEvents {}
 
-class OnCheckVerified extends VerifyEmailEvents {}
-
-
+class OnCheckVerifiedClicked extends VerifyEmailEvents {}

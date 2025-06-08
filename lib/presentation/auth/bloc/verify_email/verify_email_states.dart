@@ -1,12 +1,12 @@
 abstract class VerifyEmailStates {}
 
-class VerifyEmailInitial {}
+class VerifyEmailInitial extends VerifyEmailStates {}
 
-class VerifyEmailLoading {}
+class VerifyEmailLoading extends VerifyEmailStates {}
 
-class VerifyEmailSuccess {}
+class VerifyEmailSuccess extends VerifyEmailStates {}
 
-class VerifyEmailFailure {
+class VerifyEmailFailure extends VerifyEmailStates {
   String message;
 
   VerifyEmailFailure({required this.message});
