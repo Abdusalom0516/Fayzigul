@@ -4,9 +4,12 @@ class FirebaseAuthErrorCodes extends Equatable {
   static FirebaseLoginErrorCodes loginErrorCodes = FirebaseLoginErrorCodes();
   static FirebaseSignUpErrorCodes signUpErrorCodes = FirebaseSignUpErrorCodes();
 
+  
+
   @override
   List<Object?> get props => [];
 }
+
 
 class FirebaseLoginErrorCodes extends FirebaseAuthErrorCodes {
   final String invalidEmail = "invalid-email";

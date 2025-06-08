@@ -158,6 +158,7 @@ class AuthScreen extends HookWidget {
                                   backgroundColor: colors.ff221fif,
                                   func: () async {
                                     final auth = FirebaseAuth.instance;
+
                                     final methods =
                                         // ignore: deprecated_member_use
                                         await auth.fetchSignInMethodsForEmail(
