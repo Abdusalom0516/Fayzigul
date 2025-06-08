@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
+import 'package:plant_store/presentation/home/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
     return ScreenUtilInit(
       designSize: Size(375, 812),
       minTextAdapt: true,
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
               create: (context) => VerifyEmailBloc(),
             ),
           ],
-          child: AuthScreen(),
+          child: auth.currentUser == null ? AuthScreen() : HomeScreen(),
         ),
       ),
     );
