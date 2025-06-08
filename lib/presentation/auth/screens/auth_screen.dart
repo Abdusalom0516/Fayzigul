@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,29 +41,10 @@ class AuthScreen extends HookWidget {
           builder: (context, verifyEmailState) => AppStateWrapper(
             builder: (colors, texts, images) => Scaffold(
               resizeToAvoidBottomInset: false,
-              body: loginState is LoginLoading
-                  ? SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        spacing: 85.h,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 25.h,
-                          ),
-                          CircularProgressIndicator(
-                            color: colors.ff007537,
-                          ),
-                          SizedBox(
-                            width: 155.w,
-                            child: CustomTextButton(
-                              buttonText: texts.reload,
-                              textColor: colors.ffffffff,
-                              backgroundColor: colors.ff007537,
-                              func: () {},
-                            ),
-                          ),
-                        ],
+              body: loginState is LoginLoading || signUpState is SignUpLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: colors.ff007537,
                       ),
                     )
                   : Column(
@@ -158,13 +141,17 @@ class AuthScreen extends HookWidget {
                                   backgroundColor: colors.ff221fif,
                                   func: () async {
                                     final auth = FirebaseAuth.instance;
+
                                     final methods =
                                         // ignore: deprecated_member_use
                                         await auth.fetchSignInMethodsForEmail(
                                             emailController.text.trim());
 
+                                    log("Methods $methods");
+
                                     if (methods.isNotEmpty) {
                                       if (context.mounted) {
+                                        log("Using Login");
                                         context.read<LoginBloc>().add(
                                               OnLoginButtonClicked(
                                                 email:
@@ -177,6 +164,7 @@ class AuthScreen extends HookWidget {
                                       }
                                     } else {
                                       if (context.mounted) {
+                                        log("Using Sign Up");
                                         context.read<SignUpBloc>().add(
                                               OnSignUpButtonClicked(
                                                 email:
@@ -184,6 +172,7 @@ class AuthScreen extends HookWidget {
                                                 password: passwordController
                                                     .text
                                                     .trim(),
+                                                context: context,
                                               ),
                                             );
                                       }

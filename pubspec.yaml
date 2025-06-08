@@ -45,6 +45,8 @@ dependencies:
   json_serializable: ^6.9.5
   flutter_screenutil: ^5.9.3
   flutter_hooks: ^0.21.2
+  toastification: ^3.0.3
+  json_annotation: ^4.9.0
 
 
 dev_dependencies:

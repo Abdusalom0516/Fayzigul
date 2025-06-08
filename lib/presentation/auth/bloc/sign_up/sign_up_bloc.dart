@@ -1,7 +1,14 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plant_store/core/utils/app_router.dart';
+import 'package:plant_store/core/utils/toastification.dart';
+import 'package:plant_store/main.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
+import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
+import 'package:plant_store/presentation/auth/screens/confirm_verification_screen.dart';
 
 class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
   SignUpBloc() : super(SignUpInitial()) {
@@ -10,12 +17,25 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
         emit(SignUpLoading());
         final auth = FirebaseAuth.instance;
 
-        final credential = await auth.createUserWithEmailAndPassword(
-          email: event.email,
-          password: event.password,
-        );
+        try {
+          final credential = await auth.createUserWithEmailAndPassword(
+            email: event.email,
+            password: event.password,
+          );
 
-        await credential.user?.sendEmailVerification();
+          if (credential.user != null) {
+            emit(SignUpSuccess());
+            await credential.user?.sendEmailVerification();
+            AppRouter.go(ConfirmVerificationScreen());
+          } else {}
+        } catch (e) {
+          emit(SignUpFailure(message: e.toString()));
+          log(e.toString());
+          if (event.context.mounted) {
+            Toastification.error(event.context, e.toString());
+          }
+          AppRouter.open(AuthScreen());
+        }
       },
     );
   }
