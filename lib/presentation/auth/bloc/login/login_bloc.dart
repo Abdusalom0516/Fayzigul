@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/utils/app_router.dart';
@@ -15,36 +13,14 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
 
         final auth = FirebaseAuth.instance;
 
-        if (auth.currentUser == null) {
-          final credential = await auth.createUserWithEmailAndPassword(
-            email: event.email,
-            password: event.password,
-          );
+        final credential = await auth.signInWithEmailAndPassword(
+          email: event.email,
+          password: event.password,
+        );
 
-          await credential.user?.sendEmailVerification();
-        } else {
-          final credential = await auth.signInWithEmailAndPassword(
-            email: event.email,
-            password: event.password,
-          );
-
-          if (credential.user != null) {
-            AppRouter.open(HomeScreen());
-          }
-        }
-      },
-    );
-
-    on<OnReloadButtonClicked>(
-      (event, emit) {
-        final auth = FirebaseAuth.instance;
-        final credentials = auth.currentUser;
-
-        if (credentials != null) {
-          if (credentials.emailVerified) {
-          } else {
-            log("Email is not verified");
-          }
+        if (credential.user != null) {
+          emit(LoginSuccess());
+          AppRouter.open(HomeScreen());
         }
       },
     );

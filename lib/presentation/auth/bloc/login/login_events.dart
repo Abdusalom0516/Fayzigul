@@ -5,5 +5,3 @@ class OnLoginButtonClicked extends LoginEvents {
 
   OnLoginButtonClicked({required this.email, required this.password});
 }
-
-class OnReloadButtonClicked extends LoginEvents {}
