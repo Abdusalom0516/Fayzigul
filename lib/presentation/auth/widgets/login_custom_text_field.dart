@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 
-class LoginCustomTextField extends StatelessWidget {
-  const LoginCustomTextField({
+class AuthCustomTextField extends StatelessWidget {
+  const AuthCustomTextField({
     super.key,
     required this.controller,
     required this.primaryFocusNode,

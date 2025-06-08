@@ -5,7 +5,7 @@ import 'package:plant_store/presentation/auth/bloc/login/login_events.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
 
-class LoginBloc extends Bloc<LoginEvents, LoginStates> {
+class LoginBloc extends Bloc<LoginEvents, AuthStates> {
   LoginBloc() : super(LoginInitial()) {
     on<OnLoginButtonClicked>(
       (event, emit) async {
