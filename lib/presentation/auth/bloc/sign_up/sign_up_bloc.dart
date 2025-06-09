@@ -1,13 +1,10 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
-import 'package:plant_store/main.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
-import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
 import 'package:plant_store/presentation/auth/screens/confirm_verification_screen.dart';
 
 class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
@@ -34,7 +31,6 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
           if (event.context.mounted) {
             Toastification.error(event.context, e.toString());
           }
-          AppRouter.open(AuthScreen());
         }
       },
     );

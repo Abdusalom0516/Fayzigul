@@ -9,16 +9,16 @@ import 'package:plant_store/core/common/widgets/custom_text_button.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
-import 'package:plant_store/presentation/auth/bloc/login/login_events.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
+import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
-import 'package:plant_store/presentation/auth/screens/sign_up_screen.dart';
+import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
 import 'package:plant_store/presentation/auth/widgets/login_custom_text_field.dart';
 
-class LoginScreen extends HookWidget {
-  const LoginScreen({super.key});
+class SignUpScren extends HookWidget {
+  const SignUpScren({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class LoginScreen extends HookWidget {
                   )
                 : Column(
                     children: [
-                      // Login Top Image Section
+                      // Sign Up Top Image Section
                       !isTyping.value
                           ? Expanded(
                               flex: 6,
@@ -70,13 +70,13 @@ class LoginScreen extends HookWidget {
                           child: Column(
                             children: [
                               Height(height: 13),
-                              // Login App Name Section
-                              loginAppNameSection(texts, colors),
+                              // Sign Up App Name Section
+                              signUpAppNameSection(texts, colors),
                               Height(height: 25),
-                              // Login Sub Text Section
-                              loginSubTextSection(texts, colors),
+                              // Sign Up Sub Text Section
+                              signUpSubTextSection(texts, colors),
                               Height(height: 7),
-                              // Login Email TextField Section
+                              // Sign Up Email TextField Section
                               AuthCustomTextField(
                                 controller: emailController,
                                 primaryFocusNode: emailFocusNode,
@@ -85,7 +85,7 @@ class LoginScreen extends HookWidget {
                                 hint: texts.emailHint,
                               ),
                               Height(height: 5),
-                              // Login Email Invalid Section
+                              // Sign Up Email Invalid Section
                               isInvalidEmail.value
                                   ? Row(
                                       mainAxisAlignment:
@@ -102,7 +102,7 @@ class LoginScreen extends HookWidget {
                                     )
                                   : SizedBox.shrink(),
                               Height(height: 7),
-                              // Login Password TextField Section
+                              // Sign Up Password TextField Section
                               AuthCustomTextField(
                                 controller: passwordController,
                                 primaryFocusNode: passwordFocusNode,
@@ -111,7 +111,7 @@ class LoginScreen extends HookWidget {
                                 hint: texts.passwordHint,
                               ),
                               Height(height: 5),
-                              // Login Password Invalid Section
+                              // Sign Up Password Invalid Section
                               isInvalidPassword.value
                                   ? Row(
                                       mainAxisAlignment:
@@ -128,24 +128,25 @@ class LoginScreen extends HookWidget {
                                     )
                                   : SizedBox.shrink(),
                               Height(height: 15),
-                              // Login  Button
+                              // Sign Up Button
                               CustomTextButton(
                                 buttonText: texts.login,
                                 textColor: colors.ffffffff,
                                 backgroundColor: colors.ff221fif,
                                 func: () {
-                                  context.read<LoginBloc>().add(
-                                        OnLoginButtonClicked(
+                                  context.read<SignUpBloc>().add(
+                                        OnSignUpButtonClicked(
                                           email: emailController.text.trim(),
                                           password:
                                               passwordController.text.trim(),
+                                          context: context,
                                         ),
                                       );
                                 },
                               ),
                               Height(height: 5),
-                              // Login Not Now Text Section
-                              loginBottomNavigationTextSection(colors, texts),
+                              // Sign Up Not Now Text Section
+                              signUpBottomNavigationTextSection(colors, texts),
                             ],
                           ),
                         ),
@@ -158,11 +159,11 @@ class LoginScreen extends HookWidget {
     );
   }
 
-  TextButton loginBottomNavigationTextSection(
+  TextButton signUpBottomNavigationTextSection(
       ConstColors colors, ConstTexts texts) {
     return TextButton(
       onPressed: () {
-        AppRouter.open(SignUpScren());
+        AppRouter.open(LoginScreen());
       },
       style: ButtonStyle(
         overlayColor: WidgetStatePropertyAll(colors.transparent),
@@ -183,7 +184,7 @@ class LoginScreen extends HookWidget {
     );
   }
 
-  Text loginSubTextSection(ConstTexts texts, ConstColors colors) {
+  Text signUpSubTextSection(ConstTexts texts, ConstColors colors) {
     return Text(
       textAlign: TextAlign.center,
       texts.loginSubText,
@@ -194,7 +195,7 @@ class LoginScreen extends HookWidget {
     );
   }
 
-  Text loginAppNameSection(ConstTexts texts, ConstColors colors) {
+  Text signUpAppNameSection(ConstTexts texts, ConstColors colors) {
     return Text(
       texts.appName,
       style: AppTextStyles.lato.bold(

@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: AppRouter.navigatorKey,
           home: auth.currentUser == null ||
                   auth.currentUser != null && !auth.currentUser!.emailVerified
-              ? AuthScreen()
+              ? LoginScreen()
               : HomeScreen(),
         ),
       ),
