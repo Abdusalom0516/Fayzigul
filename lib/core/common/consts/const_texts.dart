@@ -17,4 +17,5 @@ class ConstTexts {
       "Go to your Gmail and Confirm your Email.";
   String plantaShining = "Planta - shining your little space";
   String seeNewArrivals = "See New Arrivals";
+  String plants = "Plants";
 }
