@@ -14,7 +14,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
-import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
+import 'package:plant_store/presentation/auth/screens/login_screen.dart';
 import 'package:plant_store/presentation/auth/widgets/login_custom_text_field.dart';
 
 class SignUpScren extends HookWidget {
@@ -130,7 +130,7 @@ class SignUpScren extends HookWidget {
                               Height(height: 15),
                               // Sign Up Button
                               CustomTextButton(
-                                buttonText: texts.login,
+                                buttonText: texts.register,
                                 textColor: colors.ffffffff,
                                 backgroundColor: colors.ff221fif,
                                 func: () {
@@ -168,18 +168,29 @@ class SignUpScren extends HookWidget {
       style: ButtonStyle(
         overlayColor: WidgetStatePropertyAll(colors.transparent),
       ),
-      child: Text(
-        texts.notNow,
-        style: AppTextStyles.lato
-            .regular(
-              color: colors.ff221fif,
-              fontSize: 16.sp,
-            )
-            .copyWith(
-              decoration: TextDecoration.underline,
-              decorationColor: colors.ff221fif,
-              decorationThickness: 1.5.r,
-            ),
+      child: Row(
+        spacing: 7.w,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(texts.doNotHaveAnAccount,
+              style: AppTextStyles.lato.regular(
+                color: colors.ff221fif,
+                fontSize: 16.sp,
+              )),
+          Text(
+            texts.login,
+            style: AppTextStyles.lato
+                .regular(
+                  color: colors.ff221fif,
+                  fontSize: 16.sp,
+                )
+                .copyWith(
+                  decoration: TextDecoration.underline,
+                  decorationColor: colors.ff221fif,
+                  decorationThickness: 1.5.r,
+                ),
+          ),
+        ],
       ),
     );
   }

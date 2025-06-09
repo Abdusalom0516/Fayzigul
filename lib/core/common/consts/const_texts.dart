@@ -11,4 +11,6 @@ class ConstTexts {
   String confirmVerification = "Confirm Verification";
   String register = "Register";
   String login = "Login";
+  String alreadyHaveAnAccount = "Already have an account?";
+  String doNotHaveAnAccount = "Don't have an account?";
 }

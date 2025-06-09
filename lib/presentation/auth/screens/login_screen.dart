@@ -128,7 +128,7 @@ class LoginScreen extends HookWidget {
                                     )
                                   : SizedBox.shrink(),
                               Height(height: 15),
-                              // Login  Button
+                              // Login Button
                               CustomTextButton(
                                 buttonText: texts.login,
                                 textColor: colors.ffffffff,
@@ -139,6 +139,7 @@ class LoginScreen extends HookWidget {
                                           email: emailController.text.trim(),
                                           password:
                                               passwordController.text.trim(),
+                                          context: context,
                                         ),
                                       );
                                 },
@@ -167,18 +168,29 @@ class LoginScreen extends HookWidget {
       style: ButtonStyle(
         overlayColor: WidgetStatePropertyAll(colors.transparent),
       ),
-      child: Text(
-        texts.notNow,
-        style: AppTextStyles.lato
-            .regular(
-              color: colors.ff221fif,
-              fontSize: 16.sp,
-            )
-            .copyWith(
-              decoration: TextDecoration.underline,
-              decorationColor: colors.ff221fif,
-              decorationThickness: 1.5.r,
-            ),
+      child: Row(
+        spacing: 7.w,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(texts.alreadyHaveAnAccount,
+              style: AppTextStyles.lato.regular(
+                color: colors.ff221fif,
+                fontSize: 16.sp,
+              )),
+          Text(
+            texts.register,
+            style: AppTextStyles.lato
+                .regular(
+                  color: colors.ff221fif,
+                  fontSize: 16.sp,
+                )
+                .copyWith(
+                  decoration: TextDecoration.underline,
+                  decorationColor: colors.ff221fif,
+                  decorationThickness: 1.5.r,
+                ),
+          ),
+        ],
       ),
     );
   }
