@@ -45,10 +45,10 @@ class HomeScreen extends StatelessWidget {
               slivers: [
                 SliverHeight(height: 25),
                 // Home Screen Bottom Plants Title Section
-                homeScreenPlantsTitleSection(texts, colors),
+                homeScreenBottomPlantsTitleSection(texts, colors),
                 SliverHeight(height: 9),
                 // Home Screen Bottom Plants GridView Section
-                homeScreenPlantsGridViewSection(),
+                homeScreenBottomPlantsGridViewSection(),
               ],
             )),
           ],
@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SliverPadding homeScreenPlantsTitleSection(
+  SliverPadding homeScreenBottomPlantsTitleSection(
       ConstTexts texts, ConstColors colors) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
@@ -146,7 +146,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SliverPadding homeScreenPlantsGridViewSection() {
+  SliverPadding homeScreenBottomPlantsGridViewSection() {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
