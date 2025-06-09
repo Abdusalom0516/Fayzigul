@@ -17,12 +17,12 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvents, VerifyEmailStates> {
           await auth.currentUser!.reload();
 
           if (auth.currentUser!.emailVerified) {
-            emit(VerifyEmailSuccess());
             if (event.context.mounted) {
               Toastification.success(
                   event.context, "Email Verified Succesfully");
             }
             AppRouter.open(HomeScreen());
+            emit(VerifyEmailSuccess());
           } else {
             emit(VerifyEmailFailure(message: "Email not verified."));
             if (event.context.mounted) {

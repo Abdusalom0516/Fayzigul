@@ -8,7 +8,7 @@ import 'package:plant_store/firebase_options.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/verify_email/verify_email_bloc.dart';
-import 'package:plant_store/presentation/auth/screens/auth_screen.dart';
+import 'package:plant_store/presentation/auth/screens/login_screen.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
 
 void main() async {
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: AppRouter.navigatorKey,
           home: auth.currentUser == null ||
                   auth.currentUser != null && !auth.currentUser!.emailVerified
-              ? AuthScreen()
+              ? LoginScreen()
               : HomeScreen(),
         ),
       ),
