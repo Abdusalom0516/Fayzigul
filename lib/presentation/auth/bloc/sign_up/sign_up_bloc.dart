@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/errors/firebase_auth_error_codes.dart';
