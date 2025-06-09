@@ -13,5 +13,8 @@ class ConstTexts {
   String login = "Login";
   String alreadyHaveAnAccount = "Already have an account?";
   String doNotHaveAnAccount = "Don't have an account?";
-  String confirmVerificationExplanation = "Go to your Gmail and Confirm your Email.";
+  String confirmVerificationExplanation =
+      "Go to your Gmail and Confirm your Email.";
+  String plantaShining = "Planta - shining your little space";
+  String seeNewArrivals = "See New Arrivals";
 }
