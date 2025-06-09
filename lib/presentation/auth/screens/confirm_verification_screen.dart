@@ -26,14 +26,28 @@ class ConfirmVerificationScreen extends StatelessWidget {
               : SizedBox(
                   width: double.infinity,
                   child: Column(
-                    spacing: 35.h,
+                    spacing: 65.h,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        texts.confirmVerification,
-                        style: AppTextStyles.lato.medium(
-                          color: colors.ff221fif,
-                          fontSize: 21.sp,
+                      SizedBox(
+                        child: Column(
+                          spacing: 7.h,
+                          children: [
+                            Text(
+                              texts.confirmVerification,
+                              style: AppTextStyles.lato.semiBold(
+                                color: colors.ff221fif,
+                                fontSize: 25.sp,
+                              ),
+                            ),
+                            Text(
+                              texts.confirmVerificationExplanation,
+                              style: AppTextStyles.lato.regular(
+                                color: colors.ff221fif,
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
