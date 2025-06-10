@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 // Home Screen Bottom Plants Title Section
                 homeScreenBottomPlantsTitleSection(texts, colors),
                 SliverHeight(height: 9),
-                // Home Screen Bottom Plants GridView Section
+                // Home Screen Bottom Plants GridView.builder Section
                 homeScreenBottomPlantsGridViewSection(),
               ],
             )),
@@ -150,6 +150,7 @@ class HomeScreen extends StatelessWidget {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
+        itemCount: 9,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 217,
