@@ -3,4 +3,5 @@ class ConstImgPaths {
   String plant = "assets/images/plant.png";
   String homeBg = "assets/images/home_bg.png";
   String equipment = "assets/images/equipment.png";
+  String kit = "assets/images/kit.png";
 }
