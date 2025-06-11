@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
@@ -5,6 +7,7 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/widgets/equipments_card.dart';
 import 'package:plant_store/presentation/home/widgets/plants_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,10 +48,36 @@ class HomeScreen extends StatelessWidget {
               slivers: [
                 SliverHeight(height: 25),
                 // Home Screen Bottom Plants Title Section
-                homeScreenBottomPlantsTitleSection(texts, colors),
+                homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
                 SliverHeight(height: 9),
                 // Home Screen Bottom Plants GridView.builder Section
                 homeScreenBottomPlantsGridViewSection(),
+                SliverHeight(height: 9),
+                // Home Screen Bottom See More Text Button Section
+                homeScreenBottomPlantsSeeMoreTextButtonsSection(
+                  colors,
+                  texts,
+                  () {
+                    log("See More Button Clicked.");
+                  },
+                ),
+                SliverHeight(height: 25),
+                // Home Screen Bottom Equipments Title Section
+                homeScreenBottomPlantsTitleSection(
+                    texts, colors, texts.equipments),
+                SliverHeight(height: 9),
+                // Home Screen Bottom Equipments GridView.builder Section
+                homeScreenBottomEquipmentsGridViewSection(),
+                SliverHeight(height: 9),
+                // Home Screen Bottom See More Text Button Section
+                homeScreenBottomPlantsSeeMoreTextButtonsSection(
+                  colors,
+                  texts,
+                  () {
+                    log("See More Button Clicked.");
+                  },
+                ),
+                SliverHeight(height: 25),
               ],
             )),
           ],
@@ -57,13 +86,47 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  SliverPadding homeScreenBottomPlantsSeeMoreTextButtonsSection(
+      ConstColors colors, ConstTexts texts, VoidCallback func) {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
+      sliver: SliverToBoxAdapter(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              style: ButtonStyle(
+                padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                overlayColor: WidgetStatePropertyAll(colors.transparent),
+              ),
+              onPressed: func,
+              child: Text(
+                texts.seeMore,
+                style: AppTextStyles.lato
+                    .medium(
+                      color: colors.ff221fif,
+                      fontSize: 16.sp,
+                    )
+                    .copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: colors.ff221fif,
+                      decorationThickness: 1.2.r,
+                    ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   SliverPadding homeScreenBottomPlantsTitleSection(
-      ConstTexts texts, ConstColors colors) {
+      ConstTexts texts, ConstColors colors, String text) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverToBoxAdapter(
         child: Text(
-          texts.plants,
+          text,
           style: AppTextStyles.lato.medium(
             color: colors.ff221fif,
             fontSize: 24.sp,
@@ -150,7 +213,7 @@ class HomeScreen extends StatelessWidget {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
-        itemCount: 9,
+        itemCount: 10,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 217,
@@ -158,6 +221,22 @@ class HomeScreen extends StatelessWidget {
           mainAxisSpacing: 15.h,
         ),
         itemBuilder: (context, index) => PlantCard(),
+      ),
+    );
+  }
+
+  SliverPadding homeScreenBottomEquipmentsGridViewSection() {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+      sliver: SliverGrid.builder(
+        itemCount: 10,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 155 / 197,
+          crossAxisSpacing: 15.w,
+          mainAxisSpacing: 15.h,
+        ),
+        itemBuilder: (context, index) => EquipmentsCard(),
       ),
     );
   }

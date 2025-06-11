@@ -18,4 +18,6 @@ class ConstTexts {
   String plantaShining = "Planta - shining your little space";
   String seeNewArrivals = "See New Arrivals";
   String plants = "Plants";
+  String seeMore = "See More";
+  String equipments = "Equipments";
 }
