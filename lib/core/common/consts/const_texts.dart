@@ -21,4 +21,6 @@ class ConstTexts {
   String seeMore = "See More";
   String equipments = "Equipments";
   String plantCareKit = "Planta Care Kit (new)";
+  String search = "Search";
+  String recentSearches = "Recent Searches";
 }
