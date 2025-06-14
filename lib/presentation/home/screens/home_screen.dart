@@ -54,16 +54,21 @@ class HomeScreen extends StatelessWidget {
             homeScreenBottomPlantsTitleSection(
                 texts, colors, texts.plantCareKit),
             SliverHeight(height: 9),
-            SliverPadding(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
-              sliver: SliverList.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) => KitCard(),
-              ),
-            ),
-            SliverHeight(height: 15),
+            // Home Screen Bottom Kits ListView.builder Section
+            homeScreenBottomKitsListViewBuilderSection(),
+            SliverHeight(height: 5),
           ],
         ),
+      ),
+    );
+  }
+
+  SliverPadding homeScreenBottomKitsListViewBuilderSection() {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
+      sliver: SliverList.builder(
+        itemCount: 3,
+        itemBuilder: (context, index) => KitCard(),
       ),
     );
   }

@@ -10,7 +10,9 @@ class SearchScreen extends StatelessWidget {
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
         body: CustomScrollView(
-          slivers: [],
+          slivers: [
+            
+          ],
         ),
       ),
     );
