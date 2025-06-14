@@ -29,6 +29,7 @@ dependencies:
   shorebird_code_push: ^2.0.4
   sliding_clipped_nav_bar: ^3.1.1
   flutter_snake_navigationbar: ^0.6.1
+  dot_navigation_bar: ^1.0.2
 
 
 dev_dependencies:

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
+import 'package:plant_store/core/common/consts/const_img_paths.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
@@ -18,130 +19,76 @@ class HomeScreen extends StatelessWidget {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
-        body: Column(
-          children: [
-            // Home Screen Top Section
-            Container(
-              height: 318.h,
-              padding: EdgeInsets.only(top: 75.r),
-              decoration: BoxDecoration(color: colors.fff6f6f6),
-              child: Stack(
-                children: [
-                  // Home Screen Top Image Section
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Image.asset(
-                      images.homeBg,
-                      width: 375.w,
-                      height: 205.h,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  // Home Screen Top Texts Section
-                  homeScreenTopTextsSection(texts, colors),
-                ],
+        body: CustomScrollView(
+          slivers: [
+            // Home Screen Top Image & Text Section
+            homeScreenTopImageAndTextSection(colors, images, texts),
+            SliverHeight(height: 25),
+            // Home Screen Bottom Plants Title Section
+            homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
+            SliverHeight(height: 9),
+            // Home Screen Bottom Plants GridView.builder Section
+            homeScreenBottomPlantsGridViewSection(),
+            SliverHeight(height: 9),
+            // Home Screen Bottom See More Text Button Section
+            homeScreenBottomPlantsSeeMoreTextButtonsSection(colors, texts, () {
+              log("See More Button Clicked.");
+            }),
+            SliverHeight(height: 25),
+            // Home Screen Bottom Equipments Title Section
+            homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
+            SliverHeight(height: 9),
+            // Home Screen Bottom Equipments GridView.builder Section
+            homeScreenBottomEquipmentsGridViewSection(),
+            SliverHeight(height: 9),
+            // Home Screen Bottom See More Text Button Section
+            homeScreenBottomPlantsSeeMoreTextButtonsSection(
+              colors,
+              texts,
+              () {
+                log("See More Button Clicked.");
+              },
+            ),
+            SliverHeight(height: 25),
+            // Home Screen Bottom Plant Care Title Section
+            homeScreenBottomPlantsTitleSection(
+                texts, colors, texts.plantCareKit),
+            SliverHeight(height: 9),
+            SliverPadding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
+              sliver: SliverList.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) => KitCard(),
               ),
             ),
-            // Home Screen Bottom Section
-            Expanded(
-                child: CustomScrollView(
-              slivers: [
-                SliverHeight(height: 25),
-                // Home Screen Bottom Plants Title Section
-                homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
-                SliverHeight(height: 9),
-                // Home Screen Bottom Plants GridView.builder Section
-                homeScreenBottomPlantsGridViewSection(),
-                SliverHeight(height: 9),
-                // Home Screen Bottom See More Text Button Section
-                homeScreenBottomPlantsSeeMoreTextButtonsSection(
-                  colors,
-                  texts,
-                  () {
-                    log("See More Button Clicked.");
-                  },
-                ),
-                SliverHeight(height: 25),
-                // Home Screen Bottom Equipments Title Section
-                homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
-                SliverHeight(height: 9),
-                // Home Screen Bottom Equipments GridView.builder Section
-                homeScreenBottomEquipmentsGridViewSection(),
-                SliverHeight(height: 9),
-                // Home Screen Bottom See More Text Button Section
-                homeScreenBottomPlantsSeeMoreTextButtonsSection(
-                  colors,
-                  texts,
-                  () {
-                    log("See More Button Clicked.");
-                  },
-                ),
-                SliverHeight(height: 25),
-                // Home Screen Bottom Plant Care Title Section
-                homeScreenBottomPlantsTitleSection(
-                    texts, colors, texts.plantCareKit),
-                SliverHeight(height: 9),
-                SliverPadding(
-                  padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
-                  sliver: SliverToBoxAdapter(
-                    child: Container(
-                      width: double.infinity,
-                      height: 134.h,
-                      decoration: BoxDecoration(
-                        color: colors.fff6f6f6,
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Padding(
-                            padding: EdgeInsetsGeometry.all(15.r),
-                            child: Column(
-                              spacing: 2.h,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  overflow: TextOverflow.ellipsis,
-                                  'Lemon Balm Grow Kit',
-                                  style: AppTextStyles.lato.medium(
-                                    color: colors.ff221fif,
-                                    fontSize: 19.sp,
-                                  ),
-                                ),
-                                Text(
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  'Include: Lemon Balm seeds, dung, Planta pot, marker...',
-                                  style: AppTextStyles.lato.medium(
-                                    color:
-                                        colors.ff221fif.withValues(alpha: 0.63),
-                                    fontSize: 15.sp,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )),
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.only(
-                              topRight: Radius.circular(8.r),
-                              bottomRight: Radius.circular(8.r),
-                            ),
-                            child: Image.asset(
-                              images.kit,
-                              height: 134.h,
-                              width: 108.w,
-                              fit: BoxFit.contain,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SliverHeight(height: 25),
-              ],
-            )),
+            SliverHeight(height: 15),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter homeScreenTopImageAndTextSection(
+      ConstColors colors, ConstImgPaths images, ConstTexts texts) {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 318.h,
+        padding: EdgeInsets.only(top: 75.r),
+        decoration: BoxDecoration(color: colors.fff6f6f6),
+        child: Stack(
+          children: [
+            // Home Screen Top Image Section
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                images.homeBg,
+                width: 375.w,
+                height: 205.h,
+                fit: BoxFit.contain,
+              ),
+            ),
+            // Home Screen Top Texts Section
+            homeScreenTopTextsSection(texts, colors),
           ],
         ),
       ),
@@ -299,6 +246,72 @@ class HomeScreen extends StatelessWidget {
           mainAxisSpacing: 15.h,
         ),
         itemBuilder: (context, index) => EquipmentsCard(),
+      ),
+    );
+  }
+}
+
+class KitCard extends StatelessWidget {
+  const KitCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppStateWrapper(
+      builder: (colors, texts, images) => Container(
+        width: double.infinity,
+        height: 134.h,
+        margin: EdgeInsets.only(bottom: 15.r),
+        decoration: BoxDecoration(
+          color: colors.fff6f6f6,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsGeometry.all(15.r),
+                child: Column(
+                  spacing: 2.h,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      overflow: TextOverflow.ellipsis,
+                      'Lemon Balm Grow Kit',
+                      style: AppTextStyles.lato.medium(
+                        color: colors.ff221fif,
+                        fontSize: 19.sp,
+                      ),
+                    ),
+                    Text(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      'Include: Lemon Balm seeds, dung, Planta pot, marker...',
+                      style: AppTextStyles.lato.medium(
+                        color: colors.ff221fif.withValues(alpha: 0.63),
+                        fontSize: 15.sp,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            ClipRRect(
+              borderRadius: BorderRadiusGeometry.only(
+                topRight: Radius.circular(8.r),
+                bottomRight: Radius.circular(8.r),
+              ),
+              child: Image.asset(
+                images.kit,
+                height: 134.h,
+                width: 108.w,
+                fit: BoxFit.contain,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -46,6 +46,11 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) => MaterialApp(
+          theme: Theme.of(context).copyWith(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+          ),
           debugShowCheckedModeBanner: false,
           navigatorKey: AppRouter.navigatorKey,
           home: auth.currentUser == null ||
