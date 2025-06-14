@@ -63,8 +63,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 SliverHeight(height: 25),
                 // Home Screen Bottom Equipments Title Section
-                homeScreenBottomPlantsTitleSection(
-                    texts, colors, texts.equipments),
+                homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
                 SliverHeight(height: 9),
                 // Home Screen Bottom Equipments GridView.builder Section
                 homeScreenBottomEquipmentsGridViewSection(),

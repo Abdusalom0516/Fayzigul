@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.3"
+  ffi:
+    dependency: transitive
+    description:
+      name: ffi
+      sha256: "289279317b4b16eb2bb7e271abccd4bf84ec9bdcbe999e278a94b804f5630418"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   file:
     dependency: transitive
     description:
@@ -366,6 +374,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.3"
+  flutter_snake_navigationbar:
+    dependency: "direct main"
+    description:
+      name: flutter_snake_navigationbar
+      sha256: b78bd6389f95d595922704a3e9d1c5d94283eca8e7c02032c157b2d8e96ba083
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -624,11 +640,27 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  shorebird_code_push:
+    dependency: "direct main"
+    description:
+      name: shorebird_code_push
+      sha256: cc78bbf651d320414e6ce66d6f3e825f91050050bf94bbe27f7eb3eebfdfde1c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+  sliding_clipped_nav_bar:
+    dependency: "direct main"
+    description:
+      name: sliding_clipped_nav_bar
+      sha256: f43ba9856d25515faa012f4f3763080f8a93fa6edf11a3c3ca358b8982de6411
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   source_gen:
     dependency: transitive
     description:

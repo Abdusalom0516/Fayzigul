@@ -47,17 +47,20 @@ class LoginScreen extends HookWidget {
                       !isTyping.value
                           ? Expanded(
                               flex: 6,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Image.asset(
-                                    images.loginPlant,
-                                    fit: BoxFit.cover,
-                                    width: 375.w,
-                                    height: 345.h,
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(12.1.r),
+                                    bottomLeft: Radius.circular(12.1.r),
                                   ),
-                                ],
+                                ),
+                                child: Image.asset(
+                                  images.loginPlant,
+                                  fit: BoxFit.cover,
+                                  width: 375.w,
+                                  height: 345.h,
+                                ),
                               ),
                             )
                           : Height(height: 55),
