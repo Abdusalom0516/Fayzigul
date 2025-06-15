@@ -3,9 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_width.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/widgets/equipments_card.dart';
+import 'package:plant_store/presentation/home/widgets/plants_card.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});
@@ -21,45 +25,56 @@ class HomeCategoryScreen extends HookWidget {
           slivers: [
             // Sliver App Bar Section
             sliverAppBarSection(colors),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 64.h,
-                width: double.infinity,
-                child: Row(
-                  spacing: 3.w,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CategoryCard(
-                      title: texts.all,
-                      isChosen: currentCategoryIndex.value == 0,
-                      func: () {
-                        currentCategoryIndex.value = 0;
-                      },
-                    ),
-                    CategoryCard(
-                      title: texts.newC,
-                      isChosen: currentCategoryIndex.value == 1,
-                      func: () {
-                        currentCategoryIndex.value = 1;
-                      },
-                    ),
-                    CategoryCard(
-                      title: texts.indoor,
-                      isChosen: currentCategoryIndex.value == 2,
-                      func: () {
-                        currentCategoryIndex.value = 2;
-                      },
-                    ),
-                    CategoryCard(
-                      title: texts.outdoor,
-                      isChosen: currentCategoryIndex.value == 3,
-                      func: () {
-                        currentCategoryIndex.value = 3;
-                      },
-                    ),
-                  ],
-                ),
-              ),
+            // Categotiy Buttons Section
+            categoryTitle == texts.equipments
+                ? SliverHeight(height: 17)
+                : categoryButtonsSection(texts, currentCategoryIndex),
+            // Products GridView.builder Section
+            productsGridViewSection(categoryTitle, texts),
+            SliverHeight(height: 35),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter categoryButtonsSection(
+      ConstTexts texts, ValueNotifier<int> currentCategoryIndex) {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: 64.h,
+        width: double.infinity,
+        child: Row(
+          spacing: 3.w,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CategoryCard(
+              title: texts.all,
+              isChosen: currentCategoryIndex.value == 0,
+              func: () {
+                currentCategoryIndex.value = 0;
+              },
+            ),
+            CategoryCard(
+              title: texts.newC,
+              isChosen: currentCategoryIndex.value == 1,
+              func: () {
+                currentCategoryIndex.value = 1;
+              },
+            ),
+            CategoryCard(
+              title: texts.indoor,
+              isChosen: currentCategoryIndex.value == 2,
+              func: () {
+                currentCategoryIndex.value = 2;
+              },
+            ),
+            CategoryCard(
+              title: texts.outdoor,
+              isChosen: currentCategoryIndex.value == 3,
+              func: () {
+                currentCategoryIndex.value = 3;
+              },
             ),
           ],
         ),
@@ -67,9 +82,42 @@ class HomeCategoryScreen extends HookWidget {
     );
   }
 
+  SliverPadding productsGridViewSection(
+      String categoryTitle, ConstTexts texts) {
+    return categoryTitle == texts.equipments
+        ? SliverPadding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+            sliver: SliverGrid.builder(
+              itemCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 155 / 197,
+                crossAxisSpacing: 15.w,
+                mainAxisSpacing: 15.h,
+              ),
+              itemBuilder: (context, index) => EquipmentsCard(),
+            ),
+          )
+        : SliverPadding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+            sliver: SliverGrid.builder(
+              itemCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 155 / 217,
+                crossAxisSpacing: 15.w,
+                mainAxisSpacing: 15.h,
+              ),
+              itemBuilder: (context, index) => PlantCard(),
+            ),
+          );
+  }
+
   SliverAppBar sliverAppBarSection(ConstColors colors) {
     return SliverAppBar(
       centerTitle: true,
+      pinned: true,
+      floating: true,
       backgroundColor: colors.ffffffff,
       title: Text(
         categoryTitle,
