@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/cart/screens/cart_screen.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
 import 'package:plant_store/presentation/search/screens/search_screen.dart';
 
@@ -21,7 +22,7 @@ class MainScreen extends HookWidget {
             children: [
               HomeScreen(),
               SearchScreen(),
-              HomeScreen(),
+              CartScreen(),
               SearchScreen(),
             ],
           ),
@@ -47,24 +48,35 @@ class MainScreen extends HookWidget {
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.home,
+                    Icons.home_outlined,
+                  ),
+                  activeIcon: Icon(
+                    Icons.home_rounded,
                   ),
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.search,
+                      Icons.search_rounded,
                     ),
                     label: "Search"),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.notifications,
+                    Icons.shopping_cart_outlined,
+                    size: 25.r,
                   ),
-                  label: "Notifications",
+                  activeIcon: Icon(
+                    Icons.shopping_cart_rounded,
+                    size: 25.r,
+                  ),
+                  label: "Cart",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.person,
+                    Icons.person_outline_rounded,
+                  ),
+                  activeIcon: Icon(
+                    Icons.person_rounded,
                   ),
                   label: "Profile",
                 )

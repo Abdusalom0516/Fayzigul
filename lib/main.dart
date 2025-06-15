@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/app_bloc_providers.dart';
+import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/firebase_options.dart';
 import 'package:plant_store/presentation/auth/screens/login_screen.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             hoverColor: Colors.transparent,
+            scaffoldBackgroundColor: ConstColors().ffffffff,
           ),
           debugShowCheckedModeBanner: false,
           navigatorKey: AppRouter.navigatorKey,
