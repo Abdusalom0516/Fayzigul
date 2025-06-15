@@ -20,9 +20,10 @@ class CartScreen extends StatelessWidget {
           slivers: [
             // Sliver App Bar Section
             sliverAppBarSection(colors, texts),
-            SliverToBoxAdapter(
-              child: CartProductCard(),
-            ),
+            SliverList.builder(
+              itemCount: 3,
+              itemBuilder: (context, index) => CartProductCard(),
+            )
           ],
         ),
       ),
@@ -67,6 +68,7 @@ class CartProductCard extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isCheckBoxClicked = useState(false);
+    final quantity = useState(1);
     return AppStateWrapper(
       builder: (colors, texts, images) => Container(
         height: 107.h,
@@ -75,6 +77,7 @@ class CartProductCard extends HookWidget {
         child: Row(
           spacing: 15.w,
           children: [
+            // CheckBox Section
             Transform.scale(
               scale: 1.15.r,
               child: Checkbox.adaptive(
@@ -87,6 +90,7 @@ class CartProductCard extends HookWidget {
                 },
               ),
             ),
+            // Product Image Section
             Container(
               width: 77.w,
               height: 77.h,
@@ -99,6 +103,103 @@ class CartProductCard extends HookWidget {
                 height: 77.h,
                 width: 77.w,
                 fit: BoxFit.contain,
+              ),
+            ),
+            // Product Details Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        "Spider Plant",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.sp,
+                        ),
+                      ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        "\$250",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff007537,
+                          fontSize: 17.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              log("Cart Plus Button Clicked.");
+                              quantity.value++;
+                            },
+                            child: Icon(
+                              Icons.add_box_outlined,
+                              size: 24.r,
+                              color: colors.ff221fif,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35.w,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              quantity.value.toString(),
+                              style: AppTextStyles.lato.medium(
+                                color: colors.ff221fif,
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              log("Cart Minus Button Clicked.");
+                              if (quantity.value <= 0) {
+                                return;
+                              }
+                              quantity.value--;
+                            },
+                            child: Icon(
+                              Icons.indeterminate_check_box_outlined,
+                              size: 24.r,
+                              color: colors.ff221fif,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Remove Button Section
+                      InkWell(
+                        onTap: () {
+                          log("Remove Button Clicked.");
+                        },
+                        overlayColor: WidgetStatePropertyAll(colors.fff6f6f6),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                  color: colors.ff221fif, width: 1.2.r),
+                            ),
+                          ),
+                          child: Text(
+                            texts.remove,
+                            style: AppTextStyles.lato.medium(
+                              color: colors.ff221fif,
+                              fontSize: 17.sp,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
             )
           ],

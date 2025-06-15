@@ -28,4 +28,5 @@ class ConstTexts {
   String outdoor = "Outdoor";
   String indoor = "Indoor";
   String cart = "Cart";
+  String remove = "Remove";
 }
