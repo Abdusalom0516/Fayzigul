@@ -127,7 +127,7 @@ class SearchScreen extends HookWidget {
         texts.search,
         style: AppTextStyles.lato.medium(
           color: colors.ff221fif,
-          fontSize: 25.sp,
+          fontSize: 23.sp,
         ),
       ),
     );
