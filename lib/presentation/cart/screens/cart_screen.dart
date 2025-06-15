@@ -15,6 +15,8 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
+        // Bottom Navigation Section
+        bottomNavigationBar: cartBottomNavigationSection(texts, colors),
         body: CustomScrollView(
           slivers: [
             // Sliver App Bar Section
@@ -27,9 +29,75 @@ class CartScreen extends StatelessWidget {
     );
   }
 
+  Container cartBottomNavigationSection(ConstTexts texts, ConstColors colors) {
+    return Container(
+      height: 93.h,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      margin: EdgeInsets.only(bottom: 25.r),
+      child: Column(
+        spacing: 15.h,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                texts.subtotal,
+                style: AppTextStyles.lato.medium(
+                  color: colors.ff221fif,
+                  fontSize: 19.sp,
+                ),
+              ),
+              Text(
+                "\$999",
+                style: AppTextStyles.lato.semiBold(
+                  color: colors.ff007537,
+                  fontSize: 19.sp,
+                ),
+              ),
+            ],
+          ),
+          TextButton(
+            style:
+                ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
+            onPressed: () {
+              log("Checkout Button Clicked.");
+            },
+            child: Container(
+              width: double.infinity,
+              height: 50.h,
+              padding: EdgeInsets.symmetric(horizontal: 25.r),
+              decoration: BoxDecoration(
+                color: colors.ff007537,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    texts.proceedToCheckout,
+                    style: AppTextStyles.lato.medium(
+                      color: colors.ffffffff,
+                      fontSize: 17.sp,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: colors.ffffffff,
+                    size: 17.r,
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   SliverList cartProductSliverListBuilderSection() {
     return SliverList.builder(
-      itemCount: 3,
+      itemCount: 7,
       itemBuilder: (context, index) => CartProductCard(),
     );
   }
