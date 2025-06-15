@@ -29,4 +29,6 @@ class ConstTexts {
   String indoor = "Indoor";
   String cart = "Cart";
   String remove = "Remove";
+  String subtotal = "Subtotal";
+  String proceedToCheckout = "Proceed to Checkout";
 }
