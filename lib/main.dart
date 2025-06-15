@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) => MaterialApp(
           theme: Theme.of(context).copyWith(
+            appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             hoverColor: Colors.transparent,

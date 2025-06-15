@@ -23,4 +23,8 @@ class ConstTexts {
   String plantCareKit = "Planta Care Kit (new)";
   String search = "Search";
   String recentSearches = "Recent Searches";
+  String all = "All";
+  String newC = "New";
+  String outdoor = "Outdoor";
+  String indoor = "Indoor";
 }

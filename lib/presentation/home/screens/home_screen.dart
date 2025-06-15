@@ -55,7 +55,8 @@ class HomeScreen extends StatelessWidget {
               texts,
               () {
                 log("See More Button Clicked.");
-                AppRouter.go(HomeCategoryScreen(categoryTitle: texts.plants));
+                AppRouter.go(
+                    HomeCategoryScreen(categoryTitle: texts.equipments));
               },
             ),
             SliverHeight(height: 25),
@@ -264,4 +265,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
