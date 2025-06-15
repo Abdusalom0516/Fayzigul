@@ -7,8 +7,11 @@ import 'package:plant_store/core/common/consts/const_img_paths.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/screens/home_category_screen.dart';
 import 'package:plant_store/presentation/home/widgets/equipments_card.dart';
+import 'package:plant_store/presentation/home/widgets/kir_card.dart';
 import 'package:plant_store/presentation/home/widgets/plants_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,9 +34,14 @@ class HomeScreen extends StatelessWidget {
             homeScreenBottomPlantsGridViewSection(),
             SliverHeight(height: 9),
             // Home Screen Bottom See More Text Button Section
-            homeScreenBottomPlantsSeeMoreTextButtonsSection(colors, texts, () {
-              log("See More Button Clicked.");
-            }),
+            homeScreenBottomPlantsSeeMoreTextButtonsSection(
+              colors,
+              texts,
+              () {
+                log("See More Button of Plants Clicked.");
+                AppRouter.go(HomeCategoryScreen(categoryTitle: texts.plants));
+              },
+            ),
             SliverHeight(height: 25),
             // Home Screen Bottom Equipments Title Section
             homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
@@ -47,6 +55,7 @@ class HomeScreen extends StatelessWidget {
               texts,
               () {
                 log("See More Button Clicked.");
+                AppRouter.go(HomeCategoryScreen(categoryTitle: texts.plants));
               },
             ),
             SliverHeight(height: 25),
@@ -256,68 +265,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class KitCard extends StatelessWidget {
-  const KitCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => Container(
-        width: double.infinity,
-        height: 134.h,
-        margin: EdgeInsets.only(bottom: 15.r),
-        decoration: BoxDecoration(
-          color: colors.fff6f6f6,
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsetsGeometry.all(15.r),
-                child: Column(
-                  spacing: 2.h,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      overflow: TextOverflow.ellipsis,
-                      'Lemon Balm Grow Kit',
-                      style: AppTextStyles.lato.medium(
-                        color: colors.ff221fif,
-                        fontSize: 19.sp,
-                      ),
-                    ),
-                    Text(
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      'Include: Lemon Balm seeds, dung, Planta pot, marker...',
-                      style: AppTextStyles.lato.medium(
-                        color: colors.ff221fif.withValues(alpha: 0.63),
-                        fontSize: 15.sp,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            ClipRRect(
-              borderRadius: BorderRadiusGeometry.only(
-                topRight: Radius.circular(8.r),
-                bottomRight: Radius.circular(8.r),
-              ),
-              child: Image.asset(
-                images.kit,
-                height: 134.h,
-                width: 108.w,
-                fit: BoxFit.contain,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
