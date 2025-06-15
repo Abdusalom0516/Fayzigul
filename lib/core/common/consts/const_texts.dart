@@ -18,4 +18,14 @@ class ConstTexts {
   String plantaShining = "Planta - shining your little space";
   String seeNewArrivals = "See New Arrivals";
   String plants = "Plants";
+  String seeMore = "See More";
+  String equipments = "Equipments";
+  String plantCareKit = "Planta Care Kit (new)";
+  String search = "Search";
+  String recentSearches = "Recent Searches";
+  String all = "All";
+  String newC = "New";
+  String outdoor = "Outdoor";
+  String indoor = "Indoor";
+  String cart = "Cart";
 }
