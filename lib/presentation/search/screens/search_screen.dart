@@ -26,23 +26,10 @@ class SearchScreen extends HookWidget {
             // Search Screen TextField Section
             searchScreenTextFieldSection(colors, controller, texts),
             SliverHeight(height: 35),
-            SliverPadding(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
-              sliver: SliverToBoxAdapter(
-                child: Row(
-                  children: [
-                    Text(
-                      texts.recentSearches,
-                      style: AppTextStyles.lato.semiBold(
-                        color: colors.ff221fif,
-                        fontSize: 19.sp,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Search History Recent Searches Title Section
+            searchHistoryRecentSearchesTitleSection(texts, colors),
             SliverHeight(height: 15),
+            // Search History Options Section
             SliverPadding(
               padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
               sliver: SliverToBoxAdapter(
@@ -54,7 +41,33 @@ class SearchScreen extends HookWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            // Search History Search Results ListView.builder Section
+            SliverList.builder(
+              itemCount: 3,
+              itemBuilder: (context, index) => SearchResultProductsCard(),
+            ),
+            SliverHeight(height: 25),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverPadding searchHistoryRecentSearchesTitleSection(
+      ConstTexts texts, ConstColors colors) {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
+      sliver: SliverToBoxAdapter(
+        child: Row(
+          children: [
+            Text(
+              texts.recentSearches,
+              style: AppTextStyles.lato.semiBold(
+                color: colors.ff221fif,
+                fontSize: 19.sp,
+              ),
+            ),
           ],
         ),
       ),
@@ -115,6 +128,81 @@ class SearchScreen extends HookWidget {
         style: AppTextStyles.lato.medium(
           color: colors.ff221fif,
           fontSize: 25.sp,
+        ),
+      ),
+    );
+  }
+}
+
+class SearchResultProductsCard extends StatelessWidget {
+  const SearchResultProductsCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppStateWrapper(
+      builder: (colors, texts, images) => Container(
+        height: 107.h,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 15.h),
+        child: Row(
+          spacing: 15.w,
+          children: [
+            // Search Card Image Part
+            Container(
+              height: 77.h,
+              width: 77.w,
+              decoration: BoxDecoration(
+                color: colors.fff6f6f6,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Image.asset(
+                images.plant,
+                height: 77.h,
+                width: 77.w,
+                fit: BoxFit.contain,
+              ),
+            ),
+            // Search Card Texts Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        "Panse  | Hybrid",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.w,
+                        ),
+                      ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        "\$250",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.w,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    overflow: TextOverflow.ellipsis,
+                    "156 items left",
+                    style: AppTextStyles.lato.regular(
+                      color: colors.ff221fif,
+                      fontSize: 15.w,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
