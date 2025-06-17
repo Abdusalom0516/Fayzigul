@@ -5,6 +5,7 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/cart/screens/cart_screen.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
+import 'package:plant_store/presentation/profile/screens/profile_screen.dart';
 import 'package:plant_store/presentation/search/screens/search_screen.dart';
 
 class MainScreen extends HookWidget {
@@ -23,7 +24,7 @@ class MainScreen extends HookWidget {
               HomeScreen(),
               SearchScreen(),
               CartScreen(),
-              SearchScreen(),
+              ProfileScreen(),
             ],
           ),
           bottomNavigationBar: Material(

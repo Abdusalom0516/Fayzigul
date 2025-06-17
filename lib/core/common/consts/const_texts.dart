@@ -31,4 +31,13 @@ class ConstTexts {
   String remove = "Remove";
   String subtotal = "Subtotal";
   String proceedToCheckout = "Proceed to Checkout";
+  String general = "General";
+  String security = "Security";
+  String editInfo = "Edit Information";
+  String plantGuide = "Planting Guide";
+  String transHist = "Transaction History";
+  String qa = " Q & A";
+  String term = "Terms and Policy";
+  String secPol = "Security Policy";
+  String logOut = "Logout";
 }
