@@ -6,6 +6,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_img_paths.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card.dart';
@@ -19,6 +20,130 @@ class ProductsDetailsScreen extends HookWidget {
     final pageController = usePageController();
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
+        bottomNavigationBar: Card(
+          elevation: 5.5.r,
+          color: colors.ffffffff,
+          child: Container(
+            height: 167.h,
+            width: double.infinity,
+            margin: EdgeInsets.only(bottom: 25.r),
+            padding:
+                EdgeInsetsGeometry.symmetric(horizontal: 24.r, vertical: 15.r),
+            child: Column(
+              children: [
+                // Cart Summary Section
+                Column(
+                  spacing: 5.h,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${texts.youPicked} 1 ${texts.items}",
+                          style: AppTextStyles.lato.medium(
+                            color: colors.ff221fif,
+                            fontSize: 17.sp,
+                          ),
+                        ),
+                        Text(
+                          texts.subtotal,
+                          style: AppTextStyles.lato.medium(
+                            color: colors.ff221fif,
+                            fontSize: 17.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                log("Cart Minus Button Clicked.");
+                                if (quantity.value <= 0) {
+                                  return;
+                                }
+                                quantity.value--;
+                              },
+                              child: Icon(
+                                Icons.indeterminate_check_box_outlined,
+                                size: 35.r,
+                                color: colors.ff3A3A3A,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 75.w,
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                quantity.value.toString(),
+                                style: AppTextStyles.lato.medium(
+                                  color: colors.ff221fif,
+                                  fontSize: 17.5.sp,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                log("Cart Plus Button Clicked.");
+                                quantity.value++;
+                              },
+                              child: Icon(
+                                Icons.add_box_outlined,
+                                size: 35.r,
+                                color: colors.ff221fif,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "\$99.9",
+                          style: AppTextStyles.lato.bold(
+                            color: colors.ff221fif,
+                            fontSize: 24.w,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Height(height: 15),
+
+                // Add to Cart Button Section
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStatePropertyAll(colors.ff007537),
+                          padding: WidgetStatePropertyAll(
+                              EdgeInsetsGeometry.symmetric(vertical: 15.r)),
+                          shape: WidgetStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          log("Add to Cart Button Clicked.");
+                        },
+                        child: Text(
+                          texts.addToCart,
+                          style: AppTextStyles.lato.bold(
+                            color: colors.ffffffff,
+                            fontSize: 17.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
         body: CustomScrollView(
           slivers: [
             appBarSection(colors, texts),
@@ -71,117 +196,6 @@ class ProductsDetailsScreen extends HookWidget {
                     ],
                   )),
             ),
-            SliverHeight(height: 45),
-            SliverPadding(
-              padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 24.r, vertical: 15.r),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  spacing: 5.h,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${texts.youPicked} 1 ${texts.items}",
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                        Text(
-                          texts.subtotal,
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                log("Cart Minus Button Clicked.");
-                                if (quantity.value <= 0) {
-                                  return;
-                                }
-                                quantity.value--;
-                              },
-                              child: Icon(
-                                Icons.indeterminate_check_box_outlined,
-                                size: 35.r,
-                                color: colors.ff221fif,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 75.w,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                quantity.value.toString(),
-                                style: AppTextStyles.lato.medium(
-                                  color: colors.ff221fif,
-                                  fontSize: 17.5.sp,
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                log("Cart Plus Button Clicked.");
-                                quantity.value++;
-                              },
-                              child: Icon(
-                                Icons.add_box_outlined,
-                                size: 35.r,
-                                color: colors.ff221fif,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "\$99.9",
-                          style: AppTextStyles.lato.bold(
-                            color: colors.ff221fif,
-                            fontSize: 24.w,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              
-            ),
-            SliverHeight(height: 15),
-            // Add to Cart Button Section
-            SliverPadding(padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r)
-            , sliver: SliverToBoxAdapter(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(colors.ff007537),
-                  padding: WidgetStatePropertyAll(
-                      EdgeInsetsGeometry.symmetric(vertical: 15.r)),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  log("Add to Cart Button Clicked.");
-                },
-                child: Text(
-                  texts.addToCart,
-                  style: AppTextStyles.lato.bold(
-                    color: colors.ffffffff,
-                    fontSize: 17.sp,
-                  ),
-                ),
-              ),
-            ),),
             SliverHeight(height: 45),
           ],
         ),
