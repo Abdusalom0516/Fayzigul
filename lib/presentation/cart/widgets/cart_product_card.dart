@@ -144,7 +144,7 @@ class CartProductCard extends HookWidget {
                         ),
                       )
                     ],
-                  )
+                  ),
                 ],
               ),
             )

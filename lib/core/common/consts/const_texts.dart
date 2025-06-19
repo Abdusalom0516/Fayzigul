@@ -40,4 +40,12 @@ class ConstTexts {
   String term = "Terms and Policy";
   String secPol = "Security Policy";
   String logOut = "Logout";
+  String details = "Details";
+  String mass = "Mass";
+  String origin = "Origin";
+  String status = "Status";
+  String itemsLeft = "items left";
+  String youPicked = "You picked";
+  String items = "items";
+  String addToCart = "ADD TO CART";
 }
