@@ -10,6 +10,7 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card.dart';
+import 'package:plant_store/presentation/home/widgets/product_details_card.dart';
 
 class ProductsDetailsScreen extends HookWidget {
   const ProductsDetailsScreen({super.key});
@@ -20,130 +21,7 @@ class ProductsDetailsScreen extends HookWidget {
     final pageController = usePageController();
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        bottomNavigationBar: Card(
-          elevation: 5.5.r,
-          color: colors.ffffffff,
-          child: Container(
-            height: 167.h,
-            width: double.infinity,
-            margin: EdgeInsets.only(bottom: 25.r),
-            padding:
-                EdgeInsetsGeometry.symmetric(horizontal: 24.r, vertical: 15.r),
-            child: Column(
-              children: [
-                // Cart Summary Section
-                Column(
-                  spacing: 5.h,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${texts.youPicked} 1 ${texts.items}",
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                        Text(
-                          texts.subtotal,
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                log("Cart Minus Button Clicked.");
-                                if (quantity.value <= 0) {
-                                  return;
-                                }
-                                quantity.value--;
-                              },
-                              child: Icon(
-                                Icons.indeterminate_check_box_outlined,
-                                size: 35.r,
-                                color: colors.ff3A3A3A,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 75.w,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                quantity.value.toString(),
-                                style: AppTextStyles.lato.medium(
-                                  color: colors.ff221fif,
-                                  fontSize: 17.5.sp,
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                log("Cart Plus Button Clicked.");
-                                quantity.value++;
-                              },
-                              child: Icon(
-                                Icons.add_box_outlined,
-                                size: 35.r,
-                                color: colors.ff221fif,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "\$99.9",
-                          style: AppTextStyles.lato.bold(
-                            color: colors.ff221fif,
-                            fontSize: 24.w,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Height(height: 15),
-
-                // Add to Cart Button Section
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStatePropertyAll(colors.ff007537),
-                          padding: WidgetStatePropertyAll(
-                              EdgeInsetsGeometry.symmetric(vertical: 15.r)),
-                          shape: WidgetStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          log("Add to Cart Button Clicked.");
-                        },
-                        child: Text(
-                          texts.addToCart,
-                          style: AppTextStyles.lato.bold(
-                            color: colors.ffffffff,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: bottomNavigationSection(colors, texts, quantity),
         body: CustomScrollView(
           slivers: [
             appBarSection(colors, texts),
@@ -153,53 +31,231 @@ class ProductsDetailsScreen extends HookWidget {
             productCategoriesSection(),
             // Product Price Section
             productPriceSection(colors),
+            SliverHeight(height: 15),
+            // Product Details Title Section
+            productTitleScreen(colors, texts.details),
             // Product Details Section
-            SliverToBoxAdapter(
-              child: Padding(
-                  padding: EdgeInsetsGeometry.symmetric(
-                      horizontal: 48.r, vertical: 15.r),
-                  child: Column(
-                    spacing: 15.h,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.only(bottom: 3.5.r),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: colors.ff221fif,
-                              width: 1.2.r,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          texts.details,
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 20.sp,
-                          ),
-                        ),
-                      ),
-                      ProductDetailsCard(
-                        keyword: texts.mass,
-                        value: "1 kg",
-                      ),
-                      ProductDetailsCard(
-                        keyword: texts.origin,
-                        value: "Afrika",
-                      ),
-                      ProductDetailsCard(
-                        keyword: texts.status,
-                        value: "156 ${texts.itemsLeft}",
-                      ),
-                    ],
-                  )),
+            productDetailsSection(colors, texts),
+            SliverHeight(height: 25),
+            // Product Description Title Section
+            productTitleScreen(colors, texts.description),
+            SliverHeight(height: 7),
+            // Product Description Text Section
+            SliverPadding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 48.r),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                  style: AppTextStyles.lato.regular(
+                    color: colors.ff221fif,
+                    fontSize: 17.sp,
+                  ),
+                ),
+              ),
             ),
-            SliverHeight(height: 45),
+            SliverHeight(height: 25),
           ],
         ),
       ),
+    );
+  }
+
+  SliverPadding productTitleScreen(ConstColors colors, String title) {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 48.r),
+      sliver: SliverToBoxAdapter(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(bottom: 3.5.r),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: colors.ff221fif,
+                width: 1.1.r,
+              ),
+            ),
+          ),
+          child: Text(
+            title,
+            style: AppTextStyles.lato.medium(
+              color: colors.ff221fif,
+              fontSize: 20.sp,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter productDetailsSection(
+      ConstColors colors, ConstTexts texts) {
+    return SliverToBoxAdapter(
+      child: Padding(
+          padding:
+              EdgeInsetsGeometry.symmetric(horizontal: 48.r, vertical: 15.r),
+          child: Column(
+            spacing: 15.h,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductDetailsCard(
+                keyword: texts.mass,
+                value: "1 kg",
+              ),
+              ProductDetailsCard(
+                keyword: texts.origin,
+                value: "Afrika",
+              ),
+              ProductDetailsCard(
+                keyword: texts.status,
+                value: "156 ${texts.itemsLeft}",
+                isValueGreen: true,
+              ),
+            ],
+          )),
+    );
+  }
+
+  Card bottomNavigationSection(
+      ConstColors colors, ConstTexts texts, ValueNotifier<int> quantity) {
+    return Card(
+      elevation: 7.5.r,
+      color: colors.ffffffff,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 25.r),
+        height: 167.h,
+        width: double.infinity,
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r, vertical: 15.r),
+        child: Column(
+          children: [
+            // Cart Summary Section
+            Column(
+              spacing: 5.h,
+              children: [
+                // Number of Items Chosen and Subtotal Section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                        "${texts.youPicked} ${quantity.value} ${texts.items}",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        texts.subtotal,
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Cart Quantity and Price Section
+                Row(
+                  spacing: 15.w,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            log("Cart Minus Button Clicked.");
+                            if (quantity.value <= 0) {
+                              return;
+                            }
+                            quantity.value--;
+                          },
+                          child: Icon(
+                            Icons.indeterminate_check_box_outlined,
+                            size: 35.r,
+                            color: colors.ffababab,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 75.w,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            quantity.value.toString(),
+                            style: AppTextStyles.lato.medium(
+                              color: colors.ff221fif,
+                              fontSize: 17.5.sp,
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            log("Cart Plus Button Clicked.");
+                            quantity.value++;
+                          },
+                          child: Icon(
+                            Icons.add_box_outlined,
+                            size: 35.r,
+                            color: colors.ff221fif,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        "\$99.9",
+                        style: AppTextStyles.lato.bold(
+                          color: colors.ff221fif,
+                          fontSize: 24.w,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Height(height: 15),
+            // Add to Cart Button Section
+            addToCartButtonSection(colors, texts),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Row addToCartButtonSection(ConstColors colors, ConstTexts texts) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(colors.ff007537),
+              padding: WidgetStatePropertyAll(
+                  EdgeInsetsGeometry.symmetric(vertical: 15.r)),
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+              ),
+            ),
+            onPressed: () {
+              log("Add to Cart Button Clicked.");
+            },
+            child: Text(
+              texts.addToCart,
+              style: AppTextStyles.lato.bold(
+                color: colors.ffffffff,
+                fontSize: 17.sp,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -235,24 +291,13 @@ class ProductsDetailsScreen extends HookWidget {
                 controller: pageController,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  Image.asset(
-                    images.plant,
-                    height: 330.h,
-                    width: 330.w,
-                    fit: BoxFit.contain,
-                  ),
-                  Image.asset(
-                    images.plant,
-                    height: 330.h,
-                    width: 330.w,
-                    fit: BoxFit.contain,
-                  ),
-                  Image.asset(
-                    images.plant,
-                    height: 330.h,
-                    width: 330.w,
-                    fit: BoxFit.contain,
-                  ),
+                  for (int i = 0; i < 5; i++)
+                    Image.asset(
+                      images.plant,
+                      height: 330.h,
+                      width: 330.w,
+                      fit: BoxFit.contain,
+                    ),
                 ],
               ),
             ),
@@ -264,63 +309,24 @@ class ProductsDetailsScreen extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Backward Icon Part
-                  TextButton(
-                    style: ButtonStyle(
-                      padding: WidgetStatePropertyAll(EdgeInsets.zero),
-                    ),
-                    onPressed: () {
-                      log("Index: ${pageController.page}");
+
+                  CircleArrowIconButton(
+                    func: () {
                       pageController.previousPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn);
                     },
-                    child: Card(
-                      elevation: 3.5.r,
-                      shape: CircleBorder(),
-                      child: Container(
-                        height: 45.w,
-                        width: 45.w,
-                        decoration: BoxDecoration(
-                          color: colors.ffffffff,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          color: colors.ff221fif,
-                          size: 24.r,
-                        ),
-                      ),
-                    ),
+                    icon: Icons.arrow_back_ios_rounded,
                   ),
                   // Forward Icon Part
-                  TextButton(
-                    style: ButtonStyle(
-                      padding: WidgetStatePropertyAll(EdgeInsets.zero),
-                    ),
-                    onPressed: () {
-                      log("Index: ${pageController.page}");
+                  CircleArrowIconButton(
+                    func: () {
                       pageController.nextPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn);
                     },
-                    child: Card(
-                      elevation: 3.5.r,
-                      shape: CircleBorder(),
-                      child: Container(
-                        height: 45.w,
-                        width: 45.w,
-                        decoration: BoxDecoration(
-                          color: colors.ffffffff,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: colors.ff221fif,
-                          size: 24.r,
-                        ),
-                      ),
-                    ),
-                  )
+                    icon: Icons.arrow_forward_ios_rounded,
+                  ),
                 ],
               ),
             ),
@@ -364,43 +370,39 @@ class ProductsDetailsScreen extends HookWidget {
   }
 }
 
-class ProductDetailsCard extends StatelessWidget {
-  const ProductDetailsCard(
-      {super.key, required this.keyword, required this.value});
-  final String keyword, value;
+class CircleArrowIconButton extends StatelessWidget {
+  const CircleArrowIconButton({
+    super.key,
+    required this.func,
+    required this.icon,
+  });
+  final VoidCallback func;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return AppStateWrapper(
-      builder: (colors, texts, images) => Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(bottom: 3.5.r),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
+      builder: (colors, texts, images) => TextButton(
+        style: ButtonStyle(
+          padding: WidgetStatePropertyAll(EdgeInsets.zero),
+        ),
+        onPressed: func,
+        child: Card(
+          elevation: 3.5.r,
+          shape: CircleBorder(),
+          child: Container(
+            height: 45.w,
+            width: 45.w,
+            decoration: BoxDecoration(
+              color: colors.ffffffff,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
               color: colors.ff221fif,
-              width: 1.2.r,
+              size: 24.r,
             ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              keyword,
-              style: AppTextStyles.lato.regular(
-                color: colors.ff3A3A3A,
-                fontSize: 17.5.sp,
-              ),
-            ),
-            Text(
-              value,
-              style: AppTextStyles.lato.regular(
-                color: colors.ff3A3A3A,
-                fontSize: 17.5.sp,
-              ),
-            ),
-          ],
         ),
       ),
     );

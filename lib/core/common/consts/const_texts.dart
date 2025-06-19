@@ -48,4 +48,5 @@ class ConstTexts {
   String youPicked = "You picked";
   String items = "items";
   String addToCart = "ADD TO CART";
+  String description = "Description";
 }
