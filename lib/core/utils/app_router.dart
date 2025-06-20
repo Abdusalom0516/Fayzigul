@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class AppRouter {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   static void close() {
     if (navigatorKey.currentState?.canPop() ?? false) {

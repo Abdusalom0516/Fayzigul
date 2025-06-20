@@ -9,6 +9,7 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card.dart';
 import 'package:plant_store/presentation/home/widgets/product_details_card.dart';
 
@@ -41,18 +42,13 @@ class ProductsDetailsScreen extends HookWidget {
             productTitleScreen(colors, texts.description),
             SliverHeight(height: 7),
             // Product Description Text Section
-            SliverPadding(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: 48.r),
-              sliver: SliverToBoxAdapter(
-                child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                  style: AppTextStyles.lato.regular(
-                    color: colors.ff221fif,
-                    fontSize: 17.sp,
-                  ),
-                ),
-              ),
-            ),
+            productFullContentSection(colors, texts.lorem),
+            SliverHeight(height: 25),
+            // Product Description Title Section
+            productTitleScreen(colors, texts.instruction),
+            SliverHeight(height: 7),
+            // Product Insrtuction Text Section
+            productFullContentSection(colors, texts.lorem),
             SliverHeight(height: 25),
           ],
         ),
@@ -60,9 +56,24 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
+  SliverPadding productFullContentSection(ConstColors colors, String content) {
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
+      sliver: SliverToBoxAdapter(
+        child: Text(
+          content,
+          style: AppTextStyles.lato.regular(
+            color: colors.ff221fif,
+            fontSize: 17.sp,
+          ),
+        ),
+      ),
+    );
+  }
+
   SliverPadding productTitleScreen(ConstColors colors, String title) {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 48.r),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
       sliver: SliverToBoxAdapter(
         child: Container(
           width: double.infinity,
@@ -92,7 +103,7 @@ class ProductsDetailsScreen extends HookWidget {
     return SliverToBoxAdapter(
       child: Padding(
           padding:
-              EdgeInsetsGeometry.symmetric(horizontal: 48.r, vertical: 15.r),
+              EdgeInsetsGeometry.symmetric(horizontal: 32.r, vertical: 15.r),
           child: Column(
             spacing: 15.h,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,20 +232,22 @@ class ProductsDetailsScreen extends HookWidget {
             ),
             Height(height: 15),
             // Add to Cart Button Section
-            addToCartButtonSection(colors, texts),
+            addToCartButtonSection(colors, texts, quantity),
           ],
         ),
       ),
     );
   }
 
-  Row addToCartButtonSection(ConstColors colors, ConstTexts texts) {
+  Row addToCartButtonSection(
+      ConstColors colors, ConstTexts texts, ValueNotifier<int> quantity) {
     return Row(
       children: [
         Expanded(
           child: ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(colors.ff007537),
+              backgroundColor: WidgetStatePropertyAll(
+                  quantity.value <= 0 ? colors.ffababab : colors.ff007537),
               padding: WidgetStatePropertyAll(
                   EdgeInsetsGeometry.symmetric(vertical: 15.r)),
               shape: WidgetStatePropertyAll(
@@ -309,7 +322,6 @@ class ProductsDetailsScreen extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Backward Icon Part
-
                   CircleArrowIconButton(
                     func: () {
                       pageController.previousPage(
@@ -338,7 +350,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productPriceSection(ConstColors colors) {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 48.r),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
       sliver: SliverToBoxAdapter(
         child: Text(
           "\$99.9",
@@ -353,7 +365,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productCategoriesSection() {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 48.w, vertical: 21.h),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.w, vertical: 21.h),
       sliver: SliverToBoxAdapter(
         child: Wrap(
           spacing: 9.w,
@@ -364,45 +376,6 @@ class ProductsDetailsScreen extends HookWidget {
             ProdDetCategoryCard(categoryTitle: "Plants"),
             ProdDetCategoryCard(categoryTitle: "Outdoor")
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CircleArrowIconButton extends StatelessWidget {
-  const CircleArrowIconButton({
-    super.key,
-    required this.func,
-    required this.icon,
-  });
-  final VoidCallback func;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => TextButton(
-        style: ButtonStyle(
-          padding: WidgetStatePropertyAll(EdgeInsets.zero),
-        ),
-        onPressed: func,
-        child: Card(
-          elevation: 3.5.r,
-          shape: CircleBorder(),
-          child: Container(
-            height: 45.w,
-            width: 45.w,
-            decoration: BoxDecoration(
-              color: colors.ffffffff,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: colors.ff221fif,
-              size: 24.r,
-            ),
-          ),
         ),
       ),
     );

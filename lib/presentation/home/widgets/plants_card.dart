@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +22,7 @@ class PlantCard extends StatelessWidget {
           overlayColor: WidgetStatePropertyAll(colors.transparent),
         ),
         onPressed: () {
+          log("Plant Card Pressed");
           AppRouter.go(ProductsDetailsScreen());
         },
         child: SizedBox(
