@@ -15,7 +15,7 @@ import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
 import 'package:plant_store/presentation/auth/screens/login_screen.dart';
-import 'package:plant_store/presentation/auth/widgets/login_custom_text_field.dart';
+import 'package:plant_store/presentation/auth/widgets/login_custom_text_field_wd.dart';
 
 class SignUpScren extends HookWidget {
   const SignUpScren({super.key});

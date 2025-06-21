@@ -8,8 +8,8 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/home/widgets/equipments_card.dart';
-import 'package:plant_store/presentation/home/widgets/plants_card.dart';
+import 'package:plant_store/presentation/home/widgets/equipments_card_wd.dart';
+import 'package:plant_store/presentation/home/widgets/plants_card_wd.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});

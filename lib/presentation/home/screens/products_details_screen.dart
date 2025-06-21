@@ -9,9 +9,9 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button.dart';
-import 'package:plant_store/presentation/home/widgets/prod_details_category_card.dart';
-import 'package:plant_store/presentation/home/widgets/product_details_card.dart';
+import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
+import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
+import 'package:plant_store/presentation/home/widgets/product_details_card_wd.dart';
 
 class ProductsDetailsScreen extends HookWidget {
   const ProductsDetailsScreen({super.key});
