@@ -17,6 +17,11 @@ class KitCard extends StatelessWidget {
         style: ButtonStyle(
           padding: WidgetStatePropertyAll(EdgeInsets.zero),
           overlayColor: WidgetStatePropertyAll(colors.transparent),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+          ),
         ),
         onPressed: () {
           AppRouter.go(ProductsDetailsScreen());
