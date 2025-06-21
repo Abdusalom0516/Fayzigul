@@ -73,4 +73,5 @@ class ConstTexts {
   String phoneNumber = "Phone Number";
   String address = "Address";
   String username = "Username";
+  String save = "Save";
 }

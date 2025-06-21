@@ -11,6 +11,7 @@ import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:plant_store/presentation/auth/screens/login_screen.dart';
 import 'package:plant_store/presentation/main/main_screen.dart';
+import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => SignUpBloc()),
         BlocProvider(create: (context) => VerifyEmailBloc()),
+        BlocProvider(create: (context) => ProfileScreenBloc()),
       ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),

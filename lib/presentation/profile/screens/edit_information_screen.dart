@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 
-class EditInformationScreen extends StatelessWidget {
+class EditInformationScreen extends HookWidget {
   const EditInformationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final usernameController = useTextEditingController();
+    final emailAddressController = useTextEditingController();
+    final addressController = useTextEditingController();
+    final phoneNumberController = useTextEditingController();
+    final isSavable = useState(false);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
+        bottomNavigationBar: Padding(
+          padding:
+              EdgeInsetsGeometry.symmetric(horizontal: 25.r, vertical: 35.r),
+          child: CustomTextButton(
+            buttonText: texts.save,
+            textColor: colors.ffffffff,
+            backgroundColor:
+                isSavable.value ? colors.ff007537 : colors.ff7D7B7B,
+            func: () {},
+          ),
+        ),
         body: CustomScrollView(
           slivers: [
             // Sliver Appbar Section
@@ -26,7 +44,7 @@ class EditInformationScreen extends StatelessWidget {
                 child: Text(
                   texts.infoWillSaved,
                   style: AppTextStyles.lato
-                      .regular(color: colors.ff221fif, fontSize: 14.r),
+                      .regular(color: colors.ff221fif, fontSize: 15.r),
                 ),
               ),
             ),
@@ -35,9 +53,46 @@ class EditInformationScreen extends StatelessWidget {
               padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
               sliver: SliverToBoxAdapter(
                 child: Column(
-                  spacing: 15.h,
+                  spacing: 11.h,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [],
+                  children: [
+                    CustomTextField(
+                        controller: usernameController,
+                        hint: texts.username,
+                        func: (value) {
+                          isSavable.value = value.isNotEmpty &&
+                              emailAddressController.text.isNotEmpty &&
+                              addressController.text.isNotEmpty &&
+                              phoneNumberController.text.isNotEmpty;
+                        }),
+                    CustomTextField(
+                        controller: emailAddressController,
+                        hint: texts.emailHint,
+                        func: (value) {
+                          isSavable.value = value.isNotEmpty &&
+                              usernameController.text.isNotEmpty &&
+                              addressController.text.isNotEmpty &&
+                              phoneNumberController.text.isNotEmpty;
+                        }),
+                    CustomTextField(
+                        controller: addressController,
+                        hint: texts.address,
+                        func: (value) {
+                          isSavable.value = value.isNotEmpty &&
+                              usernameController.text.isNotEmpty &&
+                              emailAddressController.text.isNotEmpty &&
+                              phoneNumberController.text.isNotEmpty;
+                        }),
+                    CustomTextField(
+                        controller: phoneNumberController,
+                        hint: texts.phoneNumber,
+                        func: (value) {
+                          isSavable.value = value.isNotEmpty &&
+                              usernameController.text.isNotEmpty &&
+                              emailAddressController.text.isNotEmpty &&
+                              addressController.text.isNotEmpty;
+                        }),
+                  ],
                 ),
               ),
             )
@@ -54,10 +109,58 @@ class EditInformationScreen extends StatelessWidget {
       floating: true,
       backgroundColor: colors.ffffffff,
       title: Text(
-        texts.faqs,
+        texts.editInfo,
         style: AppTextStyles.lato.medium(
           color: colors.ff221fif,
           fontSize: 23.sp,
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  const CustomTextField(
+      {super.key,
+      required this.controller,
+      required this.hint,
+      required this.func});
+
+  final TextEditingController controller;
+  final String hint;
+  final Function(String) func;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppStateWrapper(
+      builder: (colors, texts, images) => TextField(
+        controller: controller,
+        cursorColor: colors.ff221fif,
+        onChanged: func,
+        style: AppTextStyles.lato
+            .regular(color: colors.ff221fif, fontSize: 17.r)
+            .copyWith(
+              decoration: TextDecoration.none,
+              decorationColor: colors.transparent,
+              decorationThickness: 0,
+            ),
+        decoration: InputDecoration(
+          hint: Text(hint),
+          hintStyle: AppTextStyles.lato
+              .regular(color: colors.ff7D7B7B, fontSize: 17.r),
+          contentPadding: EdgeInsets.zero,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: colors.ff7D7B7B,
+              width: 1.r,
+            ),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: colors.ff7D7B7B,
+              width: 1.r,
+            ),
+          ),
         ),
       ),
     );

@@ -10,6 +10,6 @@ class OnQaNavigationClicked extends ProfileScreenEvents {}
 
 class OnTermsAndSecurityNavigationClicked extends ProfileScreenEvents {}
 
-class OnSecurityoPolicyNavigationClicked extends ProfileScreenEvents {}
+class OnSecurityPolicyNavigationClicked extends ProfileScreenEvents {}
 
 class OnLogOutClicked extends ProfileScreenEvents {}
