@@ -7,7 +7,7 @@ import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_events.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_states.dart';
-import 'package:plant_store/presentation/home/screens/home_screen.dart';
+import 'package:plant_store/presentation/main/main_screen.dart';
 
 class LoginBloc extends Bloc<LoginEvents, AuthStates> {
   LoginBloc() : super(LoginInitial()) {
@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvents, AuthStates> {
           );
 
           if (credential.user != null) {
-            AppRouter.open(HomeScreen());
+            AppRouter.open(MainScreen());
             emit(LoginSuccess());
           }
         } on FirebaseAuthException catch (e) {
