@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
     final auth = FirebaseAuth.instance;
     return MultiBlocProvider(
       providers: [
-    BlocProvider(create: (context) => LoginBloc()),
-    BlocProvider(create: (context) => SignUpBloc()),
-    BlocProvider(create: (context) => VerifyEmailBloc()),
-  ],
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => SignUpBloc()),
+        BlocProvider(create: (context) => VerifyEmailBloc()),
+      ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),
         minTextAdapt: true,

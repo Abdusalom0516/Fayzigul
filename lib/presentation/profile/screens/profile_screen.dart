@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
-import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc.dart';
+import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc_events.dart';
 import 'package:plant_store/presentation/profile/widgets/profile_card_wd.dart';
-import 'package:plant_store/presentation/profile/screens/faqs_screen.dart';
-import 'package:plant_store/presentation/profile/screens/transactions_history_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -21,35 +21,67 @@ class ProfileScreen extends StatelessWidget {
             // Sliver Appbar Section
             sliverAppBarSection(colors),
             // Profile Image, Name & Email Section
-            profileImagenameAndEmailSection(colors),
+            profileImageNameAndEmailSection(colors),
             SliverHeight(height: 35),
             // Profile General Part Title Section
             profileTitleSection(colors, texts.general),
             SliverHeight(height: 5),
             // Profile General Part Cards Section
-            ProfileCard(title: texts.editInfo, func: () {}),
-            ProfileCard(title: texts.plantGuide, func: () {}),
             ProfileCard(
-              title: texts.transHist,
+              title: texts.editInfo,
               func: () {
-                AppRouter.go(TransactionsHistoryScreen());
+                context
+                    .read<ProfileScreenBloc>()
+                    .add(OnEditInformationNavigationClicked());
               },
             ),
             ProfileCard(
-                title: texts.qa,
-                func: () {
-                  AppRouter.go(FaqsScreen());
-                }),
+              title: texts.plantGuide,
+              func: () {
+                context
+                    .read<ProfileScreenBloc>()
+                    .add(OnPlantingGuideNavigationClicked());
+              },
+            ),
+            ProfileCard(
+              title: texts.transHist,
+              func: () {
+                context
+                    .read<ProfileScreenBloc>()
+                    .add(OnTransactionsHistoryNavigationClicked());
+              },
+            ),
+            ProfileCard(
+              title: texts.qa,
+              func: () {
+                context.read<ProfileScreenBloc>().add(OnQaNavigationClicked());
+              },
+            ),
             SliverHeight(height: 35),
             // Profile Security Part Title Section
             profileTitleSection(colors, texts.security),
             SliverHeight(height: 5),
-            // Profile Security Part Cards Section
-            ProfileCard(title: texts.term, func: () {}),
-            ProfileCard(title: texts.secPol, func: () {}),
-            ProfileCard(title: texts.logOut, func: () {
-              
-            }, isRed: true),
+            // Profile Security Cards Section
+            ProfileCard(
+              title: texts.term,
+              func: () {
+                context
+                    .read<ProfileScreenBloc>()
+                    .add(OnTermsAndSecurityNavigationClicked());
+              },
+            ),
+            ProfileCard(
+              title: texts.secPol,
+              func: () {
+                context.read<ProfileScreenBloc>().add(OnLogOutClicked());
+              },
+            ),
+            ProfileCard(
+                title: texts.logOut,
+                func: () {
+                  context.read<ProfileScreenBloc>().add(OnLogOutClicked());
+                },
+                isRed: true),
           ],
         ),
       ),
@@ -82,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter profileImagenameAndEmailSection(ConstColors colors) {
+  SliverToBoxAdapter profileImageNameAndEmailSection(ConstColors colors) {
     return SliverToBoxAdapter(
       child: Container(
         height: 72.h,
