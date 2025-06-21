@@ -9,5 +9,6 @@ class ConstColors {
   Color fff6f6f6 = Color(0xFFF6F6F6);
   Color ff7F7F7F = Color(0xFF7F7F7F);
   Color ff3A3A3A = Color(0xFF3A3A3A);
+  Color ff7D7B7B = Color(0xFF7D7B7B);
   Color transparent = Colors.transparent;
 }

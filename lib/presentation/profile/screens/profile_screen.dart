@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/profile/profile_card.dart';
+import 'package:plant_store/presentation/profile/screens/faqs_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -27,6 +29,11 @@ class ProfileScreen extends StatelessWidget {
             ProfileCard(title: texts.editInfo, func: () {}),
             ProfileCard(title: texts.plantGuide, func: () {}),
             ProfileCard(title: texts.transHist, func: () {}),
+            ProfileCard(
+                title: texts.qa,
+                func: () {
+                  AppRouter.go(FaqsScreen());
+                }),
             SliverHeight(height: 35),
             // Profile Security Part Title Section
             profileTitleSection(colors, texts.security),
