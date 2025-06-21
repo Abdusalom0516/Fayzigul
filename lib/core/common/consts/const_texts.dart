@@ -59,8 +59,13 @@ class ConstTexts {
   String whereShip = "Where do you ship?";
   String ifOrderMultiple =
       "If I order more than one plant, will they ship separately?";
-  String hotOrderDifferentPlace =
+  String howToOrderDifferentPlace =
       "How do I order several plants to go to different addresses?";
   String howLongArriveAns =
       "Orders placed via Standard shipping will be processed within 2-8 business days and will be in transit for 1-5 days. Orders placed via Expedited shipping will be processed within 1-2 business days and will be in transit for 1-5 days.";
+  String whereShipAns = "We ship to all 63 provinces in the Vietnam.";
+  String ifOrderMultipleAns =
+      "Yes, each individual plant ships separately. Plants that are part of the same order may ship out on different days and may also be delivered on different days. You will receive individual tracking information for each plant in your order.";
+  String howToOrderDifferentPlaceAns =
+      "If you're hoping to purchase 5 or more plants going to different addresses, our Customer Support team can help with that! Just with details about your bulk order and someone on our team will get back to you as soon as possible.";
 }
