@@ -4,6 +4,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_expansion_tile_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 
 class FaqsScreen extends StatelessWidget {
@@ -17,19 +18,23 @@ class FaqsScreen extends StatelessWidget {
           slivers: [
             // Sliver Appbar Section
             appBarSection(colors, texts),
+            SliverHeight(height: 15),
             // Qustion and Answer Section
             CustomExpansionTile(
               quastion: texts.howLongArrive,
               answer: texts.howLongArriveAns,
             ),
+            SliverHeight(height: 5),
             CustomExpansionTile(
               quastion: texts.whereShip,
               answer: texts.whereShipAns,
             ),
+            SliverHeight(height: 5),
             CustomExpansionTile(
               quastion: texts.ifOrderMultiple,
               answer: texts.ifOrderMultipleAns,
             ),
+            SliverHeight(height: 5),
             CustomExpansionTile(
               quastion: texts.howToOrderDifferentPlace,
               answer: texts.howToOrderDifferentPlaceAns,
