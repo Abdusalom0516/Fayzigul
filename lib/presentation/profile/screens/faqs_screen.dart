@@ -18,7 +18,7 @@ class FaqsScreen extends StatelessWidget {
               floating: true,
               backgroundColor: colors.ffffffff,
               title: Text(
-                texts.cart,
+                texts.faqs,
                 style: AppTextStyles.lato.medium(
                   color: colors.ff221fif,
                   fontSize: 23.sp,
@@ -26,9 +26,10 @@ class FaqsScreen extends StatelessWidget {
               ),
             ),
             SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 48.r, vertical: 15.r),
+              padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 15.r),
               sliver: SliverToBoxAdapter(
                 child: ExpansionTile(
+                  childrenPadding: EdgeInsets.symmetric(horizontal: 15.r),
                   title: Text(
                     texts.howLongArrive,
                     style: AppTextStyles.lato
