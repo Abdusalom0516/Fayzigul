@@ -54,25 +54,31 @@ class TransactionsCard extends StatelessWidget {
                     color: colors.fff6f6f6,
                     child: Image.asset(images.plant, fit: BoxFit.cover),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Order Successful",
-                        style: AppTextStyles.lato
-                            .medium(color: colors.ff007537, fontSize: 17.sp),
-                      ),
-                      Text(
-                        "Spider Plant",
-                        style: AppTextStyles.lato
-                            .medium(color: colors.ff221fif, fontSize: 17.sp),
-                      ),
-                      Text(
-                        "2 ${texts.items}",
-                        style: AppTextStyles.lato
-                            .regular(color: colors.ff221fif, fontSize: 15.sp),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      spacing: 3.h,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          overflow: TextOverflow.ellipsis,
+                          "Order Successful",
+                          style: AppTextStyles.lato
+                              .medium(color: colors.ff007537, fontSize: 17.sp),
+                        ),
+                        Text(
+                          overflow: TextOverflow.ellipsis,
+                          "Spider Plant",
+                          style: AppTextStyles.lato
+                              .medium(color: colors.ff221fif, fontSize: 17.sp),
+                        ),
+                        Text(
+                          overflow: TextOverflow.ellipsis,
+                          "2 ${texts.items}",
+                          style: AppTextStyles.lato
+                              .regular(color: colors.ff221fif, fontSize: 15.sp),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )
