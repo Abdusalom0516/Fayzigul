@@ -68,4 +68,9 @@ class ConstTexts {
       "Yes, each individual plant ships separately. Plants that are part of the same order may ship out on different days and may also be delivered on different days. You will receive individual tracking information for each plant in your order.";
   String howToOrderDifferentPlaceAns =
       "If you're hoping to purchase 5 or more plants going to different addresses, our Customer Support team can help with that! Just with details about your bulk order and someone on our team will get back to you as soon as possible.";
+  String infoWillSaved =
+      "The information will be saved for the next purchase. Click on the details to edit.";
+  String phoneNumber = "Phone Number";
+  String address = "Address";
+  String username = "Username";
 }

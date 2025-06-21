@@ -5,7 +5,7 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/profile/profile_card_wd.dart';
+import 'package:plant_store/presentation/profile/widgets/profile_card_wd.dart';
 import 'package:plant_store/presentation/profile/screens/faqs_screen.dart';
 import 'package:plant_store/presentation/profile/screens/transactions_history_screen.dart';
 
@@ -47,7 +47,9 @@ class ProfileScreen extends StatelessWidget {
             // Profile Security Part Cards Section
             ProfileCard(title: texts.term, func: () {}),
             ProfileCard(title: texts.secPol, func: () {}),
-            ProfileCard(title: texts.logOut, func: () {}, isRed: true),
+            ProfileCard(title: texts.logOut, func: () {
+              
+            }, isRed: true),
           ],
         ),
       ),

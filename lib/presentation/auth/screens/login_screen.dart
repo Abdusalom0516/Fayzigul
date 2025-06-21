@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -137,6 +139,7 @@ class LoginScreen extends HookWidget {
                                 textColor: colors.ffffffff,
                                 backgroundColor: colors.ff221fif,
                                 func: () {
+                                  log("Hello");
                                   context.read<LoginBloc>().add(
                                         OnLoginButtonClicked(
                                           email: emailController.text.trim(),
