@@ -13,7 +13,7 @@ class CustomExpansionTile extends HookWidget {
   Widget build(BuildContext context) {
     final isExpanded = useState(false);
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 7.r),
+      padding: EdgeInsets.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: AppStateWrapper(
           builder: (colors, texts, images) => ExpansionTile(
