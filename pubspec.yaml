@@ -32,6 +32,7 @@ dependencies:
   dot_navigation_bar: ^1.0.2
   smooth_page_indicator: ^1.2.1
   page_view_dot_indicator: ^2.3.0
+  icons_launcher: ^3.0.1
 
 
 dev_dependencies:
@@ -39,6 +40,15 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
+
+
+icons_launcher:
+  image_path: "assets/images/logo.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
 
 
 flutter:

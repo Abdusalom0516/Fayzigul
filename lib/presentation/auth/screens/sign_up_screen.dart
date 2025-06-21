@@ -5,7 +5,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
-import 'package:plant_store/core/common/widgets/custom_text_button.dart';
+import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
@@ -15,7 +15,7 @@ import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_events.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_states.dart';
 import 'package:plant_store/presentation/auth/screens/login_screen.dart';
-import 'package:plant_store/presentation/auth/widgets/login_custom_text_field.dart';
+import 'package:plant_store/presentation/auth/widgets/login_custom_text_field_wd.dart';
 
 class SignUpScren extends HookWidget {
   const SignUpScren({super.key});

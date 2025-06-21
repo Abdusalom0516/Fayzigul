@@ -9,9 +9,9 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button.dart';
-import 'package:plant_store/presentation/home/widgets/prod_details_category_card.dart';
-import 'package:plant_store/presentation/home/widgets/product_details_card.dart';
+import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
+import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
+import 'package:plant_store/presentation/home/widgets/product_details_card_wd.dart';
 
 class ProductsDetailsScreen extends HookWidget {
   const ProductsDetailsScreen({super.key});
@@ -58,7 +58,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productFullContentSection(ConstColors colors, String content) {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: Text(
           content,
@@ -73,7 +73,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productTitleScreen(ConstColors colors, String title) {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: Container(
           width: double.infinity,
@@ -103,7 +103,7 @@ class ProductsDetailsScreen extends HookWidget {
     return SliverToBoxAdapter(
       child: Padding(
           padding:
-              EdgeInsetsGeometry.symmetric(horizontal: 32.r, vertical: 15.r),
+              EdgeInsetsGeometry.symmetric(horizontal: 25.r, vertical: 15.r),
           child: Column(
             spacing: 15.h,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,7 +350,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productPriceSection(ConstColors colors) {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.r),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: Text(
           "\$99.9",
@@ -365,7 +365,7 @@ class ProductsDetailsScreen extends HookWidget {
 
   SliverPadding productCategoriesSection() {
     return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 32.w, vertical: 21.h),
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 25.w, vertical: 21.h),
       sliver: SliverToBoxAdapter(
         child: Wrap(
           spacing: 9.w,

@@ -38,6 +38,8 @@ class MyApp extends StatelessWidget {
           theme: Theme.of(context).copyWith(
             appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
             splashColor: Colors.transparent,
+            // It remove the unecessary borders
+            dividerColor: Colors.transparent,
             highlightColor: Colors.transparent,
             hoverColor: Colors.transparent,
             scaffoldBackgroundColor: ConstColors().ffffffff,

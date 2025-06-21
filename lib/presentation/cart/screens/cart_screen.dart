@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
-import 'package:plant_store/core/common/widgets/custom_width.dart';
+import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/cart/widgets/cart_product_card.dart';
+import 'package:plant_store/presentation/cart/widgets/cart_product_card_wd.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

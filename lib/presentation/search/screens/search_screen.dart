@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +6,7 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/search/widgets/search_history_card_wd.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
@@ -203,69 +202,6 @@ class SearchResultProductsCard extends StatelessWidget {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SearchHistoryCard extends StatelessWidget {
-  const SearchHistoryCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => TextButton(
-        onPressed: () {
-          log("Search History Option Clicked.");
-        },
-        style: ButtonStyle(
-          padding: WidgetStatePropertyAll(EdgeInsets.zero),
-          overlayColor: WidgetStatePropertyAll(colors.transparent),
-        ),
-        child: SizedBox(
-          height: 37.h,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                spacing: 11.w,
-                children: [
-                  Icon(
-                    Icons.access_time_rounded,
-                    color: colors.ffababab,
-                    size: 24.r,
-                  ),
-                  Text(
-                    "Spider Plant",
-                    style: AppTextStyles.lato.medium(
-                      color: colors.ff221fif,
-                      fontSize: 17.sp,
-                    ),
-                  )
-                ],
-              ),
-              Transform.translate(
-                offset: Offset(9.w, 0),
-                child: IconButton(
-                  onPressed: () {
-                    log("Close Button Clicked.");
-                  },
-                  style: ButtonStyle(
-                    padding: WidgetStatePropertyAll(EdgeInsets.zero),
-                    // overlayColor: WidgetStatePropertyAll(colors.transparent),
-                  ),
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: colors.ffababab,
-                    size: 24.r,
-                  ),
-                ),
-              )
-            ],
-          ),
         ),
       ),
     );

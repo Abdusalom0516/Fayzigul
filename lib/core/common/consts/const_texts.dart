@@ -52,4 +52,20 @@ class ConstTexts {
   String instruction = "Instruction";
   String lorem =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  String faqs = "FAQS";
+  String transactionHistory = "Transaction History";
+  String plantingGuides = "Planting Guides";
+  String howLongArrive = "How long will it take for my order to arrive?";
+  String whereShip = "Where do you ship?";
+  String ifOrderMultiple =
+      "If I order more than one plant, will they ship separately?";
+  String howToOrderDifferentPlace =
+      "How do I order several plants to go to different addresses?";
+  String howLongArriveAns =
+      "Orders placed via Standard shipping will be processed within 2-8 business days and will be in transit for 1-5 days. Orders placed via Expedited shipping will be processed within 1-2 business days and will be in transit for 1-5 days.";
+  String whereShipAns = "We ship to all 63 provinces in the Vietnam.";
+  String ifOrderMultipleAns =
+      "Yes, each individual plant ships separately. Plants that are part of the same order may ship out on different days and may also be delivered on different days. You will receive individual tracking information for each plant in your order.";
+  String howToOrderDifferentPlaceAns =
+      "If you're hoping to purchase 5 or more plants going to different addresses, our Customer Support team can help with that! Just with details about your bulk order and someone on our team will get back to you as soon as possible.";
 }

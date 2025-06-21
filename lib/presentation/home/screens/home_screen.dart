@@ -10,9 +10,9 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/screens/home_category_screen.dart';
-import 'package:plant_store/presentation/home/widgets/equipments_card.dart';
-import 'package:plant_store/presentation/home/widgets/kit_card.dart';
-import 'package:plant_store/presentation/home/widgets/plants_card.dart';
+import 'package:plant_store/presentation/home/widgets/equipments_card_wd.dart';
+import 'package:plant_store/presentation/home/widgets/kit_card_wd.dart';
+import 'package:plant_store/presentation/home/widgets/plants_card_wd.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
