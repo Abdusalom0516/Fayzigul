@@ -53,7 +53,7 @@ class EditInformationScreen extends HookWidget {
               padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
               sliver: SliverToBoxAdapter(
                 child: Column(
-                  spacing: 11.h,
+                  spacing: 15.h,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextField(
@@ -145,8 +145,8 @@ class CustomTextField extends StatelessWidget {
               decorationThickness: 0,
             ),
         decoration: InputDecoration(
-          hint: Text(hint),
-          hintStyle: AppTextStyles.lato
+          label: Text(hint),
+          labelStyle: AppTextStyles.lato
               .regular(color: colors.ff7D7B7B, fontSize: 17.r),
           contentPadding: EdgeInsets.zero,
           focusedBorder: UnderlineInputBorder(
