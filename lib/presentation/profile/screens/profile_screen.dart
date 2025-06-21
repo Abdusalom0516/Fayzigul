@@ -7,6 +7,7 @@ import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/profile/profile_card_wd.dart';
 import 'package:plant_store/presentation/profile/screens/faqs_screen.dart';
+import 'package:plant_store/presentation/profile/screens/transactions_history_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -28,7 +29,12 @@ class ProfileScreen extends StatelessWidget {
             // Profile General Part Cards Section
             ProfileCard(title: texts.editInfo, func: () {}),
             ProfileCard(title: texts.plantGuide, func: () {}),
-            ProfileCard(title: texts.transHist, func: () {}),
+            ProfileCard(
+              title: texts.transHist,
+              func: () {
+                AppRouter.go(TransactionsHistoryScreen());
+              },
+            ),
             ProfileCard(
                 title: texts.qa,
                 func: () {
