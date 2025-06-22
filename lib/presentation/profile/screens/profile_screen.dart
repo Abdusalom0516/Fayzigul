@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc.dart';
@@ -20,10 +21,7 @@ class ProfileScreen extends StatelessWidget {
         body: BlocBuilder<ProfileScreenBloc, ProfileScreenStates>(
             builder: (context, state) {
           if (state is ProfileScreenLoadingState) {
-            return Center(
-                child: CircularProgressIndicator(
-              color: colors.ff007537,
-            ));
+            return CustomLoading();
           }
           return CustomScrollView(
             slivers: [

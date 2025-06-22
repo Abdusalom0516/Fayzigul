@@ -32,16 +32,14 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
 
     on<OnLogOutClicked>((event, emit) async {
       emit(ProfileScreenLoadingState());
-      log("Logging out...");
       await Future.delayed(const Duration(seconds: 1));
+
       try {
         final auth = FirebaseAuth.instance;
         await auth.signOut();
 
         if (event.context.mounted) {
-          log("User logged out successfully.");
           Phoenix.rebirth(event.context);
-          // await Restart.restartApp();
         } else {
           log("Context is not mounted, cannot navigate.");
         }
