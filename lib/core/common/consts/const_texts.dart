@@ -78,4 +78,9 @@ class ConstTexts {
   String checkout = "Checkout";
   String paymentMethod = "Payment Method";
   String yourItems = "Your Items";
+  String cash = "Pay with Cash";
+  String card = "Pay with Card";
+  String continueT = "Continue";
+  String deliveryFee = "Delivery Fee";
+  String total = "Total";
 }
