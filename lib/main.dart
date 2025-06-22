@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/utils/app_router.dart';
@@ -30,34 +31,46 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => LoginBloc()),
-        BlocProvider(create: (context) => SignUpBloc()),
-        BlocProvider(create: (context) => VerifyEmailBloc()),
-        BlocProvider(create: (context) => ProfileScreenBloc()),
-      ],
-      child: ScreenUtilInit(
-        designSize: Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) => MaterialApp(
-          theme: Theme.of(context).copyWith(
-            appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
-            splashColor: Colors.transparent,
-            // It remove the unecessary borders
-            dividerColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            scaffoldBackgroundColor: ConstColors().ffffffff,
+    return Phoenix(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => LoginBloc()),
+          BlocProvider(create: (context) => SignUpBloc()),
+          BlocProvider(create: (context) => VerifyEmailBloc()),
+          BlocProvider(create: (context) => ProfileScreenBloc()),
+        ],
+        child: ScreenUtilInit(
+          designSize: Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) => MaterialApp(
+            theme: Theme.of(context).copyWith(
+              appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
+              splashColor: Colors.transparent,
+              // It remove the unecessary borders
+              dividerColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              scaffoldBackgroundColor: ConstColors().ffffffff,
+            ),
+            debugShowCheckedModeBanner: false,
+            navigatorKey: AppRouter.navigatorKey,
+            // This is the initial route of the app checking if the user is logged in or not with FirebaseAuth
+            home: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                final user = snapshot.data;
+                if (user == null || !user.emailVerified) {
+                  return LoginScreen();
+                } else {
+                  return MainScreen();
+                }
+              },
+            ),
           ),
-          debugShowCheckedModeBanner: false,
-          navigatorKey: AppRouter.navigatorKey,
-          home: auth.currentUser == null ||
-                  auth.currentUser != null && !auth.currentUser!.emailVerified
-              ? LoginScreen()
-              : MainScreen(),
         ),
       ),
     );

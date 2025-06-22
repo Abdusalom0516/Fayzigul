@@ -7,6 +7,7 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc.dart';
 import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc_events.dart';
+import 'package:plant_store/presentation/profile/bloc/profile_scren_bloc_states.dart';
 import 'package:plant_store/presentation/profile/widgets/profile_card_wd.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,74 +17,89 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            // Sliver Appbar Section
-            sliverAppBarSection(colors),
-            // Profile Image, Name & Email Section
-            profileImageNameAndEmailSection(colors),
-            SliverHeight(height: 35),
-            // Profile General Part Title Section
-            profileTitleSection(colors, texts.general),
-            SliverHeight(height: 5),
-            // Profile General Part Cards Section
-            ProfileCard(
-              title: texts.editInfo,
-              func: () {
-                context
-                    .read<ProfileScreenBloc>()
-                    .add(OnEditInformationNavigationClicked());
-              },
-            ),
-            ProfileCard(
-              title: texts.plantGuide,
-              func: () {
-                context
-                    .read<ProfileScreenBloc>()
-                    .add(OnPlantingGuideNavigationClicked());
-              },
-            ),
-            ProfileCard(
-              title: texts.transHist,
-              func: () {
-                context
-                    .read<ProfileScreenBloc>()
-                    .add(OnTransactionsHistoryNavigationClicked());
-              },
-            ),
-            ProfileCard(
-              title: texts.qa,
-              func: () {
-                context.read<ProfileScreenBloc>().add(OnQaNavigationClicked());
-              },
-            ),
-            SliverHeight(height: 35),
-            // Profile Security Part Title Section
-            profileTitleSection(colors, texts.security),
-            SliverHeight(height: 5),
-            // Profile Security Cards Section
-            ProfileCard(
-              title: texts.term,
-              func: () {
-                context
-                    .read<ProfileScreenBloc>()
-                    .add(OnTermsAndSecurityNavigationClicked());
-              },
-            ),
-            ProfileCard(
-              title: texts.secPol,
-              func: () {
-                context.read<ProfileScreenBloc>().add(OnLogOutClicked());
-              },
-            ),
-            ProfileCard(
-                title: texts.logOut,
+        body: BlocBuilder<ProfileScreenBloc, ProfileScreenStates>(
+            builder: (context, state) {
+          if (state is ProfileScreenLoadingState) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: colors.ff007537,
+            ));
+          }
+          return CustomScrollView(
+            slivers: [
+              // Sliver Appbar Section
+              sliverAppBarSection(colors),
+              // Profile Image, Name & Email Section
+              profileImageNameAndEmailSection(colors),
+              SliverHeight(height: 35),
+              // Profile General Part Title Section
+              profileTitleSection(colors, texts.general),
+              SliverHeight(height: 5),
+              // Profile General Part Cards Section
+              ProfileCard(
+                title: texts.editInfo,
                 func: () {
-                  context.read<ProfileScreenBloc>().add(OnLogOutClicked());
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnEditInformationNavigationClicked());
                 },
-                isRed: true),
-          ],
-        ),
+              ),
+              ProfileCard(
+                title: texts.plantGuide,
+                func: () {
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnPlantingGuideNavigationClicked());
+                },
+              ),
+              ProfileCard(
+                title: texts.transHist,
+                func: () {
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnTransactionsHistoryNavigationClicked());
+                },
+              ),
+              ProfileCard(
+                title: texts.qa,
+                func: () {
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnQaNavigationClicked());
+                },
+              ),
+              SliverHeight(height: 35),
+              // Profile Security Part Title Section
+              profileTitleSection(colors, texts.security),
+              SliverHeight(height: 5),
+              // Profile Security Cards Section
+              ProfileCard(
+                title: texts.term,
+                func: () {
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnTermsAndSecurityNavigationClicked());
+                },
+              ),
+              ProfileCard(
+                title: texts.secPol,
+                func: () {
+                  context
+                      .read<ProfileScreenBloc>()
+                      .add(OnSecurityPolicyNavigationClicked());
+                },
+              ),
+              ProfileCard(
+                  title: texts.logOut,
+                  func: () {
+                    context
+                        .read<ProfileScreenBloc>()
+                        .add(OnLogOutClicked(context: context));
+                  },
+                  isRed: true),
+            ],
+          );
+        }),
       ),
     );
   }
