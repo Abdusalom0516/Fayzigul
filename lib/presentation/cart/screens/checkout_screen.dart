@@ -9,6 +9,7 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/cart/widgets/bottom_nav_text_row_wd.dart';
 import 'package:plant_store/presentation/cart/widgets/checkout_items_card_wd.dart';
 import 'package:plant_store/presentation/cart/widgets/payment_method_card_wd.dart';
 import 'package:plant_store/presentation/profile/widgets/custom_textfield_wd.dart';
@@ -192,43 +193,6 @@ class CheckoutScreen extends HookWidget {
           color: colors.ff221fif,
           fontSize: 23.sp,
         ),
-      ),
-    );
-  }
-}
-
-class BottomNavigationTextRow extends StatelessWidget {
-  const BottomNavigationTextRow(
-      {super.key, required this.title, required this.value});
-
-  final String title, value;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => Row(
-        spacing: 15.w,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: AppTextStyles.lato.medium(
-              color: colors.ff221fif,
-              fontSize: 17.sp,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              textAlign: TextAlign.end,
-              overflow: TextOverflow.ellipsis,
-              value,
-              style: AppTextStyles.lato.semiBold(
-                color: colors.ff007537,
-                fontSize: 17.sp,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
