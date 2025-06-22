@@ -8,6 +8,7 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
@@ -232,43 +233,18 @@ class ProductsDetailsScreen extends HookWidget {
             ),
             Height(height: 15),
             // Add to Cart Button Section
-            addToCartButtonSection(colors, texts, quantity),
+            CustomTextButton(
+              buttonText: texts.addToCart,
+              textColor: colors.ffffffff,
+              backgroundColor:
+                  quantity.value <= 0 ? colors.ffababab : colors.ff007537,
+              func: () {
+                log("Add to Cart Button Clicked.");
+              },
+            )
           ],
         ),
       ),
-    );
-  }
-
-  Row addToCartButtonSection(
-      ConstColors colors, ConstTexts texts, ValueNotifier<int> quantity) {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(
-                  quantity.value <= 0 ? colors.ffababab : colors.ff007537),
-              padding: WidgetStatePropertyAll(
-                  EdgeInsetsGeometry.symmetric(vertical: 15.r)),
-              shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-            ),
-            onPressed: () {
-              log("Add to Cart Button Clicked.");
-            },
-            child: Text(
-              texts.addToCart,
-              style: AppTextStyles.lato.bold(
-                color: colors.ffffffff,
-                fontSize: 17.sp,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
