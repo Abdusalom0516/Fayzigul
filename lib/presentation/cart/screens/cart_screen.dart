@@ -5,7 +5,9 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/cart/screens/checkout_screen.dart';
 import 'package:plant_store/presentation/cart/widgets/cart_product_card_wd.dart';
 
 class CartScreen extends StatelessWidget {
@@ -62,6 +64,7 @@ class CartScreen extends StatelessWidget {
                 ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
             onPressed: () {
               log("Checkout Button Clicked.");
+              AppRouter.go(CheckoutScreen());
             },
             child: Container(
               width: double.infinity,

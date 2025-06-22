@@ -74,4 +74,8 @@ class ConstTexts {
   String address = "Address";
   String username = "Username";
   String save = "Save";
+  String personalInfo = "Personal Information";
+  String checkout = "Checkout";
+  String paymentMethod = "Payment Method";
+  String yourItems = "Your Items";
 }
