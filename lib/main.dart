@@ -21,7 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,45 +31,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Phoenix(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => LoginBloc()),
-          BlocProvider(create: (context) => SignUpBloc()),
-          BlocProvider(create: (context) => VerifyEmailBloc()),
-          BlocProvider(create: (context) => ProfileScreenBloc()),
-        ],
-        child: ScreenUtilInit(
-          designSize: Size(375, 812),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (context, child) => MaterialApp(
-            theme: Theme.of(context).copyWith(
-              appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
-              splashColor: Colors.transparent,
-              // It remove the unecessary borders
-              dividerColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              scaffoldBackgroundColor: ConstColors().ffffffff,
-            ),
-            debugShowCheckedModeBanner: false,
-            navigatorKey: AppRouter.navigatorKey,
-            // This is the initial route of the app checking if the user is logged in or not with FirebaseAuth
-            home: StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                final user = snapshot.data;
-                if (user == null || !user.emailVerified) {
-                  return LoginScreen();
-                } else {
-                  return MainScreen();
-                }
-              },
-            ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => SignUpBloc()),
+        BlocProvider(create: (context) => VerifyEmailBloc()),
+        BlocProvider(create: (context) => ProfileScreenBloc()),
+      ],
+      child: ScreenUtilInit(
+        designSize: Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: AppRouter.navigatorKey,
+          theme: Theme.of(context).copyWith(
+            appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
+            splashColor: Colors.transparent,
+            // It remove the unecessary borders
+            dividerColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            scaffoldBackgroundColor: ConstColors().ffffffff,
+          ),
+          // This is the initial route of the app checking if the user is logged in or not with FirebaseAuth
+          home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              final user = snapshot.data;
+              if (user == null || !user.emailVerified) {
+                return LoginScreen();
+              } else {
+                return MainScreen();
+              }
+            },
           ),
         ),
       ),

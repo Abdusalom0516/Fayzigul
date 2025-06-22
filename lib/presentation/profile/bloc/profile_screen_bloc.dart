@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -34,16 +33,21 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
     on<OnLogOutClicked>((event, emit) async {
       emit(ProfileScreenLoadingState());
       log("Logging out...");
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       try {
         final auth = FirebaseAuth.instance;
         await auth.signOut();
 
         if (event.context.mounted) {
+          log("User logged out successfully.");
           Phoenix.rebirth(event.context);
+          // await Restart.restartApp();
+        } else {
+          log("Context is not mounted, cannot navigate.");
         }
       } catch (e) {
         if (event.context.mounted) {
+          log("Error during logout: $e");
           emit(ProfileScreenFailureState(
               "An error occurred while logging out. Please try again."));
           Toastification.error(
