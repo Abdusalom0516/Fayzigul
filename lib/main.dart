@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
+import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/firebase_options.dart';
 import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
@@ -20,7 +22,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +32,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginBloc()),
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: AppRouter.navigatorKey,
           theme: Theme.of(context).copyWith(
             appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
             splashColor: Colors.transparent,
@@ -52,12 +55,21 @@ class MyApp extends StatelessWidget {
             hoverColor: Colors.transparent,
             scaffoldBackgroundColor: ConstColors().ffffffff,
           ),
-          debugShowCheckedModeBanner: false,
-          navigatorKey: AppRouter.navigatorKey,
-          home: auth.currentUser == null ||
-                  auth.currentUser != null && !auth.currentUser!.emailVerified
-              ? LoginScreen()
-              : MainScreen(),
+          // This is the initial route of the app checking if the user is logged in or not with FirebaseAuth
+          home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CustomLoading();
+              }
+              final user = snapshot.data;
+              if (user == null || !user.emailVerified) {
+                return LoginScreen();
+              } else {
+                return MainScreen();
+              }
+            },
+          ),
         ),
       ),
     );

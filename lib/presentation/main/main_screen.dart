@@ -20,6 +20,7 @@ class MainScreen extends HookWidget {
           backgroundColor: colors.ffffffff,
           body: PageView(
             controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               HomeScreen(),
               SearchScreen(),
