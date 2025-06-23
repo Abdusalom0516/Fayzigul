@@ -4,6 +4,7 @@ class ProductEntity {
   double price, mass;
   int id, quantity;
   List<Map<String, String>> basicKnowladge, stages;
+  List<String> images, categories;
 
   ProductEntity({
     required this.id,
@@ -17,7 +18,7 @@ class ProductEntity {
     required this.massType,
     required this.quantity,
     required this.stages,
+    required this.categories,
+    required this.images,
   });
-
-
 }

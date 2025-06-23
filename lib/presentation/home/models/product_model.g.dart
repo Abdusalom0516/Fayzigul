@@ -22,6 +22,11 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       stages: (json['stages'] as List<dynamic>)
           .map((e) => Map<String, String>.from(e as Map))
           .toList(),
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
+      categories: (json['categories'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -37,4 +42,6 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'quantity': instance.quantity,
       'basicKnowladge': instance.basicKnowladge,
       'stages': instance.stages,
+      'images': instance.images,
+      'categories': instance.categories,
     };

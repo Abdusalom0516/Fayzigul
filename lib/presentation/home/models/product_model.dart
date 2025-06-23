@@ -18,6 +18,8 @@ class ProductModel extends ProductEntity {
     required super.massType,
     required super.quantity,
     required super.stages,
+    required super.images,
+    required super.categories,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
@@ -36,6 +38,8 @@ class ProductModel extends ProductEntity {
     int? quantity,
     List<Map<String, String>>? basicKnowladge,
     List<Map<String, String>>? stages,
+    List<String>? images,
+    List<String>? categories,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -49,6 +53,8 @@ class ProductModel extends ProductEntity {
       massType: massType ?? this.massType,
       quantity: quantity ?? this.quantity,
       stages: stages ?? this.stages,
+      images: images ?? this.images,
+      categories: categories ?? this.images,
     );
   }
 }
