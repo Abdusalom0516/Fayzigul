@@ -9,7 +9,6 @@ import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/widgets/equipments_card_wd.dart';
-import 'package:plant_store/presentation/home/widgets/plants_card_wd.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});
@@ -108,7 +107,7 @@ class HomeCategoryScreen extends HookWidget {
                 crossAxisSpacing: 15.w,
                 mainAxisSpacing: 15.h,
               ),
-              itemBuilder: (context, index) => PlantCard(),
+              itemBuilder: (context, index) => EquipmentsCard(),
             ),
           );
   }

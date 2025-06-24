@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/cart/screens/cart_screen.dart';
+import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
 import 'package:plant_store/presentation/profile/screens/profile_screen.dart';
 import 'package:plant_store/presentation/search/screens/search_screen.dart';
@@ -15,6 +18,10 @@ class MainScreen extends HookWidget {
   Widget build(BuildContext context) {
     final pageController = usePageController(initialPage: 0);
     final selectedIndex = useState(0);
+    useEffect(() {
+      context.read<HomeScreenBloc>().add(OnGetProductsClicked());
+      return null;
+    }, []);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
           backgroundColor: colors.ffffffff,
