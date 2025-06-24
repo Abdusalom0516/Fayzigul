@@ -1,18 +1,159 @@
-<h1>Fayzigul</h1>
-<hr><p>E-Commerce App for selling Plants.</p><h2>General Information</h2>
-<hr><ul>
-<li>Plant related products selling applciation which also helps to care many kind of plants.</li>
-</ul><ul>
-<li>From my young age I killed so many plants because of lack of knowladge about the plant and how to care about them. So I decided to create this project in order to save thousands if not millions of plants by giving their owners solid instructions and clear info.</li>
-</ul><ul>
-<li>Fayzigul will help people to love plants more, teaches how to care about their plants. The main purpose of this project is to bring plants to every house and make their breathing air pure.</li>
-</ul><h2>Technologies Used</h2>
-<hr><ul>
-<li>Flutter</li>
-</ul><ul>
-<li>Firebase</li>
-</ul><ul>
-<li>Dart</li>
-</ul><h2>Screenshots</h2>
-<hr><p><img src="https://iili.io/FTxk5Ob.jpg" alt=""></p><h2>Contact</h2>
-<hr><p><span style="margin-right: 30px;"></span><a href="https://www.linkedin.com/in/abdusalom-gayratov?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BCElxbdsCRNK%2Fg7pz8wYVfw%3D%3D"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" style="width: 10%;"></a><span style="margin-right: 30px;"></span><a href="https://github.com/Abdusalom0516"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a></p>
+# 🌿 Fayzigul
+
+**Fayzigul** is a mobile application designed to help users discover, buy, and care for home plants. Whether you're a beginner or a plant expert, Fayzigul provides detailed information on how to take care of each plant and helps you build a greener, healthier indoor space.
+
+---
+
+## 📱 Preview
+
+> Add your app screenshots or a demo GIF here.
+
+![Fayzigul App Preview](screenshots/preview1.png)
+
+---
+
+## 🌱 Features
+
+- 🌸 Browse a wide variety of indoor and outdoor plants  
+- 📖 Get detailed care instructions for each plant  
+- 🛒 Buy plants and related accessories directly from the app  
+- 🧠 Learn about watering, sunlight, soil, and repotting  
+- 🌍 Multi-language support (Uzbek, Russian, English)  
+- 🔔 Receive care reminders and plant tips  
+- 🔍 Smart search for plant species or symptoms  
+
+---
+
+## 🚀 Getting Started
+
+### 📦 Prerequisites
+
+- [Flutter](https://flutter.dev/docs/get-started/install) (3.x.x)  
+- Dart SDK  
+- Android Studio / VS Code  
+- Firebase Project (for Auth, Firestore, etc.)  
+
+### 🧪 Installation
+
+```bash
+git clone https://github.com/yourusername/fayzigul.git
+cd fayzigul
+flutter pub get
+```
+
+### ▶️ Running the App
+
+```bash
+flutter run
+
+# Or with a specific device:
+flutter run -d emulator-5554
+```
+
+---
+
+## 🔧 Project Structure
+
+```text
+lib/
+├── core/             # Constants, utilities
+├── features/         # Feature-based folders
+│   ├── home/
+│   ├── plant_details/
+│   ├── cart/
+│   └── care_tips/
+├── models/           # Data models
+├── services/         # Firebase or API services
+└── main.dart         # Entry point
+```
+
+---
+
+## 🧰 Built With
+
+- **Flutter** – Cross-platform UI toolkit  
+- **Firebase** – Auth, Firestore, Storage  
+- **Riverpod / Provider / BLoC** – State management  
+- **Dio / HTTP** – Networking  
+- **Intl** – Localization  
+- **Hive / SharedPreferences** – Local storage  
+
+---
+
+## 🔒 Permissions
+
+The app requires the following permissions:
+
+- Internet access  
+- Notification access (for care reminders)  
+- Storage (optional, for saving images)
+
+> Make sure to add them in `AndroidManifest.xml` and `Info.plist`.
+
+---
+
+## 🌍 Localization
+
+Fayzigul supports:
+
+- 🇺🇿 Uzbek  
+- 🇷🇺 Russian  
+- 🇬🇧 English  
+
+Translations are managed in `lib/l10n/`.
+
+---
+
+## 🧪 Testing
+
+```bash
+flutter test
+```
+
+Write unit, widget, or integration tests inside the `test/` folder.
+
+---
+
+## 📦 Deployment
+
+### Android
+
+```bash
+flutter build apk --release
+# or
+flutter build appbundle
+```
+
+### iOS
+
+```bash
+flutter build ios --release
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo  
+2. Create your feature branch: `git checkout -b feature/awesome-feature`  
+3. Commit your changes: `git commit -m 'Add awesome feature'`  
+4. Push to the branch: `git push origin feature/awesome-feature`  
+5. Open a pull request  
+
+---
+
+## 📧 Contact
+
+**Abdusalom Gayratov**  
+📧 [abdusalomgayratov7@gmail.com](mailto:abdusalomgayratov7@gmail.com)  
+📱 Telegram: [@yourtelegramhandle](https://t.me/yourtelegramhandle)  
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+> 🌿 Fayzigul – Make your home greener, one plant at a time.
