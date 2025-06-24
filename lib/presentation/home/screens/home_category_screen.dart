@@ -108,7 +108,7 @@ class HomeCategoryScreen extends HookWidget {
                 crossAxisSpacing: 15.w,
                 mainAxisSpacing: 15.h,
               ),
-              itemBuilder: (context, index) => PlantCard(),
+              itemBuilder: (context, index) => EquipmentsCard(),
             ),
           );
   }

@@ -1,8 +1,8 @@
 class ProductEntity {
-  String name, description, origin, instruction, massType;
+  String id, name, description, origin, instruction, massType;
 
   double price, mass;
-  int id, quantity;
+  int quantity;
   List<Map<String, String>> basicKnowladge, stages;
   List<String> images, categories;
 

@@ -1,25 +1,35 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_img_paths.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
-import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/core/utils/app_state_wrapper.dart' as aps;
+import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.dart';
+import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_states.dart';
 import 'package:plant_store/presentation/home/screens/home_category_screen.dart';
 import 'package:plant_store/presentation/home/widgets/equipments_card_wd.dart';
 import 'package:plant_store/presentation/home/widgets/kit_card_wd.dart';
 import 'package:plant_store/presentation/home/widgets/plants_card_wd.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppStateWrapper(
+    useEffect(() {
+      context.read<HomeScreenBloc>().add(OnGetProductsClicked());
+      return null;
+    }, []);
+
+    return aps.AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
         body: CustomScrollView(
@@ -31,7 +41,10 @@ class HomeScreen extends StatelessWidget {
             homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
             SliverHeight(height: 9),
             // Home Screen Bottom Plants GridView.builder Section
-            homeScreenBottomPlantsGridViewSection(),
+            BlocBuilder<HomeScreenBloc, HomeScreenStates>(
+              builder: (context, state) =>
+                  homeScreenBottomPlantsGridViewSection(colors, state),
+            ),
             SliverHeight(height: 9),
             // Home Screen Bottom See More Text Button Section
             homeScreenBottomPlantsSeeMoreTextButtonsSection(
@@ -233,20 +246,53 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SliverPadding homeScreenBottomPlantsGridViewSection() {
-    return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-      sliver: SliverGrid.builder(
-        itemCount: 10,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 155 / 217,
-          crossAxisSpacing: 15.w,
-          mainAxisSpacing: 15.h,
+  SliverPadding homeScreenBottomPlantsGridViewSection(
+      ConstColors colors, HomeScreenStates state) {
+    if (state is HomeScreenLoadingState) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: CustomLoading(),
         ),
-        itemBuilder: (context, index) => PlantCard(),
-      ),
-    );
+      );
+    }
+    if (state is HomeScreenFailureState) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              state.message,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    if (state is HomeScreenSuccessState) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverGrid.builder(
+          itemCount: state.products.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 155 / 217,
+            crossAxisSpacing: 15.w,
+            mainAxisSpacing: 15.h,
+          ),
+          itemBuilder: (context, index) => PlantCard(
+            product: state.products[index],
+          ),
+        ),
+      );
+    } else {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+      );
+    }
   }
 
   SliverPadding homeScreenBottomEquipmentsGridViewSection() {

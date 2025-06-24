@@ -34,7 +34,7 @@ class ProductModel extends ProductEntity {
     String? massType,
     double? price,
     double? mass,
-    int? id,
+    String? id,
     int? quantity,
     List<Map<String, String>>? basicKnowladge,
     List<Map<String, String>>? stages,
