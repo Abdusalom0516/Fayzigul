@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-
+import 'package:plant_store/presentation/home/models/product_model.dart';
 
 class EquipmentsCard extends StatelessWidget {
-  const EquipmentsCard({
-    super.key,
-  });
+  const EquipmentsCard({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
