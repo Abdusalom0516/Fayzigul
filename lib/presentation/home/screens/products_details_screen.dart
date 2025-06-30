@@ -10,12 +10,14 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/models/product_model.dart';
 import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
 import 'package:plant_store/presentation/home/widgets/product_details_card_wd.dart';
 
 class ProductsDetailsScreen extends HookWidget {
-  const ProductsDetailsScreen({super.key});
+  const ProductsDetailsScreen({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +25,34 @@ class ProductsDetailsScreen extends HookWidget {
     final pageController = usePageController();
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        bottomNavigationBar: bottomNavigationSection(colors, texts, quantity),
+        bottomNavigationBar:
+            bottomNavigationSection(product, colors, texts, quantity),
         body: CustomScrollView(
           slivers: [
             appBarSection(colors, texts),
             // Product Images Section
-            productImagesSection(colors, pageController, images),
+            productImagesSection(product, colors, pageController, images),
             // Product Categories Section
-            productCategoriesSection(),
+            productCategoriesSection(product),
             // Product Price Section
-            productPriceSection(colors),
+            productPriceSection(product, colors),
             SliverHeight(height: 15),
             // Product Details Title Section
-            productTitleScreen(colors, texts.details),
+            productTitleSection(colors, texts.details),
             // Product Details Section
             productDetailsSection(colors, texts),
             SliverHeight(height: 25),
             // Product Description Title Section
-            productTitleScreen(colors, texts.description),
+            productTitleSection(colors, texts.description),
             SliverHeight(height: 7),
             // Product Description Text Section
-            productFullContentSection(colors, texts.lorem),
+            productFullContentSection(colors, product.description),
             SliverHeight(height: 25),
             // Product Description Title Section
-            productTitleScreen(colors, texts.instruction),
+            productTitleSection(colors, texts.instruction),
             SliverHeight(height: 7),
             // Product Insrtuction Text Section
-            productFullContentSection(colors, texts.lorem),
+            productFullContentSection(colors, product.instruction),
             SliverHeight(height: 25),
           ],
         ),
@@ -72,7 +75,7 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  SliverPadding productTitleScreen(ConstColors colors, String title) {
+  SliverPadding productTitleSection(ConstColors colors, String title) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
@@ -111,15 +114,15 @@ class ProductsDetailsScreen extends HookWidget {
             children: [
               ProductDetailsCard(
                 keyword: texts.mass,
-                value: "1 kg",
+                value: "${product.mass} ${product.massType}",
               ),
               ProductDetailsCard(
                 keyword: texts.origin,
-                value: "Afrika",
+                value: product.origin,
               ),
               ProductDetailsCard(
                 keyword: texts.status,
-                value: "156 ${texts.itemsLeft}",
+                value: "${product.quantity} ${texts.itemsLeft}",
                 isValueGreen: true,
               ),
             ],
@@ -127,8 +130,8 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  Card bottomNavigationSection(
-      ConstColors colors, ConstTexts texts, ValueNotifier<int> quantity) {
+  Card bottomNavigationSection(ProductModel product, ConstColors colors,
+      ConstTexts texts, ValueNotifier<int> quantity) {
     return Card(
       elevation: 7.5.r,
       color: colors.ffffffff,
@@ -220,7 +223,7 @@ class ProductsDetailsScreen extends HookWidget {
                       child: Text(
                         textAlign: TextAlign.end,
                         overflow: TextOverflow.ellipsis,
-                        "\$99.9",
+                        "\$${product.price * quantity.value}",
                         style: AppTextStyles.lato.bold(
                           color: colors.ff221fif,
                           fontSize: 24.w,
@@ -264,7 +267,7 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  SliverToBoxAdapter productImagesSection(
+  SliverToBoxAdapter productImagesSection(ProductModel product,
       ConstColors colors, PageController pageController, ConstImgPaths images) {
     return SliverToBoxAdapter(
       child: Container(
@@ -280,9 +283,9 @@ class ProductsDetailsScreen extends HookWidget {
                 controller: pageController,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  for (int i = 0; i < 5; i++)
-                    Image.asset(
-                      images.plant,
+                  for (int i = 0; i < product.images.length; i++)
+                    Image.network(
+                      product.images[i],
                       height: 330.h,
                       width: 330.w,
                       fit: BoxFit.contain,
@@ -324,12 +327,12 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  SliverPadding productPriceSection(ConstColors colors) {
+  SliverPadding productPriceSection(ProductModel product, ConstColors colors) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: Text(
-          "\$99.9",
+          "\$${product.price}",
           style: AppTextStyles.lato.bold(
             color: colors.ff007537,
             fontSize: 24.w,
@@ -339,7 +342,7 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  SliverPadding productCategoriesSection() {
+  SliverPadding productCategoriesSection(ProductModel product) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 25.w, vertical: 21.h),
       sliver: SliverToBoxAdapter(
@@ -347,10 +350,8 @@ class ProductsDetailsScreen extends HookWidget {
           spacing: 9.w,
           runSpacing: 9.w,
           children: [
-            ProdDetCategoryCard(categoryTitle: "Plants"),
-            ProdDetCategoryCard(categoryTitle: "Outdoor"),
-            ProdDetCategoryCard(categoryTitle: "Plants"),
-            ProdDetCategoryCard(categoryTitle: "Outdoor")
+            for (String category in product.categories)
+              ProdDetCategoryCard(categoryTitle: category),
           ],
         ),
       ),

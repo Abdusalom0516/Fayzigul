@@ -1,3 +1,4 @@
-abstract class HomeScreenEvents {}
+abstract class PlantsBlocEvents {}
 
-class OnGetProductsClicked extends HomeScreenEvents {}
+class OnGetProductsClicked extends PlantsBlocEvents {}
+

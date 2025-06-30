@@ -83,4 +83,5 @@ class ConstTexts {
   String continueT = "Continue";
   String deliveryFee = "Delivery Fee";
   String total = "Total";
+  String noProductsFound = "No Products Found";
 }

@@ -10,7 +10,10 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
-import 'package:plant_store/core/utils/app_state_wrapper.dart' as aps;
+import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc_events.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc_state.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_states.dart';
@@ -25,11 +28,12 @@ class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<HomeScreenBloc>().add(OnGetProductsClicked());
+      context.read<PlantsBloc>().add(OnGetProductsClicked());
+      context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
       return null;
     }, []);
 
-    return aps.AppStateWrapper(
+    return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
         body: CustomScrollView(
@@ -41,9 +45,10 @@ class HomeScreen extends HookWidget {
             homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
             SliverHeight(height: 9),
             // Home Screen Bottom Plants GridView.builder Section
-            BlocBuilder<HomeScreenBloc, HomeScreenStates>(
+            BlocBuilder<PlantsBloc, PlantsBlocStates>(
               builder: (context, state) =>
-                  homeScreenBottomPlantsGridViewSection(colors, state),
+                  homeScreenBottomPlantsGridViewSection(
+                      colors: colors, texts: texts, state: state),
             ),
             SliverHeight(height: 9),
             // Home Screen Bottom See More Text Button Section
@@ -60,7 +65,11 @@ class HomeScreen extends HookWidget {
             homeScreenBottomPlantsTitleSection(texts, colors, texts.equipments),
             SliverHeight(height: 9),
             // Home Screen Bottom Equipments GridView.builder Section
-            homeScreenBottomEquipmentsGridViewSection(),
+            BlocBuilder<EquipmentsBloc, EquipmentsBlocState>(
+              builder: (context, state) =>
+                  homeScreenBottomEquipmentsGridViewSection(
+                      state: state, colors: colors, texts: texts),
+            ),
             SliverHeight(height: 9),
             // Home Screen Bottom See More Text Button Section
             homeScreenBottomPlantsSeeMoreTextButtonsSection(
@@ -247,8 +256,10 @@ class HomeScreen extends HookWidget {
   }
 
   SliverPadding homeScreenBottomPlantsGridViewSection(
-      ConstColors colors, HomeScreenStates state) {
-    if (state is HomeScreenLoadingState) {
+      {required ConstColors colors,
+      required ConstTexts texts,
+      required PlantsBlocStates state}) {
+    if (state is PlantsBlocLoadingState) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverToBoxAdapter(
@@ -256,7 +267,7 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    if (state is HomeScreenFailureState) {
+    if (state is PlantsBlocFailureState) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverToBoxAdapter(
@@ -272,7 +283,23 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    if (state is HomeScreenSuccessState) {
+    if (state is PlantsBlocSuccessState) {
+      if (state.products.isEmpty) {
+        return SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                texts.noProductsFound,
+                style: AppTextStyles.lato.medium(
+                  color: colors.ff221fif,
+                  fontSize: 15.sp,
+                ),
+              ),
+            ),
+          ),
+        );
+      }
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverGrid.builder(
@@ -295,19 +322,83 @@ class HomeScreen extends HookWidget {
     }
   }
 
-  SliverPadding homeScreenBottomEquipmentsGridViewSection() {
-    return SliverPadding(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-      sliver: SliverGrid.builder(
-        itemCount: 10,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 155 / 197,
-          crossAxisSpacing: 15.w,
-          mainAxisSpacing: 15.h,
+  SliverPadding homeScreenBottomEquipmentsGridViewSection(
+      {required EquipmentsBlocState state,
+      required ConstColors colors,
+      required ConstTexts texts}) {
+    if (state is EquipmentsBlocLoadingState) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: CustomLoading(),
         ),
-        itemBuilder: (context, index) => EquipmentsCard(),
-      ),
-    );
+      );
+    }
+    if (state is EquipmentsBlocFailureState) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              state.message,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (state is EquipmentsBlocSuccessState) {
+      if (state.listOfProducts.isEmpty) {
+        return SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                texts.noProductsFound,
+                style: AppTextStyles.lato.medium(
+                  color: colors.ff221fif,
+                  fontSize: 15.sp,
+                ),
+              ),
+            ),
+          ),
+        );
+      } else {
+        return SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverGrid.builder(
+            itemCount: state.listOfProducts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 155 / 197,
+              crossAxisSpacing: 15.w,
+              mainAxisSpacing: 15.h,
+            ),
+            itemBuilder: (context, index) => EquipmentsCard(
+              product: state.listOfProducts[index],
+            ),
+          ),
+        );
+      }
+    } else {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              texts.noProductsFound,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
 }

@@ -11,17 +11,13 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       origin: json['origin'] as String,
-      basicKnowladge: (json['basicKnowladge'] as List<dynamic>)
-          .map((e) => Map<String, String>.from(e as Map))
-          .toList(),
+      basicKnowladge: Map<String, String>.from(json['basicKnowladge'] as Map),
       description: json['description'] as String,
       instruction: json['instruction'] as String,
       mass: (json['mass'] as num).toDouble(),
       massType: json['massType'] as String,
       quantity: (json['quantity'] as num).toInt(),
-      stages: (json['stages'] as List<dynamic>)
-          .map((e) => Map<String, String>.from(e as Map))
-          .toList(),
+      stages: Map<String, String>.from(json['stages'] as Map),
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       categories: (json['categories'] as List<dynamic>)

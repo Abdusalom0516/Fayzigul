@@ -8,7 +8,6 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/home/widgets/equipments_card_wd.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});
@@ -29,7 +28,7 @@ class HomeCategoryScreen extends HookWidget {
                 ? SliverHeight(height: 17)
                 : categoryButtonsSection(texts, currentCategoryIndex),
             // Products GridView.builder Section
-            productsGridViewSection(categoryTitle, texts),
+            // productsGridViewSection(categoryTitle, texts),
             SliverHeight(height: 35),
           ],
         ),
@@ -81,36 +80,36 @@ class HomeCategoryScreen extends HookWidget {
     );
   }
 
-  SliverPadding productsGridViewSection(
-      String categoryTitle, ConstTexts texts) {
-    return categoryTitle == texts.equipments
-        ? SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-            sliver: SliverGrid.builder(
-              itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 155 / 197,
-                crossAxisSpacing: 15.w,
-                mainAxisSpacing: 15.h,
-              ),
-              itemBuilder: (context, index) => EquipmentsCard(),
-            ),
-          )
-        : SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-            sliver: SliverGrid.builder(
-              itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 155 / 217,
-                crossAxisSpacing: 15.w,
-                mainAxisSpacing: 15.h,
-              ),
-              itemBuilder: (context, index) => EquipmentsCard(),
-            ),
-          );
-  }
+  // SliverPadding productsGridViewSection(
+  //     String categoryTitle, ConstTexts texts) {
+  //   return categoryTitle == texts.equipments
+  //       ? SliverPadding(
+  //           padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+  //           sliver: SliverGrid.builder(
+  //             itemCount: 10,
+  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //               crossAxisCount: 2,
+  //               childAspectRatio: 155 / 197,
+  //               crossAxisSpacing: 15.w,
+  //               mainAxisSpacing: 15.h,
+  //             ),
+  //             itemBuilder: (context, index) => EquipmentsCard(),
+  //           ),
+  //         )
+  //       : SliverPadding(
+  //           padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+  //           sliver: SliverGrid.builder(
+  //             itemCount: 10,
+  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //               crossAxisCount: 2,
+  //               childAspectRatio: 155 / 217,
+  //               crossAxisSpacing: 15.w,
+  //               mainAxisSpacing: 15.h,
+  //             ),
+  //             itemBuilder: (context, index) => EquipmentsCard(),
+  //           ),
+  //         );
+  // }
 
   SliverAppBar sliverAppBarSection(ConstColors colors) {
     return SliverAppBar(

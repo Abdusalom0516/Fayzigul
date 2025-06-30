@@ -29,7 +29,7 @@ class PlantCard extends StatelessWidget {
         ),
         onPressed: () {
           log("Plant Card Pressed");
-          AppRouter.go(ProductsDetailsScreen());
+          AppRouter.go(ProductsDetailsScreen(product: product));
         },
         child: SizedBox(
           child: Column(

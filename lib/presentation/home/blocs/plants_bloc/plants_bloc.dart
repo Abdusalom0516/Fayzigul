@@ -6,10 +6,10 @@ import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.da
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_states.dart';
 import 'package:plant_store/presentation/home/models/product_model.dart';
 
-class HomeScreenBloc extends Bloc<HomeScreenEvents, HomeScreenStates> {
-  HomeScreenBloc() : super(HomeScreenInitialState()) {
+class PlantsBloc extends Bloc<PlantsBlocEvents, PlantsBlocStates> {
+  PlantsBloc() : super(PlantsBlocInitialState()) {
     on<OnGetProductsClicked>((event, emit) async {
-      emit(HomeScreenLoadingState());
+      emit(PlantsBlocLoadingState());
 
       List<ProductModel> products = [];
 
@@ -21,10 +21,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvents, HomeScreenStates> {
           products.add(ProductModel.fromJson(elem.data()));
         }
 
-        emit(HomeScreenSuccessState(products: products));
+        emit(PlantsBlocSuccessState(products: products));
         log("Got products ${products.length}");
       } catch (e) {
-        emit(HomeScreenFailureState(message: "Failed to get products."));
+        emit(PlantsBlocFailureState(message: "Failed to get products."));
         log(e.toString());
       }
     });

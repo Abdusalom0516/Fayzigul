@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
-import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/presentation/home/screens/products_details_screen.dart';
 
 class KitCard extends StatelessWidget {
   const KitCard({
@@ -24,7 +22,7 @@ class KitCard extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          AppRouter.go(ProductsDetailsScreen());
+          // AppRouter.go(ProductsDetailsScreen());
         },
         child: Container(
           width: double.infinity,
