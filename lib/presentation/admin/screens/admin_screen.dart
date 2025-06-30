@@ -15,7 +15,7 @@ class AdminScreen extends StatelessWidget {
       for (var product in data) {
         // await FirebaseFirestore.instance.collection('products').add(product);
         final docRef = await FirebaseFirestore.instance
-            .collection('/equipments')
+            .collection('/products')
             .add(product);
         await docRef.update({"id": docRef.id});
         log("Success");

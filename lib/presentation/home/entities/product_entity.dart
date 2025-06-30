@@ -3,7 +3,7 @@ class ProductEntity {
 
   double price, mass;
   int quantity;
-  List<Map<String, String>> basicKnowladge, stages;
+  Map<String, String> basicKnowladge, stages;
   List<String> images, categories;
 
   ProductEntity({

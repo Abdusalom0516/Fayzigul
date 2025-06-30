@@ -12,6 +12,7 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc_events.dart';
 import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc_state.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.dart';
@@ -28,6 +29,7 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     useEffect(() {
       context.read<PlantsBloc>().add(OnGetProductsClicked());
+      context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
       return null;
     }, []);
 
@@ -385,6 +387,17 @@ class HomeScreen extends HookWidget {
     } else {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              texts.noProductsFound,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
       );
     }
   }

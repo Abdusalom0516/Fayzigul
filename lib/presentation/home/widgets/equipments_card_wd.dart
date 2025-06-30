@@ -34,8 +34,8 @@ class EquipmentsCard extends StatelessWidget {
                   color: colors.fff6f6f6,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: Image.asset(
-                  images.equipment,
+                child: Image.network(
+                  product.images.first,
                   height: 134.h,
                   width: 155.w,
                   fit: BoxFit.contain,
@@ -47,7 +47,7 @@ class EquipmentsCard extends StatelessWidget {
                   children: [
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "Spider Plant",
+                      product.name,
                       style: AppTextStyles.lato.medium(
                         color: colors.ff221fif,
                         fontSize: 19.sp,
@@ -55,7 +55,7 @@ class EquipmentsCard extends StatelessWidget {
                     ),
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "\$250",
+                      "\$${product.price}",
                       style: AppTextStyles.lato.medium(
                         color: colors.ff007537,
                         fontSize: 19.sp,

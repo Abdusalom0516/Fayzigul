@@ -16,7 +16,7 @@ class EquipmentsBloc extends Bloc<EquipmentsBlocEvents, EquipmentsBlocState> {
 
         try {
           final data =
-              await FirebaseFirestore.instance.collection("products").get();
+              await FirebaseFirestore.instance.collection("equipments").get();
 
           for (var elem in data.docs) {
             listOfProducts.add(ProductModel.fromJson(elem.data()));
