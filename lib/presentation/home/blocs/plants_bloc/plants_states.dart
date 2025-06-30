@@ -1,22 +1,22 @@
 import 'package:equatable/equatable.dart';
 import 'package:plant_store/presentation/home/models/product_model.dart';
 
-abstract class HomeScreenStates extends Equatable {
+abstract class PlantsBlocStates extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class HomeScreenInitialState extends HomeScreenStates {}
+class PlantsBlocInitialState extends PlantsBlocStates {}
 
-class HomeScreenLoadingState extends HomeScreenStates {}
+class PlantsBlocLoadingState extends PlantsBlocStates {}
 
-class HomeScreenSuccessState extends HomeScreenStates {
+class PlantsBlocSuccessState extends PlantsBlocStates {
   final List<ProductModel> products;
 
-  HomeScreenSuccessState({required this.products});
+  PlantsBlocSuccessState({required this.products});
 }
 
-class HomeScreenFailureState extends HomeScreenStates {
+class PlantsBlocFailureState extends PlantsBlocStates {
   final String message;
-  HomeScreenFailureState({required this.message});
+  PlantsBlocFailureState({required this.message});
 }

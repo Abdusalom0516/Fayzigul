@@ -19,7 +19,7 @@ class MainScreen extends HookWidget {
     final pageController = usePageController(initialPage: 0);
     final selectedIndex = useState(0);
     useEffect(() {
-      context.read<HomeScreenBloc>().add(OnGetProductsClicked());
+      context.read<PlantsBloc>().add(OnGetProductsClicked());
       return null;
     }, []);
     return AppStateWrapper(

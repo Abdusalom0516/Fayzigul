@@ -25,7 +25,7 @@ class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<HomeScreenBloc>().add(OnGetProductsClicked());
+      context.read<PlantsBloc>().add(OnGetProductsClicked());
       return null;
     }, []);
 
@@ -41,7 +41,7 @@ class HomeScreen extends HookWidget {
             homeScreenBottomPlantsTitleSection(texts, colors, texts.plants),
             SliverHeight(height: 9),
             // Home Screen Bottom Plants GridView.builder Section
-            BlocBuilder<HomeScreenBloc, HomeScreenStates>(
+            BlocBuilder<PlantsBloc, PlantsBlocStates>(
               builder: (context, state) =>
                   homeScreenBottomPlantsGridViewSection(colors, state),
             ),
@@ -247,8 +247,8 @@ class HomeScreen extends HookWidget {
   }
 
   SliverPadding homeScreenBottomPlantsGridViewSection(
-      ConstColors colors, HomeScreenStates state) {
-    if (state is HomeScreenLoadingState) {
+      ConstColors colors, PlantsBlocStates state) {
+    if (state is PlantsBlocLoadingState) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverToBoxAdapter(
@@ -256,7 +256,7 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    if (state is HomeScreenFailureState) {
+    if (state is PlantsBlocFailureState) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverToBoxAdapter(
@@ -272,7 +272,7 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    if (state is HomeScreenSuccessState) {
+    if (state is PlantsBlocSuccessState) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverGrid.builder(
