@@ -223,7 +223,7 @@ class ProductsDetailsScreen extends HookWidget {
                       child: Text(
                         textAlign: TextAlign.end,
                         overflow: TextOverflow.ellipsis,
-                        "\$${product.price * quantity.value}",
+                        "\$${(product.price * quantity.value).toStringAsFixed(2)}",
                         style: AppTextStyles.lato.bold(
                           color: colors.ff221fif,
                           fontSize: 24.w,
