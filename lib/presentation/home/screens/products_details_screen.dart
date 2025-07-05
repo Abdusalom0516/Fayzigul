@@ -10,6 +10,7 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/core/utils/formatter.dart';
 import 'package:plant_store/presentation/home/models/product_model.dart';
 import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
@@ -223,7 +224,7 @@ class ProductsDetailsScreen extends HookWidget {
                       child: Text(
                         textAlign: TextAlign.end,
                         overflow: TextOverflow.ellipsis,
-                        "\$${product.price * quantity.value}",
+                        "\$${formatNumber((product.price * quantity.value))}",
                         style: AppTextStyles.lato.bold(
                           color: colors.ff221fif,
                           fontSize: 24.w,
@@ -332,7 +333,7 @@ class ProductsDetailsScreen extends HookWidget {
       padding: EdgeInsetsGeometry.symmetric(horizontal: 25.r),
       sliver: SliverToBoxAdapter(
         child: Text(
-          "\$${product.price}",
+          "\$${formatNumber(product.price)}",
           style: AppTextStyles.lato.bold(
             color: colors.ff007537,
             fontSize: 24.w,

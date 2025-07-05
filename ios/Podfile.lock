@@ -967,7 +967,7 @@ PODS:
   - Firebase/Firestore (10.25.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.25.0)
-  - firebase_auth (4.20.0):
+  - firebase_auth (4.16.0):
     - Firebase/Auth (= 10.25.0)
     - firebase_core
     - Flutter
@@ -1134,6 +1134,8 @@ PODS:
   - nanopb/encode (2.30910.0)
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
+  - restart_app (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -1141,6 +1143,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Flutter`)
+  - restart_app (from `.symlinks/plugins/restart_app/ios`)
 
 SPEC REPOS:
   trunk:
@@ -1176,13 +1179,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: Flutter
+  restart_app:
+    :path: ".symlinks/plugins/restart_app/ios"
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
   BoringSSL-GRPC: 1e2348957acdbcad360b80a264a90799984b2ba6
   cloud_firestore: 28753092b326c43b17251b50aa6c5b3247c939e5
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
-  firebase_auth: f17bd6bfc0bc3d83c6df9dc3829e5b6fee10b147
+  firebase_auth: 9cfa74cc3773c44d2f762c3baa0806234c8516f5
   firebase_core: 3b49a055ff54114cae400581c13671fe53936c36
   firebase_database: b1bc9d2ebfb494ec460b22bd2270270aa5f76fa5
   FirebaseAppCheckInterop: 6a1757cfd4067d8e00fccd14fcc1b8fd78cfac07
@@ -1203,6 +1208,7 @@ SPEC CHECKSUMS:
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  restart_app: 9cda5378aacc5000e3f66ee76a9201534e7d3ecf
 
 PODFILE CHECKSUM: 17652e4583d7770b8e1b17fd509ed60ef0d19435
 
