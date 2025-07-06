@@ -6,7 +6,7 @@ part 'product_model.g.dart';
 
 @JsonSerializable()
 class ProductModel extends ProductEntity {
-  ProductModel({
+  const ProductModel({
     required super.id,
     required super.name,
     required super.price,

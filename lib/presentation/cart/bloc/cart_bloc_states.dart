@@ -1,6 +1,7 @@
-import 'package:equatable/equatable.dart';
+import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 
-abstract class CartBlocStates extends Equatable{
-  @override
-  List<Object?> get props => [];
+class CartBlocStates {
+  final List<CartProductModel> cartProductsList;
+
+  CartBlocStates({required this.cartProductsList});
 }
