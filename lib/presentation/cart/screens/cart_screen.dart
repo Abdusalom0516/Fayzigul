@@ -10,6 +10,7 @@ import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc_events.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc_states.dart';
 import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 import 'package:plant_store/presentation/cart/screens/checkout_screen.dart';
@@ -32,7 +33,7 @@ class CartScreen extends HookWidget {
         body: CustomScrollView(
           slivers: [
             // Sliver App Bar Section
-            sliverAppBarSection(colors, texts),
+            sliverAppBarSection(colors: colors, texts: texts, context: context),
             // Cart Products SliverList.builder Section
             BlocBuilder<CartBloc, CartBlocStates>(
               builder: (context, state) => cartProductSliverListBuilderSection(
@@ -142,7 +143,10 @@ class CartScreen extends HookWidget {
     );
   }
 
-  SliverAppBar sliverAppBarSection(ConstColors colors, ConstTexts texts) {
+  SliverAppBar sliverAppBarSection(
+      {required ConstColors colors,
+      required ConstTexts texts,
+      required BuildContext context}) {
     return SliverAppBar(
       centerTitle: true,
       pinned: true,
@@ -158,7 +162,8 @@ class CartScreen extends HookWidget {
       actions: [
         IconButton(
           onPressed: () {
-            log("Delete Button Clicked.");
+            // Cleaning Cart
+            context.read<CartBloc>().add(OnCleanCart(context: context));
           },
           icon: Icon(
             Icons.delete_outline_rounded,
