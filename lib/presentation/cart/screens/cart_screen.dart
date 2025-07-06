@@ -20,12 +20,14 @@ class CartScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listOfProducts = useState<List<CartProductModel>>([]);
+    final checkBoxListOfProducts = useState<List<CartProductModel>>([]);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         // Bottom Navigation Section
         bottomNavigationBar: cartBottomNavigationSection(
-            productsList: listOfProducts, texts: texts, colors: colors),
+            checkBoxListOfProducts: checkBoxListOfProducts,
+            texts: texts,
+            colors: colors),
 
         body: CustomScrollView(
           slivers: [
@@ -37,6 +39,7 @@ class CartScreen extends HookWidget {
                 state: state,
                 texts: texts,
                 colors: colors,
+                checkBoxListOfProducts: checkBoxListOfProducts,
               ),
             ),
           ],
@@ -46,10 +49,10 @@ class CartScreen extends HookWidget {
   }
 
   Widget cartBottomNavigationSection(
-      {required ValueNotifier<List<CartProductModel>> productsList,
+      {required ValueNotifier<List<CartProductModel>> checkBoxListOfProducts,
       required ConstTexts texts,
       required ConstColors colors}) {
-    if (productsList.value.isEmpty) {
+    if (checkBoxListOfProducts.value.isEmpty) {
       return SizedBox.shrink();
     }
     return Container(
@@ -121,7 +124,8 @@ class CartScreen extends HookWidget {
   Widget cartProductSliverListBuilderSection(
       {required CartBlocStates state,
       required ConstTexts texts,
-      required ConstColors colors}) {
+      required ConstColors colors,
+      required ValueNotifier<List<CartProductModel>> checkBoxListOfProducts}) {
     List<CartProductModel> cartProductsList = state.cartProductsList;
 
     // Checking for Emptiness
@@ -133,6 +137,7 @@ class CartScreen extends HookWidget {
       itemCount: cartProductsList.length,
       itemBuilder: (context, index) => CartProductCard(
         cartProduct: cartProductsList[index],
+        checkBoxListOfProducts: checkBoxListOfProducts,
       ),
     );
   }

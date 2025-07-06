@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/utils/toastification.dart';
@@ -23,7 +25,9 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
                   productQuantity:
                       event.quantity + cartProductList[i].productQuantity);
 
-              emit(CartBlocStates(cartProductsList: cartProductList));
+              emit(
+                  CartBlocStates(cartProductsList: List.from(cartProductList)));
+              log("${cartProductList.length} length of the list.");
               Toastification.success(
                   event.context, texts.productQuantityUpdatedSuc);
               return;
@@ -32,6 +36,8 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
 
           cartProductList.add(CartProductModel(
               product: event.product, productQuantity: event.quantity));
+          emit(CartBlocStates(cartProductsList: List.from(cartProductList)));
+          log("${cartProductList.length} length of the list.");
           Toastification.success(event.context, texts.productAddedSuc);
         } catch (e) {
           Toastification.error(
@@ -54,7 +60,9 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
                   productQuantity:
                       cartProductList[i].productQuantity - event.quantity);
 
-              emit(CartBlocStates(cartProductsList: cartProductList));
+              emit(
+                  CartBlocStates(cartProductsList: List.from(cartProductList)));
+              log("${cartProductList.length} length of the list.");
               Toastification.success(
                   event.context, texts.productQuantityUpdatedSuc);
               return;

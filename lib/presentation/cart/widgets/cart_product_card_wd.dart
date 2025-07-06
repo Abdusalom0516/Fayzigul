@@ -11,12 +11,13 @@ class CartProductCard extends HookWidget {
   const CartProductCard({
     super.key,
     required this.cartProduct,
+    required this.checkBoxListOfProducts,
   });
   final CartProductModel cartProduct;
+  final ValueNotifier<List<CartProductModel>> checkBoxListOfProducts;
 
   @override
   Widget build(BuildContext context) {
-    final isCheckBoxClicked = useState(false);
     final quantity = useState(1);
     return AppStateWrapper(
       builder: (colors, texts, images) => Container(
@@ -33,9 +34,23 @@ class CartProductCard extends HookWidget {
                 activeColor: colors.ff221fif,
                 overlayColor: WidgetStatePropertyAll(colors.transparent),
                 side: BorderSide(color: colors.ff221fif, width: 1.1.r),
-                value: isCheckBoxClicked.value,
+                value: checkBoxListOfProducts.value.contains(cartProduct),
                 onChanged: (value) {
-                  isCheckBoxClicked.value = !isCheckBoxClicked.value;
+                  var list = [...List.from(checkBoxListOfProducts.value)];
+                  for (int i = 0; i < list.length; i++) {
+                    if (list[i] == cartProduct) {
+                      log("Is Equal");
+                      list.removeAt(i);
+                      checkBoxListOfProducts.value = List.from(list);
+                      return;
+                    }
+                  }
+
+                  log("Is not Equal");
+
+                  list.add(cartProduct);
+                  checkBoxListOfProducts.value = List.from(list);
+                  log(checkBoxListOfProducts.value.toString());
                 },
               ),
             ),
