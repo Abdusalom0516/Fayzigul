@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/cart/screens/cart_screen.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc_events.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_events.dart';
 import 'package:plant_store/presentation/home/screens/home_screen.dart';
@@ -18,8 +20,14 @@ class MainScreen extends HookWidget {
   Widget build(BuildContext context) {
     final pageController = usePageController(initialPage: 0);
     final selectedIndex = useState(0);
+    final gotAllInfo = useState(false);
+
     useEffect(() {
-      context.read<PlantsBloc>().add(OnGetProductsClicked());
+      if (!gotAllInfo.value) {
+        context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
+        context.read<PlantsBloc>().add(OnGetProductsClicked());
+        gotAllInfo.value = true;
+      }
       return null;
     }, []);
     return AppStateWrapper(

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/utils/toastification.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc_events.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc_states.dart';
@@ -6,6 +9,8 @@ import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 
 class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
   CartBloc() : super(CartBlocStates(cartProductsList: [])) {
+    ConstTexts texts = ConstTexts();
+
     // Event Handling for OnAddProductEvent Event
     on<OnAddProductToCart>(
       (event, emit) {
@@ -20,19 +25,23 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
                   productQuantity:
                       event.quantity + cartProductList[i].productQuantity);
 
-              emit(CartBlocStates(cartProductsList: cartProductList));
-              Toastification.success(event.context,
-                  "Product quantity updated in Cart successfully.");
+              emit(
+                  CartBlocStates(cartProductsList: List.from(cartProductList)));
+              log("${cartProductList.length} length of the list.");
+              Toastification.success(
+                  event.context, texts.productQuantityUpdatedSuc);
               return;
             }
           }
 
           cartProductList.add(CartProductModel(
               product: event.product, productQuantity: event.quantity));
-          Toastification.success(
-              event.context, "Product added to Cart successfully.");
+          emit(CartBlocStates(cartProductsList: List.from(cartProductList)));
+          log("${cartProductList.length} length of the list.");
+          Toastification.success(event.context, texts.productAddedSuc);
         } catch (e) {
-          Toastification.error(event.context, "Failed to add product $e.");
+          Toastification.error(
+              event.context, texts.failedToAddProduct(e.toString()));
         }
       },
     );
@@ -51,17 +60,19 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
                   productQuantity:
                       cartProductList[i].productQuantity - event.quantity);
 
-              emit(CartBlocStates(cartProductsList: cartProductList));
-              Toastification.success(event.context,
-                  "Product quantity updated in Cart successfully.");
+              emit(
+                  CartBlocStates(cartProductsList: List.from(cartProductList)));
+              log("${cartProductList.length} length of the list.");
+              Toastification.success(
+                  event.context, texts.productQuantityUpdatedSuc);
               return;
             }
           }
 
-          Toastification.warning(event.context, "Product not found in Cart.");
+          Toastification.warning(event.context, texts.productNotFoundInCart);
         } catch (e) {
           Toastification.error(
-              event.context, "Failed to minus product quantity $e.");
+              event.context, texts.failedToMinues(e.toString()));
         }
       },
     );
@@ -78,16 +89,23 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
             if (event.product.id == cartProductList[i].product.id) {
               cartProductList.removeAt(i);
               emit(CartBlocStates(cartProductsList: cartProductList));
-              Toastification.success(
-                  event.context, "Product removed from Cart successfully.");
+              Toastification.success(event.context, texts.productRemovedSuc);
               return;
             }
           }
 
-          Toastification.warning(event.context, "Product not found in Cart.");
+          Toastification.warning(event.context, texts.productNotFoundInCart);
         } catch (e) {
-          Toastification.error(event.context, "Failed to remove product $e.");
+          Toastification.error(
+              event.context, texts.failedToRemove(e.toString()));
         }
+      },
+    );
+
+    // Event Handling for OnCleanCart Event
+    on<OnCleanCart>(
+      (event, emit) {
+        emit(CartBlocStates(cartProductsList: []));
       },
     );
   }

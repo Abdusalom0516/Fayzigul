@@ -5,15 +5,19 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 
 class CartProductCard extends HookWidget {
   const CartProductCard({
     super.key,
+    required this.cartProduct,
+    required this.checkBoxListOfProducts,
   });
+  final CartProductModel cartProduct;
+  final ValueNotifier<List<CartProductModel>> checkBoxListOfProducts;
 
   @override
   Widget build(BuildContext context) {
-    final isCheckBoxClicked = useState(false);
     final quantity = useState(1);
     return AppStateWrapper(
       builder: (colors, texts, images) => Container(
@@ -30,9 +34,23 @@ class CartProductCard extends HookWidget {
                 activeColor: colors.ff221fif,
                 overlayColor: WidgetStatePropertyAll(colors.transparent),
                 side: BorderSide(color: colors.ff221fif, width: 1.1.r),
-                value: isCheckBoxClicked.value,
+                value: checkBoxListOfProducts.value.contains(cartProduct),
                 onChanged: (value) {
-                  isCheckBoxClicked.value = !isCheckBoxClicked.value;
+                  var list = [...List.from(checkBoxListOfProducts.value)];
+                  for (int i = 0; i < list.length; i++) {
+                    if (list[i] == cartProduct) {
+                      log("Is Equal");
+                      list.removeAt(i);
+                      checkBoxListOfProducts.value = List.from(list);
+                      return;
+                    }
+                  }
+
+                  log("Is not Equal");
+
+                  list.add(cartProduct);
+                  checkBoxListOfProducts.value = List.from(list);
+                  log(checkBoxListOfProducts.value.toString());
                 },
               ),
             ),
@@ -44,8 +62,8 @@ class CartProductCard extends HookWidget {
                 color: colors.fff6f6f6,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Image.asset(
-                images.plant,
+              child: Image.network(
+                cartProduct.product.images.first,
                 height: 77.h,
                 width: 77.w,
                 fit: BoxFit.contain,
@@ -62,7 +80,7 @@ class CartProductCard extends HookWidget {
                     children: [
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "Spider Plant",
+                        cartProduct.product.name,
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 17.sp,
@@ -70,7 +88,7 @@ class CartProductCard extends HookWidget {
                       ),
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "\$250",
+                        "\$${cartProduct.product.price}",
                         style: AppTextStyles.lato.medium(
                           color: colors.ff007537,
                           fontSize: 17.sp,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
@@ -11,6 +12,8 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/formatter.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc_events.dart';
 import 'package:plant_store/presentation/home/models/product_model.dart';
 import 'package:plant_store/presentation/home/widgets/circle_arrow_icon_button_wd.dart';
 import 'package:plant_store/presentation/home/widgets/prod_details_category_card_wd.dart';
@@ -26,8 +29,12 @@ class ProductsDetailsScreen extends HookWidget {
     final pageController = usePageController();
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        bottomNavigationBar:
-            bottomNavigationSection(product, colors, texts, quantity),
+        bottomNavigationBar: bottomNavigationSection(
+            context: context,
+            product: product,
+            colors: colors,
+            texts: texts,
+            quantity: quantity),
         body: CustomScrollView(
           slivers: [
             appBarSection(colors, texts),
@@ -131,8 +138,13 @@ class ProductsDetailsScreen extends HookWidget {
     );
   }
 
-  Card bottomNavigationSection(ProductModel product, ConstColors colors,
-      ConstTexts texts, ValueNotifier<int> quantity) {
+  Card bottomNavigationSection({
+    required ProductModel product,
+    required ConstColors colors,
+    required ConstTexts texts,
+    required ValueNotifier<int> quantity,
+    required BuildContext context,
+  }) {
     return Card(
       elevation: 7.5.r,
       color: colors.ffffffff,
@@ -186,9 +198,16 @@ class ProductsDetailsScreen extends HookWidget {
                           onTap: () {
                             log("Cart Minus Button Clicked.");
                             if (quantity.value <= 0) {
+                              context.read<CartBloc>().add(
+                                  OnRemoveProductFromCart(
+                                      product: product, context: context));
                               return;
                             }
                             quantity.value--;
+                            context.read<CartBloc>().add(OnMinusProductFromCart(
+                                product: product,
+                                quantity: quantity.value,
+                                context: context));
                           },
                           child: Icon(
                             Icons.indeterminate_check_box_outlined,
@@ -210,7 +229,14 @@ class ProductsDetailsScreen extends HookWidget {
                         InkWell(
                           onTap: () {
                             log("Cart Plus Button Clicked.");
+                            if (quantity.value >= product.quantity) {
+                              return;
+                            }
                             quantity.value++;
+                            context.read<CartBloc>().add(OnAddProductToCart(
+                                product: product,
+                                quantity: quantity.value,
+                                context: context));
                           },
                           child: Icon(
                             Icons.add_box_outlined,
