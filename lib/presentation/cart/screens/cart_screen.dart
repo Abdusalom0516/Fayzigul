@@ -131,7 +131,9 @@ class CartScreen extends HookWidget {
 
     return SliverList.builder(
       itemCount: cartProductsList.length,
-      itemBuilder: (context, index) => CartProductCard(),
+      itemBuilder: (context, index) => CartProductCard(
+        cartProduct: cartProductsList[index],
+      ),
     );
   }
 
