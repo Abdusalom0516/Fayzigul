@@ -162,7 +162,12 @@ class CartProductCard extends HookWidget {
                       // Remove Button Section
                       InkWell(
                         onTap: () {
-                          log("Remove Button Clicked.");
+                          // Removing Product From Cart
+                          context.read<CartBloc>().add(
+                                OnRemoveProductFromCart(
+                                    product: cartProduct.product,
+                                    context: context),
+                              );
                         },
                         overlayColor: WidgetStatePropertyAll(colors.fff6f6f6),
                         child: Container(
