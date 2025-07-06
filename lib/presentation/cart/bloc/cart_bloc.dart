@@ -90,5 +90,12 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
         }
       },
     );
+
+    // Event Handling for OnCleanCart Event
+    on<OnCleanCart>(
+      (event, emit) {
+        emit(CartBlocStates(cartProductsList: []));
+      },
+    );
   }
 }

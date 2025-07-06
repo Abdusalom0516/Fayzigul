@@ -24,10 +24,9 @@ class CartScreen extends HookWidget {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         // Bottom Navigation Section
-        bottomNavigationBar: BlocBuilder(
-          builder: (context, state) => cartBottomNavigationSection(
-              productsList: listOfProducts, texts: texts, colors: colors),
-        ),
+        bottomNavigationBar: cartBottomNavigationSection(
+            productsList: listOfProducts, texts: texts, colors: colors),
+
         body: CustomScrollView(
           slivers: [
             // Sliver App Bar Section
