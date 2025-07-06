@@ -108,7 +108,7 @@ class CartProductCard extends HookWidget {
                             onTap: () {
                               quantity.value++;
                               if (quantity.value >=
-                                  cartProduct.productQuantity) {
+                                  cartProduct.product.quantity) {
                                 return;
                               }
                               context.read<CartBloc>().add(
