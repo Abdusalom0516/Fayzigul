@@ -85,4 +85,11 @@ class ConstTexts {
   String total = "Total";
   String noProductsFound = "No Products Found";
   String cartIsEmpty = "Cart is Empty";
+  String productNotFoundInCart = "Product not found in Cart.";
+  String productRemovedSuc = "Product removed from Cart successfully.";
+  String failedToRemove(String e) => "Failed to remove product $e.";
+  String productQuantityUpdatedSuc = "Product quantity updated in Cart successfully.";
+  String failedToMinues(String e) => "Failed to minus product quantity $e.";
+  String productAddedSuc = "Product added to Cart successfully.";
+  String failedToAddProduct(String e) => "Failed to add product $e.";
 }
