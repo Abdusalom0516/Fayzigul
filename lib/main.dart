@@ -12,6 +12,7 @@ import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/presentation/auth/bloc/verify_email/verify_email_bloc.dart';
 import 'package:plant_store/presentation/auth/screens/login_screen.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
 import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc.dart';
 import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/presentation/main/main_screen.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProfileScreenBloc()),
         BlocProvider(create: (context) => PlantsBloc()),
         BlocProvider(create: (context) => EquipmentsBloc()),
+        BlocProvider(create: (context) => CartBloc()),
       ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),
