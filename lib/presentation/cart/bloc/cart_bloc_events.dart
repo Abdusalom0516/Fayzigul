@@ -32,4 +32,8 @@ class OnRemoveProductFromCart extends CartBlocEvents {
   OnRemoveProductFromCart({required this.product, required this.context});
 }
 
-class OnCleanCart extends CartBlocEvents {}
+class OnCleanCart extends CartBlocEvents {
+  final BuildContext context;
+
+  OnCleanCart({required this.context});
+}

@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc_events.dart';
 import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 
 class CartProductCard extends HookWidget {
@@ -18,7 +21,7 @@ class CartProductCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final quantity = useState(1);
+    final quantity = useState(cartProduct.productQuantity);
     return AppStateWrapper(
       builder: (colors, texts, images) => Container(
         height: 107.h,
@@ -103,8 +106,17 @@ class CartProductCard extends HookWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              log("Cart Plus Button Clicked.");
                               quantity.value++;
+                              if (quantity.value >=
+                                  cartProduct.product.quantity) {
+                                return;
+                              }
+                              context.read<CartBloc>().add(
+                                    OnAddProductToCart(
+                                        product: cartProduct.product,
+                                        quantity: quantity.value,
+                                        context: context),
+                                  );
                             },
                             child: Icon(
                               Icons.add_box_outlined,
@@ -125,11 +137,19 @@ class CartProductCard extends HookWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              log("Cart Minus Button Clicked.");
+                              quantity.value--;
                               if (quantity.value <= 0) {
+                                context.read<CartBloc>().add(
+                                    OnRemoveProductFromCart(
+                                        product: cartProduct.product,
+                                        context: context));
                                 return;
                               }
-                              quantity.value--;
+                              context.read<CartBloc>().add(
+                                  OnMinusProductFromCart(
+                                      product: cartProduct.product,
+                                      quantity: quantity.value,
+                                      context: context));
                             },
                             child: Icon(
                               Icons.indeterminate_check_box_outlined,
@@ -142,7 +162,12 @@ class CartProductCard extends HookWidget {
                       // Remove Button Section
                       InkWell(
                         onTap: () {
-                          log("Remove Button Clicked.");
+                          // Removing Product From Cart
+                          context.read<CartBloc>().add(
+                                OnRemoveProductFromCart(
+                                    product: cartProduct.product,
+                                    context: context),
+                              );
                         },
                         overlayColor: WidgetStatePropertyAll(colors.fff6f6f6),
                         child: Container(

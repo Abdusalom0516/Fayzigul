@@ -7,9 +7,11 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
+import 'package:plant_store/core/common/widgets/empty_center_text_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
+import 'package:plant_store/presentation/cart/bloc/cart_bloc_events.dart';
 import 'package:plant_store/presentation/cart/bloc/cart_bloc_states.dart';
 import 'package:plant_store/presentation/cart/models/cart_product_model.dart';
 import 'package:plant_store/presentation/cart/screens/checkout_screen.dart';
@@ -32,7 +34,11 @@ class CartScreen extends HookWidget {
         body: CustomScrollView(
           slivers: [
             // Sliver App Bar Section
-            sliverAppBarSection(colors, texts),
+            sliverAppBarSection(
+                checkBoxListOfProducts: checkBoxListOfProducts,
+                colors: colors,
+                texts: texts,
+                context: context),
             // Cart Products SliverList.builder Section
             BlocBuilder<CartBloc, CartBlocStates>(
               builder: (context, state) => cartProductSliverListBuilderSection(
@@ -130,7 +136,7 @@ class CartScreen extends HookWidget {
 
     // Checking for Emptiness
     if (cartProductsList.isEmpty) {
-      return EmptyText(text: texts.cartIsEmpty);
+      return EmptyCenterText(text: texts.cartIsEmpty);
     }
 
     return SliverList.builder(
@@ -142,7 +148,12 @@ class CartScreen extends HookWidget {
     );
   }
 
-  SliverAppBar sliverAppBarSection(ConstColors colors, ConstTexts texts) {
+  SliverAppBar sliverAppBarSection({
+    required ConstColors colors,
+    required ConstTexts texts,
+    required BuildContext context,
+    required ValueNotifier<List<CartProductModel>> checkBoxListOfProducts,
+  }) {
     return SliverAppBar(
       centerTitle: true,
       pinned: true,
@@ -158,7 +169,9 @@ class CartScreen extends HookWidget {
       actions: [
         IconButton(
           onPressed: () {
-            log("Delete Button Clicked.");
+            // Cleaning Cart
+            context.read<CartBloc>().add(OnCleanCart(context: context));
+            checkBoxListOfProducts.value = List.from([]);
           },
           icon: Icon(
             Icons.delete_outline_rounded,
@@ -168,32 +181,6 @@ class CartScreen extends HookWidget {
         ),
         Width(width: 15)
       ],
-    );
-  }
-}
-
-class EmptyText extends StatelessWidget {
-  const EmptyText({
-    super.key,
-    required this.text,
-  });
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverFillRemaining(
-      hasScrollBody: false,
-      child: AppStateWrapper(
-        builder: (colors, texts, images) => Center(
-          child: Text(
-            text,
-            style: AppTextStyles.lato.medium(
-              color: colors.ff221fif,
-              fontSize: 17.sp,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
