@@ -23,6 +23,7 @@ class CartScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final checkBoxListOfProducts = useState<List<CartProductModel>>([]);
+
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         // Bottom Navigation Section
@@ -146,6 +147,7 @@ class CartScreen extends HookWidget {
     return SliverList.builder(
       itemCount: cartProductsList.length,
       itemBuilder: (context, index) => CartProductCard(
+        key: ValueKey(cartProductsList[index].product.id),
         cartProduct: cartProductsList[index],
         checkBoxListOfProducts: checkBoxListOfProducts,
       ),
