@@ -112,14 +112,11 @@ class CartProductCard extends HookWidget {
                   var list = [...List.from(checkBoxListOfProducts.value)];
                   for (int i = 0; i < list.length; i++) {
                     if (list[i] == cartProduct) {
-                      log("Is Equal");
                       list.removeAt(i);
                       checkBoxListOfProducts.value = List.from(list);
                       return;
                     }
                   }
-
-                  log("Is not Equal");
 
                   list.add(cartProduct);
                   checkBoxListOfProducts.value = List.from(list);
