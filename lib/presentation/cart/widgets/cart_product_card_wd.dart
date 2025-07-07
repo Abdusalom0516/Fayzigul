@@ -192,6 +192,17 @@ class CartProductCard extends HookWidget {
                       // Remove Button Section
                       InkWell(
                         onTap: () {
+                          List<CartProductModel> list = [
+                            ...List.from(checkBoxListOfProducts.value)
+                          ];
+
+                          for (int i = 0; i < list.length; i++) {
+                            if (list[i] == cartProduct) {
+                              list.removeAt(i);
+                              checkBoxListOfProducts.value = List.from(list);
+                              break;
+                            }
+                          }
                           // Removing Product From Cart
                           context.read<CartBloc>().add(
                                 OnRemoveProductFromCart(
