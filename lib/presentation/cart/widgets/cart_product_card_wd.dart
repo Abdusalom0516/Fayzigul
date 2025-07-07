@@ -111,6 +111,21 @@ class CartProductCard extends HookWidget {
                                   cartProduct.product.quantity) {
                                 return;
                               }
+
+                              List<CartProductModel> list = [
+                                ...List.from(checkBoxListOfProducts.value)
+                              ];
+
+                              for (int i = 0; i < list.length; i++) {
+                                if (list[i] == cartProduct) {
+                                  list[i] = list[i].copyWith(
+                                      productQuantity:
+                                          list[i].productQuantity + 1);
+                                  checkBoxListOfProducts.value =
+                                      List.from(list);
+                                  return;
+                                }
+                              }
                               context.read<CartBloc>().add(
                                     OnAddProductToCart(
                                         product: cartProduct.product,
@@ -144,6 +159,21 @@ class CartProductCard extends HookWidget {
                                         product: cartProduct.product,
                                         context: context));
                                 return;
+                              }
+
+                              List<CartProductModel> list = [
+                                ...List.from(checkBoxListOfProducts.value)
+                              ];
+
+                              for (int i = 0; i < list.length; i++) {
+                                if (list[i] == cartProduct) {
+                                  list[i] = list[i].copyWith(
+                                      productQuantity:
+                                          list[i].productQuantity - 1);
+                                  checkBoxListOfProducts.value =
+                                      List.from(list);
+                                  return;
+                                }
                               }
                               context.read<CartBloc>().add(
                                   OnMinusProductFromCart(
