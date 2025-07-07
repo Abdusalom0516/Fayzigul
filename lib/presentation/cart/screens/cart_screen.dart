@@ -58,6 +58,10 @@ class CartScreen extends HookWidget {
       {required ValueNotifier<List<CartProductModel>> checkBoxListOfProducts,
       required ConstTexts texts,
       required ConstColors colors}) {
+    double sum = 0;
+    for (var elem in checkBoxListOfProducts.value) {
+      sum += (elem.product.price * elem.productQuantity);
+    }
     if (checkBoxListOfProducts.value.isEmpty) {
       return SizedBox.shrink();
     }
@@ -80,7 +84,7 @@ class CartScreen extends HookWidget {
                 ),
               ),
               Text(
-                "\$999",
+                "\$${sum.toStringAsFixed(2)}",
                 style: AppTextStyles.lato.semiBold(
                   color: colors.ff007537,
                   fontSize: 19.sp,

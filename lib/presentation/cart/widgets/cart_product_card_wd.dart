@@ -111,6 +111,21 @@ class CartProductCard extends HookWidget {
                                   cartProduct.product.quantity) {
                                 return;
                               }
+
+                              List<CartProductModel> list = [
+                                ...List.from(checkBoxListOfProducts.value)
+                              ];
+
+                              for (int i = 0; i < list.length; i++) {
+                                if (list[i] == cartProduct) {
+                                  list[i] = list[i].copyWith(
+                                      productQuantity:
+                                          list[i].productQuantity + 1);
+                                  checkBoxListOfProducts.value =
+                                      List.from(list);
+                                  return;
+                                }
+                              }
                               context.read<CartBloc>().add(
                                     OnAddProductToCart(
                                         product: cartProduct.product,
@@ -145,6 +160,21 @@ class CartProductCard extends HookWidget {
                                         context: context));
                                 return;
                               }
+
+                              List<CartProductModel> list = [
+                                ...List.from(checkBoxListOfProducts.value)
+                              ];
+
+                              for (int i = 0; i < list.length; i++) {
+                                if (list[i] == cartProduct) {
+                                  list[i] = list[i].copyWith(
+                                      productQuantity:
+                                          list[i].productQuantity - 1);
+                                  checkBoxListOfProducts.value =
+                                      List.from(list);
+                                  return;
+                                }
+                              }
                               context.read<CartBloc>().add(
                                   OnMinusProductFromCart(
                                       product: cartProduct.product,
@@ -162,6 +192,17 @@ class CartProductCard extends HookWidget {
                       // Remove Button Section
                       InkWell(
                         onTap: () {
+                          List<CartProductModel> list = [
+                            ...List.from(checkBoxListOfProducts.value)
+                          ];
+
+                          for (int i = 0; i < list.length; i++) {
+                            if (list[i] == cartProduct) {
+                              list.removeAt(i);
+                              checkBoxListOfProducts.value = List.from(list);
+                              break;
+                            }
+                          }
                           // Removing Product From Cart
                           context.read<CartBloc>().add(
                                 OnRemoveProductFromCart(
