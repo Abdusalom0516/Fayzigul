@@ -1,5 +1,5 @@
 class ConstTexts {
-  String appName = "Planta";
+  String appName = "Fayzigul";
   String loginSubText =
       "Your Premier Destination for Lush Greenery: Elevate your space with our exceptional plant selection";
   String emailHint = "Email";
@@ -15,7 +15,7 @@ class ConstTexts {
   String doNotHaveAnAccount = "Don't have an account?";
   String confirmVerificationExplanation =
       "Go to your Gmail and Confirm your Email.";
-  String plantaShining = "Planta - shining your little space";
+  String plantaShining = "Fayzigul - shining your little space";
   String seeNewArrivals = "See New Arrivals";
   String plants = "Plants";
   String seeMore = "See More";
