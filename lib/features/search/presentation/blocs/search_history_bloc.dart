@@ -29,6 +29,9 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
     on<OnSaveSearchHistoryClicked>(
       (event, emit) async {
         await saveSearchHistoryUsecase(searchHistory: event.searchHistory);
+
+        emit(SearchHistoryStates(
+            listOfSearchHistories: await getSearchHistoryUsecase()));
       },
     );
   }

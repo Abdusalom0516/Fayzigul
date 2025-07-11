@@ -8,9 +8,9 @@ part 'search_history_model.g.dart';
 class SearchHistoryModel extends SearchHistoryEntity {
   const SearchHistoryModel({required super.searchHistory});
 
-  factory SearchHistoryModel.fromJson(Map<String, dynamic> json) =>
+  factory SearchHistoryModel.fromJson(Map<dynamic, dynamic> json) =>
       _$SearchHistoryModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SearchHistoryModelToJson(this);
+  Map<dynamic, dynamic> toJson() => _$SearchHistoryModelToJson(this);
 
   SearchHistoryModel copyWith({String? searchHistory}) {
     return SearchHistoryModel(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
@@ -6,6 +7,10 @@ import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/search/data/models/search_history_model.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_states.dart';
 import 'package:plant_store/features/search/widgets/search_history_card_wd.dart';
 
 class SearchScreen extends HookWidget {
@@ -17,64 +22,81 @@ class SearchScreen extends HookWidget {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
-        body: CustomScrollView(
-          slivers: [
-            // Search Screen AppBar Section
-            searchScreenAppBarSection(colors, texts),
-            SliverHeight(height: 15),
-            // Search Screen TextField Section
-            searchScreenTextFieldSection(colors, controller, texts),
-            SliverHeight(height: 35),
-            // Search History Recent Searches Title Section
-            searchHistoryRecentSearchesTitleSection(texts, colors),
-            SliverHeight(height: 15),
-            // Search History Options Section
-            SliverPadding(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    SearchHistoryCard(),
-                    SearchHistoryCard(),
-                    SearchHistoryCard(),
-                  ],
-                ),
+        body: BlocBuilder<SearchHistoryBloc, SearchHistoryStates>(
+          builder: (context, state) => CustomScrollView(
+            slivers: [
+              // Search Screen AppBar Section
+              searchScreenAppBarSection(colors, texts),
+              SliverHeight(height: 15),
+              // Search Screen TextField Section
+              searchScreenTextFieldSection(
+                  colors: colors,
+                  context: context,
+                  controller: controller,
+                  texts: texts),
+              SliverHeight(height: 35),
+              // Search History Recent Searches Title Section
+              searchHistoryRecentSearchesTitleSection(
+                  colors: colors, state: state, texts: texts),
+              state.listOfSearchHistories.isEmpty
+                  ? SliverToBoxAdapter(child: SizedBox.shrink())
+                  : SliverHeight(height: 15),
+              // Search History Options Section
+              SliverPadding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
+                sliver: state.listOfSearchHistories.isEmpty
+                    ? SliverToBoxAdapter(
+                        child: SizedBox.shrink(),
+                      )
+                    : SliverList.builder(
+                        itemCount: state.listOfSearchHistories.length,
+                        itemBuilder: (context, index) => SearchHistoryCard(
+                            title: state
+                                .listOfSearchHistories[index].searchHistory),
+                      ),
               ),
-            ),
-            // Search History Search Results ListView.builder Section
-            SliverList.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) => SearchResultProductsCard(),
-            ),
-            SliverHeight(height: 25),
-          ],
+              // Search History Search Results ListView.builder Section
+              SliverList.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) => SearchResultProductsCard(),
+              ),
+              SliverHeight(height: 25),
+            ],
+          ),
         ),
       ),
     );
   }
 
   SliverPadding searchHistoryRecentSearchesTitleSection(
-      ConstTexts texts, ConstColors colors) {
+      {required ConstTexts texts,
+      required ConstColors colors,
+      required SearchHistoryStates state}) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
       sliver: SliverToBoxAdapter(
-        child: Row(
-          children: [
-            Text(
-              texts.recentSearches,
-              style: AppTextStyles.lato.semiBold(
-                color: colors.ff221fif,
-                fontSize: 19.sp,
+        child: state.listOfSearchHistories.isEmpty
+            ? SizedBox.shrink()
+            : Row(
+                children: [
+                  Text(
+                    texts.recentSearches,
+                    style: AppTextStyles.lato.semiBold(
+                      color: colors.ff221fif,
+                      fontSize: 19.sp,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
 
   SliverPadding searchScreenTextFieldSection(
-      ConstColors colors, TextEditingController controller, ConstTexts texts) {
+      {required BuildContext context,
+      required ConstColors colors,
+      required TextEditingController controller,
+      required ConstTexts texts}) {
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 35.w),
       sliver: SliverToBoxAdapter(
@@ -94,6 +116,11 @@ class SearchScreen extends HookWidget {
               color: colors.ff221fif,
               fontSize: 17.sp,
             ),
+            onSubmitted: (value) {
+              context.read<SearchHistoryBloc>().add(OnSaveSearchHistoryClicked(
+                  searchHistory:
+                      SearchHistoryModel(searchHistory: value.trim())));
+            },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 7.r),
               hint: Text(

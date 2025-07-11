@@ -8,7 +8,9 @@ import 'package:plant_store/core/utils/app_state_wrapper.dart';
 class SearchHistoryCard extends StatelessWidget {
   const SearchHistoryCard({
     super.key,
+    required this.title,
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class SearchHistoryCard extends StatelessWidget {
                     size: 24.r,
                   ),
                   Text(
-                    "Spider Plant",
+                    title,
                     style: AppTextStyles.lato.medium(
                       color: colors.ff221fif,
                       fontSize: 17.sp,
