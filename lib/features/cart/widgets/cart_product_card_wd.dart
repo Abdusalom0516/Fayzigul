@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/cart/bloc/cart_bloc.dart';
-import 'package:plant_store/features/cart/bloc/cart_bloc_events.dart';
+import 'package:plant_store/features/cart/blocs/cart_bloc.dart';
+import 'package:plant_store/features/cart/blocs/cart_bloc_events.dart';
 import 'package:plant_store/features/cart/models/cart_product_model.dart';
 
 class CartProductCard extends HookWidget {

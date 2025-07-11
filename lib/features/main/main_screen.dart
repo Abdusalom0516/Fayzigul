@@ -11,7 +11,7 @@ import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/features/home/blocs/plants_bloc/plants_events.dart';
 import 'package:plant_store/features/home/screens/home_screen.dart';
 import 'package:plant_store/features/profile/screens/profile_screen.dart';
-import 'package:plant_store/features/search/screens/search_screen.dart';
+import 'package:plant_store/features/search/presentation/screens/search_screen.dart';
 
 class MainScreen extends HookWidget {
   const MainScreen({super.key});

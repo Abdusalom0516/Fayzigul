@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
-import 'package:plant_store/features/auth/bloc/verify_email/verify_email_events.dart';
-import 'package:plant_store/features/auth/bloc/verify_email/verify_email_states.dart';
+import 'package:plant_store/features/auth/blocs/verify_email/verify_email_events.dart';
+import 'package:plant_store/features/auth/blocs/verify_email/verify_email_states.dart';
 import 'package:plant_store/features/main/main_screen.dart';
 
 class VerifyEmailBloc extends Bloc<VerifyEmailEvents, VerifyEmailStates> {

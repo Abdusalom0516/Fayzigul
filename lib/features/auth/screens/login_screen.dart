@@ -10,12 +10,12 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/auth/bloc/login/login_bloc.dart';
-import 'package:plant_store/features/auth/bloc/login/login_events.dart';
-import 'package:plant_store/features/auth/bloc/login/login_states.dart';
+import 'package:plant_store/features/auth/blocs/login/login_bloc.dart';
+import 'package:plant_store/features/auth/blocs/login/login_events.dart';
+import 'package:plant_store/features/auth/blocs/login/login_states.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:plant_store/features/auth/bloc/sign_up/sign_up_bloc.dart';
-import 'package:plant_store/features/auth/bloc/sign_up/sign_up_states.dart';
+import 'package:plant_store/features/auth/blocs/sign_up/sign_up_bloc.dart';
+import 'package:plant_store/features/auth/blocs/sign_up/sign_up_states.dart';
 import 'package:plant_store/features/auth/screens/sign_up_screen.dart';
 import 'package:plant_store/features/auth/widgets/login_custom_text_field_wd.dart';
 
