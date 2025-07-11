@@ -1,9 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/search/data/models/search_history_model.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
 
 class SearchHistoryCard extends StatelessWidget {
   const SearchHistoryCard({
@@ -50,6 +54,10 @@ class SearchHistoryCard extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                     log("Close Button Clicked.");
+                    context.read<SearchHistoryBloc>().add(
+                        OnRemoveSearchHistoryClicked(
+                            searchHistory:
+                                SearchHistoryModel(searchHistory: title)));
                   },
                   style: ButtonStyle(
                     padding: WidgetStatePropertyAll(EdgeInsets.zero),

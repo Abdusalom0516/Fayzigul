@@ -9,3 +9,9 @@ class OnSaveSearchHistoryClicked extends SearchHistoryEvents {
 
   OnSaveSearchHistoryClicked({required this.searchHistory});
 }
+
+class OnRemoveSearchHistoryClicked extends SearchHistoryEvents {
+  final SearchHistoryModel searchHistory;
+
+  OnRemoveSearchHistoryClicked({required this.searchHistory});
+}

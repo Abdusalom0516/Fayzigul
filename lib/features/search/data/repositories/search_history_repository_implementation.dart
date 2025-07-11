@@ -8,12 +8,17 @@ class SearchHistoryRepositoryImplementation extends SearchHistoryRepository {
   SearchHistoryRepositoryImplementation({required this.localDatasource});
 
   @override
-  Future<List<SearchHistoryModel>> getSearchHistory() async{
+  Future<List<SearchHistoryModel>> getSearchHistory() async {
     return await localDatasource.getSearchHistory();
   }
 
   @override
-  Future<void> saveSearchHistory(SearchHistoryModel searchHistory) async{
+  Future<void> saveSearchHistory(SearchHistoryModel searchHistory) async {
     await localDatasource.saveSearchHistory(searchHistory);
+  }
+
+  @override
+  Future<void> removeSearchHistory(SearchHistoryModel searchHistory) async {
+    await localDatasource.removeSearchHistory(searchHistory);
   }
 }
