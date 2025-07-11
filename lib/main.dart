@@ -8,15 +8,15 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/firebase_options.dart';
-import 'package:plant_store/presentation/auth/bloc/login/login_bloc.dart';
-import 'package:plant_store/presentation/auth/bloc/sign_up/sign_up_bloc.dart';
-import 'package:plant_store/presentation/auth/bloc/verify_email/verify_email_bloc.dart';
-import 'package:plant_store/presentation/auth/screens/login_screen.dart';
-import 'package:plant_store/presentation/cart/bloc/cart_bloc.dart';
-import 'package:plant_store/presentation/home/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/presentation/home/blocs/plants_bloc/plants_bloc.dart';
-import 'package:plant_store/presentation/main/main_screen.dart';
-import 'package:plant_store/presentation/profile/bloc/profile_screen_bloc.dart';
+import 'package:plant_store/features/auth/bloc/login/login_bloc.dart';
+import 'package:plant_store/features/auth/bloc/sign_up/sign_up_bloc.dart';
+import 'package:plant_store/features/auth/bloc/verify_email/verify_email_bloc.dart';
+import 'package:plant_store/features/auth/screens/login_screen.dart';
+import 'package:plant_store/features/cart/bloc/cart_bloc.dart';
+import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/features/main/main_screen.dart';
+import 'package:plant_store/features/profile/bloc/profile_screen_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
