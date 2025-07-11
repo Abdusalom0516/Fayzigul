@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
@@ -20,6 +21,7 @@ import 'package:plant_store/features/profile/bloc/profile_screen_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.openBox('searchHistory');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
