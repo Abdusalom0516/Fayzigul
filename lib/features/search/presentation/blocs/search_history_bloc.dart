@@ -3,6 +3,7 @@ import 'package:plant_store/features/search/data/datasources/local_datasource.da
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/data/repositories/search_history_repository_implementation.dart';
 import 'package:plant_store/features/search/domain/usecases/get_search_history_usecase.dart';
+import 'package:plant_store/features/search/domain/usecases/remove_search_history_usecase.dart';
 import 'package:plant_store/features/search/domain/usecases/save_search_history_usecase.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_states.dart';
@@ -18,6 +19,9 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
     final saveSearchHistoryUsecase =
         SaveSearchHistoryUsecase(repository: repository);
 
+    final removeSearchHistoryUsecase =
+        RemoveSearchHistoryUsecase(repository: repository);
+
     on<OnGetSearchHistoryClicked>(
       (event, emit) async {
         List<SearchHistoryModel> listOfSearchHistories =
@@ -29,6 +33,15 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
     on<OnSaveSearchHistoryClicked>(
       (event, emit) async {
         await saveSearchHistoryUsecase(searchHistory: event.searchHistory);
+
+        emit(SearchHistoryStates(
+            listOfSearchHistories: await getSearchHistoryUsecase()));
+      },
+    );
+
+    on<OnRemoveSearchHistoryClicked>(
+      (event, emit) async {
+        await removeSearchHistoryUsecase(searchHistory: event.searchHistory);
 
         emit(SearchHistoryStates(
             listOfSearchHistories: await getSearchHistoryUsecase()));
