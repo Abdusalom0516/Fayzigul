@@ -61,12 +61,10 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
         emit(state.copyWith(
             listOfSearchHistories: await getSearchHistoryUsecase(),
             isSearching: true,
-            listOfSearchedProducts: listOfSearchedProducts
-                .where(
-                  (element) => element.name.toLowerCase().contains(
-                      event.searchHistory.searchHistory.toLowerCase()),
-                )
-                .toList()));
+            listOfSearchedProducts: listOfSearchedProducts.where((element) {
+              return element.name.toLowerCase().contains(
+                  event.searchHistory.searchHistory.toLowerCase().trim());
+            }).toList()));
       },
     );
 
