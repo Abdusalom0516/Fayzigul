@@ -6,6 +6,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
@@ -56,10 +57,13 @@ class SearchScreen extends HookWidget {
                       ),
               ),
               // Search History Search Results ListView.builder Section
-              SliverList.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) => SearchResultProductsCard(),
-              ),
+              !state.isSearching
+                  ? CustomSliverSizedBoxShrink()
+                  : SliverList.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, index) =>
+                          SearchResultProductsCard(),
+                    ),
               SliverHeight(height: 25),
             ],
           ),
