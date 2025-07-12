@@ -40,18 +40,13 @@ class LocalDatasource {
     await box.addAll(List.from(newList));
   }
 
-  Future<void> removeSearchHistory(SearchHistoryModel searchHistory) async {
+  Future<void> removeSearchHistory({required int index}) async {
     final box = Hive.box("searchHistory");
-    final list = [];
+    final list = List.from(box.values.toList());
 
-    for (var elem in List.from(box.values.toList())) {
-      final conv = SearchHistoryModel.fromJson(elem);
-      if (conv.searchHistory != searchHistory.searchHistory) {
-        list.add(elem);
-      }
-    }
+    list.removeAt(index);
 
     await box.clear();
-    box.addAll(List.from(list));
+    await box.addAll(List.from(list));
   }
 }

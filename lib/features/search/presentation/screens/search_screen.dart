@@ -60,6 +60,7 @@ class SearchScreen extends HookWidget {
                     : SliverList.builder(
                         itemCount: state.listOfSearchHistories.length,
                         itemBuilder: (context, index) => SearchHistoryCard(
+                            index: index,
                             title: state
                                 .listOfSearchHistories[index].searchHistory),
                       ),

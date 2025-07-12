@@ -18,7 +18,7 @@ class SearchHistoryRepositoryImplementation extends SearchHistoryRepository {
   }
 
   @override
-  Future<void> removeSearchHistory(SearchHistoryModel searchHistory) async {
-    await localDatasource.removeSearchHistory(searchHistory);
+  Future<void> removeSearchHistory(int index) async {
+    await localDatasource.removeSearchHistory(index: index);
   }
 }

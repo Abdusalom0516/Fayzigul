@@ -9,13 +9,14 @@ class OnSaveSearchHistoryClicked extends SearchHistoryEvents {
   final SearchHistoryModel searchHistory;
   final BuildContext context;
 
-  OnSaveSearchHistoryClicked({required this.searchHistory, required this.context});
+  OnSaveSearchHistoryClicked(
+      {required this.searchHistory, required this.context});
 }
 
 class OnRemoveSearchHistoryClicked extends SearchHistoryEvents {
-  final SearchHistoryModel searchHistory;
+  final int index;
 
-  OnRemoveSearchHistoryClicked({required this.searchHistory});
+  OnRemoveSearchHistoryClicked({required this.index});
 }
 
 class OnSearchingEndClicked extends SearchHistoryEvents {}

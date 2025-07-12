@@ -69,7 +69,7 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
 
     on<OnRemoveSearchHistoryClicked>(
       (event, emit) async {
-        await removeSearchHistoryUsecase(searchHistory: event.searchHistory);
+        await removeSearchHistoryUsecase(index: event.index);
 
         emit(state.copyWith(
             listOfSearchHistories: await getSearchHistoryUsecase()));
