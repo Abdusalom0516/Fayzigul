@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hive/hive.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 
@@ -7,24 +9,35 @@ class LocalDatasource {
     List<SearchHistoryModel> list = [];
     final box = Hive.box("searchHistory");
 
-    for (var elem in box.values.toList()) {
+    for (var elem in List.from(box.values.toList())) {
       list.add(SearchHistoryModel.fromJson(elem));
     }
 
-    return list;
+    return list.reversed.toList();
   }
 
   // Method to save search histories
   Future<void> saveSearchHistory(SearchHistoryModel searchHistory) async {
     final box = Hive.box("searchHistory");
-    await box.add(searchHistory.toJson());
+    final list = List.from(box.values.toList());
+
+    if (list.isNotEmpty) {
+      if (list.last["searchHistory"] != searchHistory.searchHistory) {
+        list.add(searchHistory.toJson());
+      }
+    } else {
+      list.add(searchHistory.toJson());
+    }
+
+    await box.clear();
+    await box.addAll(List.from(list));
   }
 
   Future<void> removeSearchHistory(SearchHistoryModel searchHistory) async {
     final box = Hive.box("searchHistory");
     final list = [];
 
-    for (var elem in box.values.toList()) {
+    for (var elem in List.from(box.values.toList())) {
       final conv = SearchHistoryModel.fromJson(elem);
       if (conv.searchHistory != searchHistory.searchHistory) {
         list.add(elem);
