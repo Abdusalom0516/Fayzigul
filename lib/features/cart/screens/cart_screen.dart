@@ -7,7 +7,7 @@ import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
-import 'package:plant_store/core/common/widgets/empty_center_text_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/cart/blocs/cart_bloc.dart';
@@ -144,7 +144,7 @@ class CartScreen extends HookWidget {
 
     // Checking for Emptiness
     if (cartProductsList.isEmpty) {
-      return EmptyCenterText(text: texts.cartIsEmpty);
+      return CustomEmptyCenterText(text: texts.cartIsEmpty);
     }
 
     return SliverList.builder(

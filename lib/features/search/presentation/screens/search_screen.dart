@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
@@ -20,6 +21,12 @@ class SearchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
+    useEffect(
+      () {
+        controller.clear();
+        return null;
+      },
+    );
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
@@ -59,11 +66,13 @@ class SearchScreen extends HookWidget {
               // Search History Search Results ListView.builder Section
               !state.isSearching
                   ? CustomSliverSizedBoxShrink()
-                  : SliverList.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, index) =>
-                          SearchResultProductsCard(),
-                    ),
+                  : state.listOfSearchedProducts.isEmpty
+                      ? CustomEmptyCenterText(text: texts.noProductsFound)
+                      : SliverList.builder(
+                          itemCount: 11,
+                          itemBuilder: (context, index) =>
+                              SearchResultProductsCard(),
+                        ),
               SliverHeight(height: 25),
             ],
           ),
@@ -122,6 +131,7 @@ class SearchScreen extends HookWidget {
             ),
             onSubmitted: (value) {
               context.read<SearchHistoryBloc>().add(OnSaveSearchHistoryClicked(
+                  context: context,
                   searchHistory:
                       SearchHistoryModel(searchHistory: value.trim())));
             },

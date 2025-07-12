@@ -1,4 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc_state.dart';
+import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/features/home/blocs/plants_bloc/plants_states.dart';
+import 'package:plant_store/features/home/models/product_model.dart';
 import 'package:plant_store/features/search/data/datasources/local_datasource.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/data/repositories/search_history_repository_implementation.dart';
@@ -11,7 +16,9 @@ import 'package:plant_store/features/search/presentation/blocs/search_history_st
 class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
   SearchHistoryBloc()
       : super(SearchHistoryStates(
-            listOfSearchHistories: [], isSearching: false)) {
+            listOfSearchHistories: [],
+            isSearching: false,
+            listOfSearchedProducts: [])) {
     final SearchHistoryRepositoryImplementation repository =
         SearchHistoryRepositoryImplementation(
             localDatasource: LocalDatasource());
@@ -35,10 +42,25 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
     on<OnSaveSearchHistoryClicked>(
       (event, emit) async {
         await saveSearchHistoryUsecase(searchHistory: event.searchHistory);
+        List<ProductModel> listOfSearchedProducts = [];
+        if (event.context.mounted) {
+          final plantsBlocState = event.context.read<PlantsBloc>().state;
+          final equipmentsBlocState =
+              event.context.read<EquipmentsBloc>().state;
+          if (plantsBlocState is PlantsBlocSuccessState) {
+            listOfSearchedProducts.addAll(List.from(plantsBlocState.products));
+          }
+
+          if (equipmentsBlocState is EquipmentsBlocSuccessState) {
+            listOfSearchedProducts
+                .addAll(List.from(equipmentsBlocState.listOfProducts));
+          }
+        }
 
         emit(state.copyWith(
             listOfSearchHistories: await getSearchHistoryUsecase(),
-            isSearching: true));
+            isSearching: true,
+            listOfSearchedProducts: listOfSearchedProducts));
       },
     );
 

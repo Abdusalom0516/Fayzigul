@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 
 abstract class SearchHistoryEvents {}
@@ -6,8 +7,9 @@ class OnGetSearchHistoryClicked extends SearchHistoryEvents {}
 
 class OnSaveSearchHistoryClicked extends SearchHistoryEvents {
   final SearchHistoryModel searchHistory;
+  final BuildContext context;
 
-  OnSaveSearchHistoryClicked({required this.searchHistory});
+  OnSaveSearchHistoryClicked({required this.searchHistory, required this.context});
 }
 
 class OnRemoveSearchHistoryClicked extends SearchHistoryEvents {
@@ -16,4 +18,4 @@ class OnRemoveSearchHistoryClicked extends SearchHistoryEvents {
   OnRemoveSearchHistoryClicked({required this.searchHistory});
 }
 
-class OnSearchingEndClicked extends SearchHistoryEvents{}
+class OnSearchingEndClicked extends SearchHistoryEvents {}
