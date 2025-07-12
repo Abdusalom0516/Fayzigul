@@ -1,11 +1,11 @@
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/domain/repositories/search_history_repository.dart';
 
-class GetSearchHistoryUsecase {
+class RemoveSearchHistoryUsecase {
   SearchHistoryRepository repository;
-  GetSearchHistoryUsecase({required this.repository});
+  RemoveSearchHistoryUsecase({required this.repository});
 
-  Future<List<SearchHistoryModel>> call() async{
-    return await repository.getSearchHistory();
+  Future<void> call({required SearchHistoryModel searchHistory}) async {
+    await repository.removeSearchHistory(searchHistory);
   }
 }

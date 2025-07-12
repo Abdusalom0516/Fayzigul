@@ -11,6 +11,8 @@ import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/features/home/blocs/plants_bloc/plants_events.dart';
 import 'package:plant_store/features/home/screens/home_screen.dart';
 import 'package:plant_store/features/profile/screens/profile_screen.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
+import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
 import 'package:plant_store/features/search/presentation/screens/search_screen.dart';
 
 class MainScreen extends HookWidget {
@@ -26,6 +28,7 @@ class MainScreen extends HookWidget {
       if (!gotAllInfo.value) {
         context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
         context.read<PlantsBloc>().add(OnGetProductsClicked());
+        context.read<SearchHistoryBloc>().add(OnGetSearchHistoryClicked());
         gotAllInfo.value = true;
       }
       return null;
