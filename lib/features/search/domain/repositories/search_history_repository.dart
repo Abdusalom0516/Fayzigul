@@ -8,5 +8,5 @@ abstract class SearchHistoryRepository {
   Future<void> saveSearchHistory(SearchHistoryModel searchHistory);
 
   // Method to remove search history
-  Future<void> removeSearchHistory(SearchHistoryModel searchHistory);
+  Future<void> removeSearchHistory(int index);
 }
