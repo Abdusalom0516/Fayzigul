@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hive/hive.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 
