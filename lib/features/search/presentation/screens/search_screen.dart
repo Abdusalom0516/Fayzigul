@@ -5,8 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
+import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/home/models/product_model.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
@@ -19,6 +22,12 @@ class SearchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
+    useEffect(
+      () {
+        controller.clear();
+        return null;
+      },
+    );
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
@@ -36,18 +45,18 @@ class SearchScreen extends HookWidget {
                   texts: texts),
               SliverHeight(height: 35),
               // Search History Recent Searches Title Section
-              searchHistoryRecentSearchesTitleSection(
-                  colors: colors, state: state, texts: texts),
-              state.listOfSearchHistories.isEmpty
-                  ? SliverToBoxAdapter(child: SizedBox.shrink())
+              state.listOfSearchHistories.isEmpty || state.isSearching
+                  ? CustomSliverSizedBoxShrink()
+                  : searchHistoryRecentSearchesTitleSection(
+                      colors: colors, state: state, texts: texts),
+              state.listOfSearchHistories.isEmpty || state.isSearching
+                  ? CustomSliverSizedBoxShrink()
                   : SliverHeight(height: 15),
               // Search History Options Section
               SliverPadding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
-                sliver: state.listOfSearchHistories.isEmpty
-                    ? SliverToBoxAdapter(
-                        child: SizedBox.shrink(),
-                      )
+                sliver: state.listOfSearchHistories.isEmpty || state.isSearching
+                    ? CustomSliverSizedBoxShrink()
                     : SliverList.builder(
                         itemCount: state.listOfSearchHistories.length,
                         itemBuilder: (context, index) => SearchHistoryCard(
@@ -56,10 +65,17 @@ class SearchScreen extends HookWidget {
                       ),
               ),
               // Search History Search Results ListView.builder Section
-              SliverList.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) => SearchResultProductsCard(),
-              ),
+              !state.isSearching
+                  ? CustomSliverSizedBoxShrink()
+                  : state.listOfSearchedProducts.isEmpty
+                      ? CustomEmptyCenterText(text: texts.noProductsFound)
+                      : SliverList.builder(
+                          itemCount: state.listOfSearchedProducts.length,
+                          itemBuilder: (context, index) =>
+                              SearchResultProductsCard(
+                            productModel: state.listOfSearchedProducts[index],
+                          ),
+                        ),
               SliverHeight(height: 25),
             ],
           ),
@@ -118,8 +134,14 @@ class SearchScreen extends HookWidget {
             ),
             onSubmitted: (value) {
               context.read<SearchHistoryBloc>().add(OnSaveSearchHistoryClicked(
+                  context: context,
                   searchHistory:
                       SearchHistoryModel(searchHistory: value.trim())));
+            },
+            onChanged: (value) {
+              if (value.isEmpty) {
+                context.read<SearchHistoryBloc>().add(OnSearchingEndClicked());
+              }
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 7.r),
@@ -163,7 +185,9 @@ class SearchScreen extends HookWidget {
 class SearchResultProductsCard extends StatelessWidget {
   const SearchResultProductsCard({
     super.key,
+    required this.productModel,
   });
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -183,8 +207,8 @@ class SearchResultProductsCard extends StatelessWidget {
                 color: colors.fff6f6f6,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Image.asset(
-                images.plant,
+              child: Image.network(
+                productModel.images.first,
                 height: 77.h,
                 width: 77.w,
                 fit: BoxFit.contain,
@@ -201,7 +225,7 @@ class SearchResultProductsCard extends StatelessWidget {
                     children: [
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "Panse  | Hybrid",
+                        productModel.name,
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 17.w,
@@ -209,7 +233,7 @@ class SearchResultProductsCard extends StatelessWidget {
                       ),
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "\$250",
+                        "\$${productModel.price}",
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 17.w,
@@ -219,7 +243,7 @@ class SearchResultProductsCard extends StatelessWidget {
                   ),
                   Text(
                     overflow: TextOverflow.ellipsis,
-                    "156 items left",
+                    "${productModel.quantity} ${texts.itemsLeft}",
                     style: AppTextStyles.lato.regular(
                       color: colors.ff221fif,
                       fontSize: 15.w,
