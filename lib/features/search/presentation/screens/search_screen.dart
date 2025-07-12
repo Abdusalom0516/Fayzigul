@@ -14,7 +14,7 @@ import 'package:plant_store/features/search/data/models/search_history_model.dar
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_states.dart';
-import 'package:plant_store/features/search/widgets/search_history_card_wd.dart';
+import 'package:plant_store/features/search/presentation/widgets/search_history_card_wd.dart';
 
 class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
