@@ -27,7 +27,6 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
         GetSearchHistoryUsecase(repository: repository);
     final saveSearchHistoryUsecase =
         SaveSearchHistoryUsecase(repository: repository);
-
     final removeSearchHistoryUsecase =
         RemoveSearchHistoryUsecase(repository: repository);
 

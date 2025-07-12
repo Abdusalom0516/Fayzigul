@@ -11,7 +11,7 @@ class LocalDatasource {
       list.add(SearchHistoryModel.fromJson(elem));
     }
 
-    return list.reversed.toList();
+    return list;
   }
 
   // Method to save search histories
@@ -20,15 +20,24 @@ class LocalDatasource {
     final list = List.from(box.values.toList());
 
     if (list.isNotEmpty) {
-      if (list.last["searchHistory"] != searchHistory.searchHistory) {
-        list.add(searchHistory.toJson());
+      if (list.first["searchHistory"] != searchHistory.searchHistory) {
+        list.insert(0, searchHistory.toJson());
       }
     } else {
-      list.add(searchHistory.toJson());
+      list.insert(0, searchHistory.toJson());
+    }
+
+    final newList = [];
+
+    for (int i = 0; i < list.length; i++) {
+      newList.add(list[i]);
+      if (newList.length == 3) {
+        break;
+      }
     }
 
     await box.clear();
-    await box.addAll(List.from(list));
+    await box.addAll(List.from(newList));
   }
 
   Future<void> removeSearchHistory(SearchHistoryModel searchHistory) async {
