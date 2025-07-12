@@ -37,18 +37,18 @@ class SearchScreen extends HookWidget {
                   texts: texts),
               SliverHeight(height: 35),
               // Search History Recent Searches Title Section
-              searchHistoryRecentSearchesTitleSection(
-                  colors: colors, state: state, texts: texts),
-              state.listOfSearchHistories.isEmpty
-                  ? SliverToBoxAdapter(child: SizedBox.shrink())
+              state.listOfSearchHistories.isEmpty || state.isSearching
+                  ? CustomSliverSizedBoxShrink()
+                  : searchHistoryRecentSearchesTitleSection(
+                      colors: colors, state: state, texts: texts),
+              state.listOfSearchHistories.isEmpty || state.isSearching
+                  ? CustomSliverSizedBoxShrink()
                   : SliverHeight(height: 15),
               // Search History Options Section
               SliverPadding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 35.r),
-                sliver: state.listOfSearchHistories.isEmpty
-                    ? SliverToBoxAdapter(
-                        child: SizedBox.shrink(),
-                      )
+                sliver: state.listOfSearchHistories.isEmpty || state.isSearching
+                    ? CustomSliverSizedBoxShrink()
                     : SliverList.builder(
                         itemCount: state.listOfSearchHistories.length,
                         itemBuilder: (context, index) => SearchHistoryCard(
