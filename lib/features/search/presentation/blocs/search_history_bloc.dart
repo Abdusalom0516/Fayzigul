@@ -9,7 +9,9 @@ import 'package:plant_store/features/search/presentation/blocs/search_history_ev
 import 'package:plant_store/features/search/presentation/blocs/search_history_states.dart';
 
 class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
-  SearchHistoryBloc() : super(SearchHistoryStates(listOfSearchHistories: [])) {
+  SearchHistoryBloc()
+      : super(SearchHistoryStates(
+            listOfSearchHistories: [], isSearching: false)) {
     final SearchHistoryRepositoryImplementation repository =
         SearchHistoryRepositoryImplementation(
             localDatasource: LocalDatasource());
@@ -26,7 +28,7 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
       (event, emit) async {
         List<SearchHistoryModel> listOfSearchHistories =
             await getSearchHistoryUsecase();
-        emit(SearchHistoryStates(listOfSearchHistories: listOfSearchHistories));
+        emit(state.copyWith(listOfSearchHistories: listOfSearchHistories));
       },
     );
 
@@ -34,8 +36,9 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
       (event, emit) async {
         await saveSearchHistoryUsecase(searchHistory: event.searchHistory);
 
-        emit(SearchHistoryStates(
-            listOfSearchHistories: await getSearchHistoryUsecase()));
+        emit(state.copyWith(
+            listOfSearchHistories: await getSearchHistoryUsecase(),
+            isSearching: true));
       },
     );
 
@@ -43,8 +46,14 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
       (event, emit) async {
         await removeSearchHistoryUsecase(searchHistory: event.searchHistory);
 
-        emit(SearchHistoryStates(
+        emit(state.copyWith(
             listOfSearchHistories: await getSearchHistoryUsecase()));
+      },
+    );
+
+    on<OnSearchingEndClicked>(
+      (event, emit) {
+        emit(state.copyWith(isSearching: false));
       },
     );
   }

@@ -15,3 +15,5 @@ class OnRemoveSearchHistoryClicked extends SearchHistoryEvents {
 
   OnRemoveSearchHistoryClicked({required this.searchHistory});
 }
+
+class OnSearchingEndClicked extends SearchHistoryEvents{}

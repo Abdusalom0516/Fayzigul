@@ -121,6 +121,11 @@ class SearchScreen extends HookWidget {
                   searchHistory:
                       SearchHistoryModel(searchHistory: value.trim())));
             },
+            onChanged: (value) {
+              if (value.isEmpty) {
+                context.read<SearchHistoryBloc>().add(OnSearchingEndClicked());
+              }
+            },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 7.r),
               hint: Text(
