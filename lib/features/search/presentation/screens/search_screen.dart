@@ -9,6 +9,7 @@ import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/home/models/product_model.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';
@@ -69,9 +70,11 @@ class SearchScreen extends HookWidget {
                   : state.listOfSearchedProducts.isEmpty
                       ? CustomEmptyCenterText(text: texts.noProductsFound)
                       : SliverList.builder(
-                          itemCount: 11,
+                          itemCount: state.listOfSearchedProducts.length,
                           itemBuilder: (context, index) =>
-                              SearchResultProductsCard(),
+                              SearchResultProductsCard(
+                            productModel: state.listOfSearchedProducts[index],
+                          ),
                         ),
               SliverHeight(height: 25),
             ],
@@ -182,7 +185,9 @@ class SearchScreen extends HookWidget {
 class SearchResultProductsCard extends StatelessWidget {
   const SearchResultProductsCard({
     super.key,
+    required this.productModel,
   });
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -202,8 +207,8 @@ class SearchResultProductsCard extends StatelessWidget {
                 color: colors.fff6f6f6,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Image.asset(
-                images.plant,
+              child: Image.network(
+                productModel.images.first,
                 height: 77.h,
                 width: 77.w,
                 fit: BoxFit.contain,
@@ -220,7 +225,7 @@ class SearchResultProductsCard extends StatelessWidget {
                     children: [
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "Panse  | Hybrid",
+                        productModel.name,
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 17.w,
@@ -228,7 +233,7 @@ class SearchResultProductsCard extends StatelessWidget {
                       ),
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        "\$250",
+                        "\$${productModel.price}",
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 17.w,
@@ -238,7 +243,7 @@ class SearchResultProductsCard extends StatelessWidget {
                   ),
                   Text(
                     overflow: TextOverflow.ellipsis,
-                    "156 items left",
+                    "${productModel.quantity} ${texts.itemsLeft}",
                     style: AppTextStyles.lato.regular(
                       color: colors.ff221fif,
                       fontSize: 15.w,

@@ -43,6 +43,7 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
       (event, emit) async {
         await saveSearchHistoryUsecase(searchHistory: event.searchHistory);
         List<ProductModel> listOfSearchedProducts = [];
+
         if (event.context.mounted) {
           final plantsBlocState = event.context.read<PlantsBloc>().state;
           final equipmentsBlocState =
@@ -60,7 +61,12 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
         emit(state.copyWith(
             listOfSearchHistories: await getSearchHistoryUsecase(),
             isSearching: true,
-            listOfSearchedProducts: listOfSearchedProducts));
+            listOfSearchedProducts: listOfSearchedProducts
+                .where(
+                  (element) => element.name.toLowerCase().contains(
+                      event.searchHistory.searchHistory.toLowerCase()),
+                )
+                .toList()));
       },
     );
 
