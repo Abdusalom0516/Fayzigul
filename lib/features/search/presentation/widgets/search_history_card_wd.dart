@@ -13,17 +13,17 @@ class SearchHistoryCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.index,
+    required this.func,
   });
   final String title;
   final int index;
+  final VoidCallback func;
 
   @override
   Widget build(BuildContext context) {
     return AppStateWrapper(
       builder: (colors, texts, images) => TextButton(
-        onPressed: () {
-          log("Search History Option Clicked.");
-        },
+        onPressed: func,
         style: ButtonStyle(
           padding: WidgetStatePropertyAll(EdgeInsets.zero),
           overlayColor: WidgetStatePropertyAll(colors.transparent),

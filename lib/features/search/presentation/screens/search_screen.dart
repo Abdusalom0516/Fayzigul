@@ -59,11 +59,24 @@ class SearchScreen extends HookWidget {
                     ? CustomSliverSizedBoxShrink()
                     : SliverList.builder(
                         itemCount: state.listOfSearchHistories.length,
-                        itemBuilder: (context, index) => SearchHistoryCard(
+                        itemBuilder: (context, index) {
+                          return SearchHistoryCard(
                             index: index,
                             title: state
-                                .listOfSearchHistories[index].searchHistory),
-                      ),
+                                .listOfSearchHistories[index].searchHistory,
+                            func: () {
+                              final searchHistoryTitle = state
+                                  .listOfSearchHistories[index].searchHistory
+                                  .trim();
+                              controller.text = searchHistoryTitle;
+                              context.read<SearchHistoryBloc>().add(
+                                  OnSaveSearchHistoryClicked(
+                                      context: context,
+                                      searchHistory: SearchHistoryModel(
+                                          searchHistory: searchHistoryTitle)));
+                            },
+                          );
+                        }),
               ),
               // Search History Search Results ListView.builder Section
               !state.isSearching
