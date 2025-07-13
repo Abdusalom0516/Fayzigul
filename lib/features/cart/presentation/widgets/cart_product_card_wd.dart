@@ -46,8 +46,7 @@ class CartProductCard extends HookWidget {
         );
   }
 
-  void cartRemoveButtonLogic(
-      {required BuildContext context, required ValueNotifier<int> quantity}) {
+  void cartRemoveButtonLogic({required BuildContext context}) {
     List<CartProductModel> list = [...List.from(checkBoxListOfProducts.value)];
 
     for (int i = 0; i < list.length; i++) {
@@ -207,8 +206,7 @@ class CartProductCard extends HookWidget {
                       ),
                       // Remove Button Section
                       InkWell(
-                        onTap: () => cartRemoveButtonLogic(
-                            context: context, quantity: quantity),
+                        onTap: () => cartRemoveButtonLogic(context: context),
                         overlayColor: WidgetStatePropertyAll(colors.fff6f6f6),
                         child: Container(
                           decoration: BoxDecoration(

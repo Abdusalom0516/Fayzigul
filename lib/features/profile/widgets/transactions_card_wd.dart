@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_divider_wd.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/date_time_converter.dart';
 import 'package:plant_store/features/cart/data/models/transactions_model.dart';
+import 'package:plant_store/features/profile/screens/transactions_details_screen.dart';
 
 class TransactionsCard extends StatelessWidget {
   const TransactionsCard({super.key, required this.transactionsModel});
@@ -24,6 +26,8 @@ class TransactionsCard extends StatelessWidget {
         ),
         onPressed: () {
           log("Transaction History Item pressed");
+          AppRouter.go(
+              TransactionsDetailsScreen(transactionsModel: transactionsModel));
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 25.r, vertical: 15.r),

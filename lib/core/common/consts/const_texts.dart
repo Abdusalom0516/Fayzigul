@@ -98,4 +98,6 @@ class ConstTexts {
   String emailCanNotBeEmpty = "Email can't be empty!";
   String phoneNumberCanNotBeEmpty = "Phone number can't be empty!";
   String usernameCanNotBeEmpty = "Username can't be empty!";
+  String youPaid = "You paid";
+  String backtoHomePage = "Back to Homepage";
 }

@@ -196,6 +196,7 @@ class ProductsDetailsScreen extends HookWidget {
                       children: [
                         InkWell(
                           onTap: () {
+                            quantity.value--;
                             log("Cart Minus Button Clicked.");
                             if (quantity.value <= 0) {
                               context.read<CartBloc>().add(
@@ -203,7 +204,7 @@ class ProductsDetailsScreen extends HookWidget {
                                       product: product, context: context));
                               return;
                             }
-                            quantity.value--;
+
                             context.read<CartBloc>().add(OnMinusProductFromCart(
                                 product: product,
                                 quantity: quantity.value,
