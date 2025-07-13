@@ -122,11 +122,11 @@ class TransactionsDetailsScreen extends StatelessWidget {
       height: 157.h,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 15.r, vertical: 24.w),
-      decoration: BoxDecoration(color: colors.fff6f6f6),
+      decoration: BoxDecoration(color: colors.ffffffff),
       child: Column(
         spacing: 15.r,
         children: [
-          BottomNavigationTextRow(title: texts.youPaid, value: sum),
+          BottomNavigationTextRow(title: texts.youPaid, value: sum + 19),
           CustomTextButton(
               buttonText: texts.backtoHomePage,
               textColor: colors.ffffffff,
@@ -145,46 +145,6 @@ class TransactionsDetailsScreen extends StatelessWidget {
       itemCount: checkoutProducts.length,
       itemBuilder: (context, index) => CheckoutItemsCard(
         cartProductModel: checkoutProducts[index],
-      ),
-    );
-  }
-
-  Container bottomNavigationSection({
-    required List<CartProductModel> checkoutProducts,
-    required ConstTexts texts,
-    required ConstColors colors,
-    required BuildContext context,
-    required TextEditingController addressController,
-    required TextEditingController emailController,
-    required TextEditingController phoneNumberController,
-    required TextEditingController usernameController,
-    required bool payWithCash,
-  }) {
-    double sum = 0;
-    for (var elem in checkoutProducts) {
-      sum += (elem.product.price * elem.productQuantity);
-    }
-    return Container(
-      height: 165.h,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 24.w).copyWith(top: 15.r),
-      margin: EdgeInsets.only(bottom: 55.r),
-      child: Column(
-        spacing: 15.h,
-        children: [
-          Column(
-            spacing: 5.h,
-            children: [
-              BottomNavigationTextRow(title: texts.total, value: sum + 19),
-            ],
-          ),
-          CustomTextButton(
-            buttonText: texts.continueT,
-            textColor: colors.ffffffff,
-            backgroundColor: colors.ff007537,
-            func: () {},
-          )
-        ],
       ),
     );
   }
