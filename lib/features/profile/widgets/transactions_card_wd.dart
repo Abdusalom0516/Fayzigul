@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_divider_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/core/utils/date_time_converter.dart';
 import 'package:plant_store/features/cart/data/models/transactions_model.dart';
 
 class TransactionsCard extends StatelessWidget {
@@ -34,7 +35,7 @@ class TransactionsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${transactionsModel.date.day.toString().padLeft(2, "0")}/${transactionsModel.date.month.toString().padLeft(2, "0")}/${transactionsModel.date.year.toString().padLeft(2, "0")}",
+                    formatDate(date: transactionsModel.date),
                     style: AppTextStyles.lato.medium(
                       color: colors.ff221fif,
                       fontSize: 17.sp,

@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-String formatDate(DateTime date) {
+String formatDate({required DateTime date}) {
   final day = date.day;
   final suffix = getDaySuffix(day);
   final monthYear = DateFormat('MMMM yyyy').format(date);
