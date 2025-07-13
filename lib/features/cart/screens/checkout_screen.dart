@@ -9,13 +9,15 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/cart/models/cart_product_model.dart';
 import 'package:plant_store/features/cart/widgets/bottom_nav_text_row_wd.dart';
 import 'package:plant_store/features/cart/widgets/checkout_items_card_wd.dart';
 import 'package:plant_store/features/cart/widgets/payment_method_card_wd.dart';
 import 'package:plant_store/features/profile/widgets/custom_textfield_wd.dart';
 
 class CheckoutScreen extends HookWidget {
-  const CheckoutScreen({super.key});
+  const CheckoutScreen({super.key, required this.checkoutProducts});
+  final List<CartProductModel> checkoutProducts;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class CheckoutScreen extends HookWidget {
             // Your Items Title Section
             sectionsTitleSection(colors, texts.yourItems),
             SliverHeight(height: 5),
-            yourItemsSection(),
+            yourItemsSection(checkoutProducts: checkoutProducts),
             SliverHeight(height: 35),
             // Personal Information Title Section
             sectionsTitleSection(colors, texts.personalInfo),
@@ -60,10 +62,13 @@ class CheckoutScreen extends HookWidget {
     );
   }
 
-  SliverList yourItemsSection() {
+  SliverList yourItemsSection(
+      {required List<CartProductModel> checkoutProducts}) {
     return SliverList.builder(
-      itemCount: 3,
-      itemBuilder: (context, index) => CheckoutItemsCard(),
+      itemCount: checkoutProducts.length,
+      itemBuilder: (context, index) => CheckoutItemsCard(
+        cartProductModel: checkoutProducts[index],
+      ),
     );
   }
 

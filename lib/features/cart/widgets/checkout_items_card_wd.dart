@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/cart/models/cart_product_model.dart';
 
 class CheckoutItemsCard extends StatelessWidget {
-  const CheckoutItemsCard({
-    super.key,
-  });
+  const CheckoutItemsCard({super.key, required this.cartProductModel});
+  final CartProductModel cartProductModel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,8 @@ class CheckoutItemsCard extends StatelessWidget {
                 height: 104.h,
                 width: 107.w,
                 color: colors.fff6f6f6,
-                child: Image.asset(images.plant, fit: BoxFit.cover),
+                child: Image.network(cartProductModel.product.images.first,
+                    fit: BoxFit.cover),
               ),
               Expanded(
                 child: Column(
@@ -42,19 +43,19 @@ class CheckoutItemsCard extends StatelessWidget {
                   children: [
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "Spider Plant",
+                      cartProductModel.product.name,
                       style: AppTextStyles.lato
                           .medium(color: colors.ff221fif, fontSize: 17.sp),
                     ),
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "\$299",
+                      "\$${cartProductModel.product.price}",
                       style: AppTextStyles.lato
                           .medium(color: colors.ff221fif, fontSize: 17.sp),
                     ),
                     Text(
                       overflow: TextOverflow.ellipsis,
-                      "2 ${texts.items}",
+                      "${cartProductModel.productQuantity} ${texts.items}",
                       style: AppTextStyles.lato
                           .regular(color: colors.ff221fif, fontSize: 15.sp),
                     ),
