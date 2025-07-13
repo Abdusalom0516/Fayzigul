@@ -101,7 +101,7 @@ class CartScreen extends HookWidget {
             ),
             onPressed: () {
               log("Checkout Button Clicked.");
-              AppRouter.go(CheckoutScreen());
+              AppRouter.go(CheckoutScreen(checkoutProducts: checkBoxListOfProducts.value,));
             },
             child: Container(
               width: double.infinity,
