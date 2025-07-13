@@ -22,12 +22,10 @@ class SearchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
-    useEffect(
-      () {
-        controller.clear();
-        return null;
-      },
-    );
+    useEffect(() {
+      context.read<SearchHistoryBloc>().add(OnSearchingEndClicked());
+      return null;
+    }, []);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
