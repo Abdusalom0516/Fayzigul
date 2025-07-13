@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/utils/toastification.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc_events.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc_states.dart';
-import 'package:plant_store/features/cart/models/cart_product_model.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart_bloc_events.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart_bloc_states.dart';
+import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
 
 class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
   CartBloc() : super(CartBlocStates(cartProductsList: [])) {

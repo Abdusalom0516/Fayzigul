@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/cart/screens/cart_screen.dart';
+import 'package:plant_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
 import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc_events.dart';
 import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';

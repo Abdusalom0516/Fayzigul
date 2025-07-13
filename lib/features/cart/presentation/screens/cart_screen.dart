@@ -10,12 +10,12 @@ import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc_events.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc_states.dart';
-import 'package:plant_store/features/cart/models/cart_product_model.dart';
-import 'package:plant_store/features/cart/screens/checkout_screen.dart';
-import 'package:plant_store/features/cart/widgets/cart_product_card_wd.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart_bloc.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart_bloc_events.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart_bloc_states.dart';
+import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
+import 'package:plant_store/features/cart/presentation/screens/checkout_screen.dart';
+import 'package:plant_store/features/cart/presentation/widgets/cart_product_card_wd.dart';
 
 class CartScreen extends HookWidget {
   const CartScreen({super.key});
@@ -101,7 +101,8 @@ class CartScreen extends HookWidget {
             ),
             onPressed: () {
               log("Checkout Button Clicked.");
-              AppRouter.go(CheckoutScreen(checkoutProducts: checkBoxListOfProducts.value,));
+              AppRouter.go(CheckoutScreen(
+                  checkoutProducts: checkBoxListOfProducts.value));
             },
             child: Container(
               width: double.infinity,

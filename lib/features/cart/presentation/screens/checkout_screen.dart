@@ -9,10 +9,10 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/cart/models/cart_product_model.dart';
-import 'package:plant_store/features/cart/widgets/bottom_nav_text_row_wd.dart';
-import 'package:plant_store/features/cart/widgets/checkout_items_card_wd.dart';
-import 'package:plant_store/features/cart/widgets/payment_method_card_wd.dart';
+import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
+import 'package:plant_store/features/cart/presentation/widgets/bottom_nav_text_row_wd.dart';
+import 'package:plant_store/features/cart/presentation/widgets/checkout_items_card_wd.dart';
+import 'package:plant_store/features/cart/presentation/widgets/payment_method_card_wd.dart';
 import 'package:plant_store/features/profile/widgets/custom_textfield_wd.dart';
 
 class CheckoutScreen extends HookWidget {
@@ -28,7 +28,8 @@ class CheckoutScreen extends HookWidget {
     final payWithCash = useState(true);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        bottomNavigationBar: bottomNavigationSection(texts, colors),
+        bottomNavigationBar: bottomNavigationSection(
+            checkoutProducts: checkoutProducts, colors: colors, texts: texts),
         body: CustomScrollView(
           slivers: [
             // App Bar Section
@@ -99,7 +100,14 @@ class CheckoutScreen extends HookWidget {
     );
   }
 
-  Container bottomNavigationSection(ConstTexts texts, ConstColors colors) {
+  Container bottomNavigationSection(
+      {required List<CartProductModel> checkoutProducts,
+      required ConstTexts texts,
+      required ConstColors colors}) {
+    double sum = 0;
+    for (var elem in checkoutProducts) {
+      sum += (elem.product.price * elem.productQuantity);
+    }
     return Container(
       height: 165.h,
       width: double.infinity,
@@ -111,9 +119,10 @@ class CheckoutScreen extends HookWidget {
           Column(
             spacing: 5.h,
             children: [
-              BottomNavigationTextRow(title: texts.subtotal, value: "\$280"),
+              BottomNavigationTextRow(title: texts.subtotal, value: "\$$sum"),
               BottomNavigationTextRow(title: texts.deliveryFee, value: "\$19"),
-              BottomNavigationTextRow(title: texts.total, value: "\$299"),
+              BottomNavigationTextRow(
+                  title: texts.total, value: "\$${sum + 19}"),
             ],
           ),
           CustomTextButton(
