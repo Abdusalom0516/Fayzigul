@@ -1,4 +1,4 @@
-import 'package:plant_store/features/cart/entities/cart_product_entity.dart';
+import 'package:plant_store/features/cart/domain/entities/cart_product_entity.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:plant_store/features/home/models/product_model.dart';

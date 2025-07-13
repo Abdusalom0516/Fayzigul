@@ -6,9 +6,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc.dart';
-import 'package:plant_store/features/cart/blocs/cart_bloc_events.dart';
-import 'package:plant_store/features/cart/models/cart_product_model.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
+import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc_events.dart';
+import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
 
 class CartProductCard extends HookWidget {
   const CartProductCard({
@@ -46,8 +46,7 @@ class CartProductCard extends HookWidget {
         );
   }
 
-  void cartRemoveButtonLogic(
-      {required BuildContext context, required ValueNotifier<int> quantity}) {
+  void cartRemoveButtonLogic({required BuildContext context}) {
     List<CartProductModel> list = [...List.from(checkBoxListOfProducts.value)];
 
     for (int i = 0; i < list.length; i++) {
@@ -207,8 +206,7 @@ class CartProductCard extends HookWidget {
                       ),
                       // Remove Button Section
                       InkWell(
-                        onTap: () => cartRemoveButtonLogic(
-                            context: context, quantity: quantity),
+                        onTap: () => cartRemoveButtonLogic(context: context),
                         overlayColor: WidgetStatePropertyAll(colors.fff6f6f6),
                         child: Container(
                           decoration: BoxDecoration(

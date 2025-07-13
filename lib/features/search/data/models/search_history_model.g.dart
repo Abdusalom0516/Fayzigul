@@ -11,7 +11,7 @@ SearchHistoryModel _$SearchHistoryModelFromJson(Map<dynamic, dynamic> json) =>
       searchHistory: json['searchHistory'] as String,
     );
 
-Map<dynamic, dynamic> _$SearchHistoryModelToJson(SearchHistoryModel instance) =>
-    <dynamic, dynamic>{
+Map<String, dynamic> _$SearchHistoryModelToJson(SearchHistoryModel instance) =>
+    <String, dynamic>{
       'searchHistory': instance.searchHistory,
     };

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc.dart';
+import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc_states.dart';
 import 'package:plant_store/features/profile/widgets/transactions_card_wd.dart';
 
 class TransactionsHistoryScreen extends StatelessWidget {
@@ -14,24 +17,27 @@ class TransactionsHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            // Sliver Appbar Section
-            appBarSection(colors, texts),
-            SliverHeight(height: 15),
-            // ListView.builder Transaction Cards Section
-            lisViewTransactionCardsSection(),
-            SliverHeight(height: 35),
-          ],
+        body: BlocBuilder<CheckoutBloc, CheckoutBlocStates>(
+          builder: (context, state) => CustomScrollView(
+            slivers: [
+              // Sliver Appbar Section
+              appBarSection(colors, texts),
+              SliverHeight(height: 15),
+              // ListView.builder Transaction Cards Section
+              lisViewTransactionCardsSection(state: state),
+              SliverHeight(height: 35),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  SliverList lisViewTransactionCardsSection() {
+  SliverList lisViewTransactionCardsSection(
+      {required CheckoutBlocStates state}) {
     return SliverList.builder(
-      itemCount: 7,
-      itemBuilder: (context, index) => TransactionsCard(),
+      itemCount: state.transactionsList.length,
+      itemBuilder: (context, index) => TransactionsCard(transactionsModel: state.transactionsList[index],),
     );
   }
 
