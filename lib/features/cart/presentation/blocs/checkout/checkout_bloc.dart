@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plant_store/core/common/consts/const_texts.dart';
+import 'package:plant_store/core/utils/toastification.dart';
 import 'package:plant_store/features/cart/data/datasources/transactions_remote_datasource.dart';
 import 'package:plant_store/features/cart/data/repositories/transactions_repository_implementation.dart';
 import 'package:plant_store/features/cart/domain/usecases/get_transactions_usecase.dart';
@@ -18,6 +20,11 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
 
     on<OnCheckoutClicked>(
       (event, emit) async {
+        final texts = ConstTexts();
+        if (event.transactionsModel.address.isEmpty) {
+          Toastification.warning(event.context, texts.addressCanNotBeEmpty);
+          return;
+        }
         await saveSearchHistoryUsecase(transaction: event.transactionsModel);
       },
     );
