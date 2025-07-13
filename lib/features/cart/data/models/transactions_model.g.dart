@@ -31,5 +31,5 @@ Map<String, dynamic> _$TransactionsModelToJson(TransactionsModel instance) =>
       'address': instance.address,
       'phoneNumber': instance.phoneNumber,
       'date': instance.date.toIso8601String(),
-      'products': instance.products,
+      'products': instance.products.map((e) => e.toJson()).toList(),
     };

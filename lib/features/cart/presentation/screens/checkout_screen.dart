@@ -138,10 +138,10 @@ class CheckoutScreen extends HookWidget {
           Column(
             spacing: 5.h,
             children: [
-              BottomNavigationTextRow(title: texts.subtotal, value: "\$$sum"),
-              BottomNavigationTextRow(title: texts.deliveryFee, value: "\$19"),
+              BottomNavigationTextRow(title: texts.subtotal, value: sum),
+              BottomNavigationTextRow(title: texts.deliveryFee, value: 19),
               BottomNavigationTextRow(
-                  title: texts.total, value: "\$${sum + 19}"),
+                  title: texts.total, value: sum + 19),
             ],
           ),
           CustomTextButton(

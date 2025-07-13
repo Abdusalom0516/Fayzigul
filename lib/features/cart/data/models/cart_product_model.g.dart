@@ -14,6 +14,6 @@ CartProductModel _$CartProductModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CartProductModelToJson(CartProductModel instance) =>
     <String, dynamic>{
-      'product': instance.product,
+      'product': instance.product.toJson(),
       'productQuantity': instance.productQuantity,
     };

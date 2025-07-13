@@ -4,6 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc.dart';
+import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc_events.dart';
 import 'package:plant_store/features/cart/presentation/screens/cart_screen.dart';
 import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
 import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc_events.dart';
@@ -29,6 +31,7 @@ class MainScreen extends HookWidget {
         context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
         context.read<PlantsBloc>().add(OnGetProductsClicked());
         context.read<SearchHistoryBloc>().add(OnGetSearchHistoryClicked());
+        context.read<CheckoutBloc>().add(OnGetTransactionsClicked());
         gotAllInfo.value = true;
       }
       return null;

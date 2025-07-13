@@ -1,15 +1,14 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_divider_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/cart/data/models/transactions_model.dart';
 
 class TransactionsCard extends StatelessWidget {
-  const TransactionsCard({
-    super.key,
-  });
+  const TransactionsCard({super.key, required this.transactionsModel});
+  final TransactionsModel transactionsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class TransactionsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Wednesday, April 1st",
+                    "${transactionsModel.date.day.toString().padLeft(2, "0")}/${transactionsModel.date.month.toString().padLeft(2, "0")}/${transactionsModel.date.year.toString().padLeft(2, "0")}",
                     style: AppTextStyles.lato.medium(
                       color: colors.ff221fif,
                       fontSize: 17.sp,
@@ -52,7 +51,8 @@ class TransactionsCard extends StatelessWidget {
                     height: 104.h,
                     width: 107.w,
                     color: colors.fff6f6f6,
-                    child: Image.asset(images.plant, fit: BoxFit.cover),
+                    child: Image.network(transactionsModel.mainImage,
+                        fit: BoxFit.cover),
                   ),
                   Expanded(
                     child: Column(
@@ -61,19 +61,19 @@ class TransactionsCard extends StatelessWidget {
                       children: [
                         Text(
                           overflow: TextOverflow.ellipsis,
-                          "Order Successful",
+                          "Order ${transactionsModel.status}",
                           style: AppTextStyles.lato
                               .medium(color: colors.ff007537, fontSize: 17.sp),
                         ),
                         Text(
                           overflow: TextOverflow.ellipsis,
-                          "Spider Plant",
+                          transactionsModel.products.first.product.name,
                           style: AppTextStyles.lato
                               .medium(color: colors.ff221fif, fontSize: 17.sp),
                         ),
                         Text(
                           overflow: TextOverflow.ellipsis,
-                          "2 ${texts.items}",
+                          "${transactionsModel.products.length} ${texts.items}",
                           style: AppTextStyles.lato
                               .regular(color: colors.ff221fif, fontSize: 15.sp),
                         ),

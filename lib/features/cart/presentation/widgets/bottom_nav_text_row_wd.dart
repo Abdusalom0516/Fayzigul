@@ -7,7 +7,8 @@ class BottomNavigationTextRow extends StatelessWidget {
   const BottomNavigationTextRow(
       {super.key, required this.title, required this.value});
 
-  final String title, value;
+  final String title;
+  final double value;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class BottomNavigationTextRow extends StatelessWidget {
             child: Text(
               textAlign: TextAlign.end,
               overflow: TextOverflow.ellipsis,
-              value,
+              "\$${value.toStringAsFixed(2)}",
               style: AppTextStyles.lato.semiBold(
                 color: colors.ff007537,
                 fontSize: 17.sp,
