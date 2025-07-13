@@ -15,7 +15,7 @@ TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
       paymentMethod: json['paymentMethod'] as String,
       phoneNumber: json['phoneNumber'] as String,
       products: (json['products'] as List<dynamic>)
-          .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => CartProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as String,
       username: json['username'] as String,

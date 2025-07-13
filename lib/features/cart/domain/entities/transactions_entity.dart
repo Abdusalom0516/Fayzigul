@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
+import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
 
 class TransactionsEntity extends Equatable {
   final String mainImage,
@@ -10,7 +10,7 @@ class TransactionsEntity extends Equatable {
       address,
       phoneNumber;
   final DateTime date;
-  final List<ProductModel> products;
+  final List<CartProductModel> products;
 
   const TransactionsEntity({
     required this.address,

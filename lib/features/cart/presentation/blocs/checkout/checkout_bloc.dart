@@ -25,6 +25,22 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
           Toastification.warning(event.context, texts.addressCanNotBeEmpty);
           return;
         }
+
+        if (event.transactionsModel.email.isEmpty) {
+          Toastification.warning(event.context, texts.emailCanNotBeEmpty);
+          return;
+        }
+
+        if (event.transactionsModel.phoneNumber.isEmpty) {
+          Toastification.warning(event.context, texts.phoneNumberCanNotBeEmpty);
+          return;
+        }
+
+        if (event.transactionsModel.username.isEmpty) {
+          Toastification.warning(event.context, texts.usernameCanNotBeEmpty);
+          return;
+        }
+        
         await saveSearchHistoryUsecase(transaction: event.transactionsModel);
       },
     );

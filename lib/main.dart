@@ -8,6 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
+import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
 import 'package:plant_store/firebase_options.dart';
 import 'package:plant_store/features/auth/blocs/login/login_bloc.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => EquipmentsBloc()),
         BlocProvider(create: (context) => CartBloc()),
         BlocProvider(create: (context) => SearchHistoryBloc()),
+        BlocProvider(create: (context) => CheckoutBloc()),
       ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),
