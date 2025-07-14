@@ -25,6 +25,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('searchHistory');
+  await Hive.openBox('cart');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
