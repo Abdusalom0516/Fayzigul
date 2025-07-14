@@ -12,10 +12,10 @@ class CartProductModel extends CartEntity {
     required super.productQuantity,
   });
 
-  factory CartProductModel.fromJson(Map<String, dynamic> json) =>
+  factory CartProductModel.fromJson(Map<dynamic, dynamic> json) =>
       _$CartProductModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CartProductModelToJson(this);
+  Map<dynamic, dynamic> toJson() => _$CartProductModelToJson(this);
 
   CartProductModel copyWith({ProductModel? product, int? productQuantity}) {
     return CartProductModel(
