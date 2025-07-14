@@ -22,9 +22,9 @@ class ProductModel extends ProductEntity {
     required super.categories,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+  factory ProductModel.fromJson(Map<dynamic, dynamic> json) =>
       _$ProductModelFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+  Map<dynamic, dynamic> toJson() => _$ProductModelToJson(this);
 
   ProductModel copyWith({
     String? name,
