@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
-import 'package:plant_store/core/common/widgets/custom_width_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc_state.dart';
+import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/features/home/blocs/plants_bloc/plants_states.dart';
+import 'package:plant_store/features/home/widgets/category_card_wd.dart';
+import 'package:plant_store/features/home/widgets/equipments_card_wd.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});
@@ -16,6 +22,7 @@ class HomeCategoryScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentCategoryIndex = useState(0);
+
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         backgroundColor: colors.ffffffff,
@@ -28,7 +35,8 @@ class HomeCategoryScreen extends HookWidget {
                 ? SliverHeight(height: 17)
                 : categoryButtonsSection(texts, currentCategoryIndex),
             // Products GridView.builder Section
-            // productsGridViewSection(categoryTitle, texts),
+            productsGridViewSection(
+                categoryTitle, texts, currentCategoryIndex.value, context),
             SliverHeight(height: 35),
           ],
         ),
@@ -80,36 +88,78 @@ class HomeCategoryScreen extends HookWidget {
     );
   }
 
-  // SliverPadding productsGridViewSection(
-  //     String categoryTitle, ConstTexts texts) {
-  //   return categoryTitle == texts.equipments
-  //       ? SliverPadding(
-  //           padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-  //           sliver: SliverGrid.builder(
-  //             itemCount: 10,
-  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //               crossAxisCount: 2,
-  //               childAspectRatio: 155 / 197,
-  //               crossAxisSpacing: 15.w,
-  //               mainAxisSpacing: 15.h,
-  //             ),
-  //             itemBuilder: (context, index) => EquipmentsCard(),
-  //           ),
-  //         )
-  //       : SliverPadding(
-  //           padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-  //           sliver: SliverGrid.builder(
-  //             itemCount: 10,
-  //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //               crossAxisCount: 2,
-  //               childAspectRatio: 155 / 217,
-  //               crossAxisSpacing: 15.w,
-  //               mainAxisSpacing: 15.h,
-  //             ),
-  //             itemBuilder: (context, index) => EquipmentsCard(),
-  //           ),
-  //         );
-  // }
+  Widget productsGridViewSection(String categoryTitle, ConstTexts texts,
+      int currentCategoryIndex, BuildContext context) {
+    final listOfPlants =
+        (context.read<PlantsBloc>().state as PlantsBlocSuccessState).products;
+    final listOfEquipments =
+        (context.read<EquipmentsBloc>().state as EquipmentsBlocSuccessState)
+            .listOfProducts;
+
+    final indoorProducts = [
+      ...listOfPlants.where((element) => element.categories.contains("Indoor")),
+      ...listOfEquipments
+          .where((element) => element.categories.contains("Indoor")),
+    ];
+
+    final outdoorProducts = [
+      ...listOfPlants
+          .where((element) => element.categories.contains("Outdoor")),
+      ...listOfEquipments
+          .where((element) => element.categories.contains("Outdoor")),
+    ];
+
+    if(currentCategoryIndex == 2){
+      return SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverGrid.builder(
+            itemCount: indoorProducts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 155 / 197,
+              crossAxisSpacing: 15.w,
+              mainAxisSpacing: 15.h,
+            ),
+            itemBuilder: (context, index) => EquipmentsCard(
+              product: indoorProducts[index],
+            ),
+          ),
+        );
+    }
+
+    return categoryTitle == texts.plants
+        ? SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverGrid.builder(
+            itemCount: listOfPlants.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 155 / 197,
+              crossAxisSpacing: 15.w,
+              mainAxisSpacing: 15.h,
+            ),
+            itemBuilder: (context, index) => EquipmentsCard(
+              product: listOfPlants[index],
+            ),
+          ),
+        )
+        : SliverPadding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+          sliver: SliverGrid.builder(
+            itemCount:
+                listOfEquipments.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 155 / 217,
+              crossAxisSpacing: 15.w,
+              mainAxisSpacing: 15.h,
+            ),
+            itemBuilder: (context, index) => EquipmentsCard(
+              product: listOfEquipments[index],
+            ),
+          ),
+        );
+  }
 
   SliverAppBar sliverAppBarSection(ConstColors colors) {
     return SliverAppBar(
@@ -134,53 +184,19 @@ class HomeCategoryScreen extends HookWidget {
           size: 21.r,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.shopping_cart_outlined,
-            color: colors.ff221fif,
-            size: 24.r,
-          ),
-        ),
-        Width(width: 15)
-      ],
-    );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
-    super.key,
-    required this.title,
-    required this.func,
-    required this.isChosen,
-  });
-  final String title;
-  final VoidCallback func;
-  final bool isChosen;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateWrapper(
-      builder: (colors, texts, images) => TextButton(
-        style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-        onPressed: func,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15.r, vertical: 5.r),
-          decoration: BoxDecoration(
-            color: isChosen ? colors.ff007537 : colors.transparent,
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: Text(
-            title,
-            style: AppTextStyles.lato.semiBold(
-              color: !isChosen ? colors.ffababab : colors.ffffffff,
-              fontSize: 17.sp,
-            ),
-          ),
-        ),
-      ),
+      // actions: [
+      //   IconButton(
+      //     onPressed: () {
+      //       AppRouter.open(MainScreen());
+      //     },
+      //     icon: Icon(
+      //       Icons.shopping_cart_outlined,
+      //       color: colors.ff221fif,
+      //       size: 24.r,
+      //     ),
+      //   ),
+      //   Width(width: 15)
+      // ],
     );
   }
 }
