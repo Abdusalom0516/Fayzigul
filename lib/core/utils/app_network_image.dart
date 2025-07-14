@@ -24,7 +24,7 @@ class AppNetworkImage extends StatelessWidget {
     return AppStateWrapper(
       builder: (colors, texts, images) => CachedNetworkImage(
         height: height,
-        width: height,
+        width: width,
         imageUrl: imageUrl,
         imageBuilder: (context, image) {
           return Image(image: image, fit: BoxFit.contain);
