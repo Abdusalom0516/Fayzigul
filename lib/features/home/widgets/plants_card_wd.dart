@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/home/models/product_model.dart';
@@ -41,11 +42,10 @@ class PlantCard extends StatelessWidget {
                   color: colors.fff6f6f6,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: Image.network(
-                  product.images.first,
+                child: AppNetworkImage(
+                  imageUrl: product.images.first,
                   height: 134.h,
                   width: 155.w,
-                  fit: BoxFit.contain,
                 ),
               ),
               Expanded(

@@ -8,6 +8,7 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_empty_center_text_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/home/models/product_model.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
@@ -219,11 +220,10 @@ class SearchResultProductsCard extends StatelessWidget {
                 color: colors.fff6f6f6,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Image.network(
-                productModel.images.first,
+              child: AppNetworkImage(
+                imageUrl: productModel.images.first,
                 height: 77.h,
                 width: 77.w,
-                fit: BoxFit.contain,
               ),
             ),
             // Search Card Texts Section

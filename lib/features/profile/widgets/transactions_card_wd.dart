@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_divider_wd.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/date_time_converter.dart';
@@ -56,8 +57,8 @@ class TransactionsCard extends StatelessWidget {
                     height: 104.h,
                     width: 107.w,
                     color: colors.fff6f6f6,
-                    child: Image.network(transactionsModel.mainImage,
-                        fit: BoxFit.cover),
+                    child:
+                        AppNetworkImage(imageUrl: transactionsModel.mainImage),
                   ),
                   Expanded(
                     child: Column(

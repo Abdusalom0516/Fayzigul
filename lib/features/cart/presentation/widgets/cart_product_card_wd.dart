@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc_events.dart';
@@ -131,11 +132,10 @@ class CartProductCard extends HookWidget {
                 color: colors.fff6f6f6,
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Image.network(
-                cartProduct.product.images.first,
+              child: AppNetworkImage(
+                imageUrl: cartProduct.product.images.first,
                 height: 77.h,
                 width: 77.w,
-                fit: BoxFit.contain,
               ),
             ),
             // Product Details Section
