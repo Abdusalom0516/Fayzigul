@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 
 class AppNetworkImage extends StatelessWidget {
@@ -28,6 +29,7 @@ class AppNetworkImage extends StatelessWidget {
         imageBuilder: (context, image) {
           return Image(image: image, fit: BoxFit.contain);
         },
+        placeholder: (context, url) => CustomLoading(),
         errorWidget: (a, b, c) => Container(
           decoration: BoxDecoration(
             color: colors.ff7D7B7B,
