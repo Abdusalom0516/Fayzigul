@@ -28,6 +28,8 @@ class TransactionsRemoteDatasource {
       transactionsList.add(TransactionsModel.fromJson(elem.data()));
     }
 
+    transactionsList.sort((a, b) => b.date.compareTo(a.date));
+
     return transactionsList;
   }
 }

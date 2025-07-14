@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/cart/data/models/cart_product_model.dart';
 
@@ -33,8 +34,8 @@ class CheckoutItemsCard extends StatelessWidget {
                 height: 104.h,
                 width: 107.w,
                 color: colors.fff6f6f6,
-                child: Image.network(cartProductModel.product.images.first,
-                    fit: BoxFit.cover),
+                child: AppNetworkImage(
+                    imageUrl: cartProductModel.product.images.first),
               ),
               Expanded(
                 child: Column(

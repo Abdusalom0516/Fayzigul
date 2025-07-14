@@ -10,6 +10,7 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/formatter.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
@@ -312,11 +313,10 @@ class ProductsDetailsScreen extends HookWidget {
                 physics: NeverScrollableScrollPhysics(),
                 children: [
                   for (int i = 0; i < product.images.length; i++)
-                    Image.network(
-                      product.images[i],
+                    AppNetworkImage(
+                      imageUrl: product.images[i],
                       height: 330.h,
                       width: 330.w,
-                      fit: BoxFit.contain,
                     ),
                 ],
               ),
