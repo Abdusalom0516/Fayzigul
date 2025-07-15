@@ -109,56 +109,55 @@ class HomeCategoryScreen extends HookWidget {
     //       .where((element) => element.categories.contains("Outdoor")),
     // ];
 
-    if(currentCategoryIndex == 2){
+    if (currentCategoryIndex == 2) {
       return SliverPadding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-          sliver: SliverGrid.builder(
-            itemCount: indoorProducts.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 155 / 197,
-              crossAxisSpacing: 15.w,
-              mainAxisSpacing: 15.h,
-            ),
-            itemBuilder: (context, index) => EquipmentsCard(
-              product: indoorProducts[index],
-            ),
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverGrid.builder(
+          itemCount: indoorProducts.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 155 / 197,
+            crossAxisSpacing: 15.w,
+            mainAxisSpacing: 15.h,
           ),
-        );
+          itemBuilder: (context, index) => EquipmentsCard(
+            product: indoorProducts[index],
+          ),
+        ),
+      );
     }
 
     return categoryTitle == texts.plants
         ? SliverPadding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-          sliver: SliverGrid.builder(
-            itemCount: listOfPlants.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 155 / 197,
-              crossAxisSpacing: 15.w,
-              mainAxisSpacing: 15.h,
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+            sliver: SliverGrid.builder(
+              itemCount: listOfPlants.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 155 / 197,
+                crossAxisSpacing: 15.w,
+                mainAxisSpacing: 15.h,
+              ),
+              itemBuilder: (context, index) => EquipmentsCard(
+                product: listOfPlants[index],
+              ),
             ),
-            itemBuilder: (context, index) => EquipmentsCard(
-              product: listOfPlants[index],
-            ),
-          ),
-        )
+          )
         : SliverPadding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-          sliver: SliverGrid.builder(
-            itemCount:
-                listOfEquipments.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 155 / 217,
-              crossAxisSpacing: 15.w,
-              mainAxisSpacing: 15.h,
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+            sliver: SliverGrid.builder(
+              itemCount: listOfEquipments.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 155 / 217,
+                crossAxisSpacing: 15.w,
+                mainAxisSpacing: 15.h,
+              ),
+              itemBuilder: (context, index) => EquipmentsCard(
+                product: listOfEquipments[index],
+              ),
             ),
-            itemBuilder: (context, index) => EquipmentsCard(
-              product: listOfEquipments[index],
-            ),
-          ),
-        );
+          );
   }
 
   SliverAppBar sliverAppBarSection(ConstColors colors) {
