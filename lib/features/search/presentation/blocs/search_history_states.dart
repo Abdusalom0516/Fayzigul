@@ -1,4 +1,4 @@
-import 'package:plant_store/features/home/models/product_model.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 
 class SearchHistoryStates {

@@ -10,7 +10,7 @@ import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_sizedbox_shrink.dart';
 import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_events.dart';

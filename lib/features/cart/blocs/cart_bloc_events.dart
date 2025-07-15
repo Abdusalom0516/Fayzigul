@@ -37,5 +37,3 @@ class OnCleanCart extends CartBlocEvents {
 
   OnCleanCart({required this.context});
 }
-
-class OnGetCartListClicked extends CartBlocEvents{}

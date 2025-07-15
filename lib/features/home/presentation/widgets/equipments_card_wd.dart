@@ -1,18 +1,14 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/utils/app_network_image.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
-import 'package:plant_store/features/home/screens/products_details_screen.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
+import 'package:plant_store/features/home/presentation/screens/products_details_screen.dart';
 
-class PlantCard extends StatelessWidget {
-  const PlantCard({
-    super.key,
-    required this.product,
-  });
+class EquipmentsCard extends StatelessWidget {
+  const EquipmentsCard({super.key, required this.product});
   final ProductModel product;
 
   @override
@@ -29,7 +25,6 @@ class PlantCard extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          log("Plant Card Pressed");
           AppRouter.go(ProductsDetailsScreen(product: product));
         },
         child: SizedBox(
@@ -58,14 +53,6 @@ class PlantCard extends StatelessWidget {
                       style: AppTextStyles.lato.medium(
                         color: colors.ff221fif,
                         fontSize: 19.sp,
-                      ),
-                    ),
-                    Text(
-                      overflow: TextOverflow.ellipsis,
-                      product.categories.first,
-                      style: AppTextStyles.lato.medium(
-                        color: colors.ffababab,
-                        fontSize: 16.sp,
                       ),
                     ),
                     Text(

@@ -15,10 +15,10 @@ import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/formatter.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc_events.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
-import 'package:plant_store/features/home/widgets/circle_arrow_icon_button_wd.dart';
-import 'package:plant_store/features/home/widgets/prod_details_category_card_wd.dart';
-import 'package:plant_store/features/home/widgets/product_details_card_wd.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
+import 'package:plant_store/features/home/presentation/widgets/circle_arrow_icon_button_wd.dart';
+import 'package:plant_store/features/home/presentation/widgets/prod_details_category_card_wd.dart';
+import 'package:plant_store/features/home/presentation/widgets/product_details_card_wd.dart';
 
 class ProductsDetailsScreen extends HookWidget {
   const ProductsDetailsScreen({super.key, required this.product});
