@@ -1,7 +1,7 @@
 import 'package:plant_store/features/cart/domain/entities/cart_product_entity.dart';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
 
 part 'cart_product_model.g.dart';
 

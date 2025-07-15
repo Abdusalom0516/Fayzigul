@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_store/features/home/blocs/plants_bloc/plants_events.dart';
-import 'package:plant_store/features/home/blocs/plants_bloc/plants_states.dart';
-import 'package:plant_store/features/home/models/product_model.dart';
+import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_events.dart';
+import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_states.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
 
 class PlantsBloc extends Bloc<PlantsBlocEvents, PlantsBlocStates> {
   PlantsBloc() : super(PlantsBlocInitialState()) {

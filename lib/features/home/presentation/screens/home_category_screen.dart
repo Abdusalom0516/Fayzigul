@@ -8,12 +8,12 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/features/home/blocs/equipments_bloc/equipments_bloc_state.dart';
-import 'package:plant_store/features/home/blocs/plants_bloc/plants_bloc.dart';
-import 'package:plant_store/features/home/blocs/plants_bloc/plants_states.dart';
-import 'package:plant_store/features/home/widgets/category_card_wd.dart';
-import 'package:plant_store/features/home/widgets/equipments_card_wd.dart';
+import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc.dart';
+import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc_state.dart';
+import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_bloc.dart';
+import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_states.dart';
+import 'package:plant_store/features/home/presentation/widgets/category_card_wd.dart';
+import 'package:plant_store/features/home/presentation/widgets/equipments_card_wd.dart';
 
 class HomeCategoryScreen extends HookWidget {
   const HomeCategoryScreen({super.key, required this.categoryTitle});
