@@ -102,12 +102,12 @@ class HomeCategoryScreen extends HookWidget {
           .where((element) => element.categories.contains("Indoor")),
     ];
 
-    final outdoorProducts = [
-      ...listOfPlants
-          .where((element) => element.categories.contains("Outdoor")),
-      ...listOfEquipments
-          .where((element) => element.categories.contains("Outdoor")),
-    ];
+    // final outdoorProducts = [
+    //   ...listOfPlants
+    //       .where((element) => element.categories.contains("Outdoor")),
+    //   ...listOfEquipments
+    //       .where((element) => element.categories.contains("Outdoor")),
+    // ];
 
     if(currentCategoryIndex == 2){
       return SliverPadding(
