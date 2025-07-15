@@ -1,9 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc_state.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_states.dart';
 import 'package:plant_store/features/home/data/models/product_model.dart';
+import 'package:plant_store/features/home/presentation/blocs/products_bloc/products_bloc.dart';
 import 'package:plant_store/features/search/data/datasources/local_datasource.dart';
 import 'package:plant_store/features/search/data/models/search_history_model.dart';
 import 'package:plant_store/features/search/data/repositories/search_history_repository_implementation.dart';
@@ -44,17 +41,9 @@ class SearchHistoryBloc extends Bloc<SearchHistoryEvents, SearchHistoryStates> {
         List<ProductModel> listOfSearchedProducts = [];
 
         if (event.context.mounted) {
-          final plantsBlocState = event.context.read<PlantsBloc>().state;
-          final equipmentsBlocState =
-              event.context.read<EquipmentsBloc>().state;
-          if (plantsBlocState is PlantsBlocSuccessState) {
-            listOfSearchedProducts.addAll(List.from(plantsBlocState.products));
-          }
-
-          if (equipmentsBlocState is EquipmentsBlocSuccessState) {
-            listOfSearchedProducts
-                .addAll(List.from(equipmentsBlocState.listOfProducts));
-          }
+          final productsBlocState = event.context.read<ProductsBloc>().state;
+          listOfSearchedProducts
+              .addAll(List.from(productsBlocState.productsList));
         }
 
         emit(state.copyWith(

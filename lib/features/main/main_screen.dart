@@ -9,10 +9,8 @@ import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc_even
 import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc.dart';
 import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc_events.dart';
 import 'package:plant_store/features/cart/presentation/screens/cart_screen.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc_events.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_events.dart';
+import 'package:plant_store/features/home/presentation/blocs/products_bloc/products_bloc.dart';
+import 'package:plant_store/features/home/presentation/blocs/products_bloc/products_bloc_events.dart';
 import 'package:plant_store/features/home/presentation/screens/home_screen.dart';
 import 'package:plant_store/features/profile/screens/profile_screen.dart';
 import 'package:plant_store/features/search/presentation/blocs/search_history_bloc.dart';
@@ -30,8 +28,7 @@ class MainScreen extends HookWidget {
 
     useEffect(() {
       if (!gotAllInfo.value) {
-        context.read<EquipmentsBloc>().add(OnGetEquipmentsClicked());
-        context.read<PlantsBloc>().add(OnGetProductsClicked());
+        context.read<ProductsBloc>().add(OnGetProductsClicked());
         context.read<SearchHistoryBloc>().add(OnGetSearchHistoryClicked());
         context.read<CheckoutBloc>().add(OnGetTransactionsClicked());
         context.read<CartBloc>().add(OnGetCartListClicked());

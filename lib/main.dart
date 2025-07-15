@@ -17,8 +17,6 @@ import 'package:plant_store/features/auth/blocs/sign_up/sign_up_bloc.dart';
 import 'package:plant_store/features/auth/blocs/verify_email/verify_email_bloc.dart';
 import 'package:plant_store/features/auth/screens/login_screen.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_bloc.dart';
 import 'package:plant_store/features/main/main_screen.dart';
 import 'package:plant_store/features/profile/bloc/profile_screen_bloc.dart';
 
