@@ -8,10 +8,7 @@ import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/equipments_bloc/equipments_bloc_state.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_bloc.dart';
-import 'package:plant_store/features/home/presentation/blocs/plants_bloc/plants_states.dart';
+import 'package:plant_store/features/home/presentation/blocs/products_bloc/products_bloc.dart';
 import 'package:plant_store/features/home/presentation/widgets/category_card_wd.dart';
 import 'package:plant_store/features/home/presentation/widgets/equipments_card_wd.dart';
 
@@ -90,16 +87,10 @@ class HomeCategoryScreen extends HookWidget {
 
   Widget productsGridViewSection(String categoryTitle, ConstTexts texts,
       int currentCategoryIndex, BuildContext context) {
-    final listOfPlants =
-        (context.read<PlantsBloc>().state as PlantsBlocSuccessState).products;
-    final listOfEquipments =
-        (context.read<EquipmentsBloc>().state as EquipmentsBlocSuccessState)
-            .listOfProducts;
+    final listOfPlants = context.read<ProductsBloc>().state.productsList;
 
     final indoorProducts = [
       ...listOfPlants.where((element) => element.categories.contains("Indoor")),
-      ...listOfEquipments
-          .where((element) => element.categories.contains("Indoor")),
     ];
 
     // final outdoorProducts = [
@@ -127,37 +118,21 @@ class HomeCategoryScreen extends HookWidget {
       );
     }
 
-    return categoryTitle == texts.plants
-        ? SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-            sliver: SliverGrid.builder(
-              itemCount: listOfPlants.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 155 / 197,
-                crossAxisSpacing: 15.w,
-                mainAxisSpacing: 15.h,
-              ),
-              itemBuilder: (context, index) => EquipmentsCard(
-                product: listOfPlants[index],
-              ),
-            ),
-          )
-        : SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
-            sliver: SliverGrid.builder(
-              itemCount: listOfEquipments.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 155 / 217,
-                crossAxisSpacing: 15.w,
-                mainAxisSpacing: 15.h,
-              ),
-              itemBuilder: (context, index) => EquipmentsCard(
-                product: listOfEquipments[index],
-              ),
-            ),
-          );
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+      sliver: SliverGrid.builder(
+        itemCount: listOfPlants.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 155 / 197,
+          crossAxisSpacing: 15.w,
+          mainAxisSpacing: 15.h,
+        ),
+        itemBuilder: (context, index) => EquipmentsCard(
+          product: listOfPlants[index],
+        ),
+      ),
+    );
   }
 
   SliverAppBar sliverAppBarSection(ConstColors colors) {
