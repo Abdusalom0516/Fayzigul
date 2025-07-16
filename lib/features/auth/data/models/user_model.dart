@@ -1,4 +1,4 @@
-import 'package:plant_store/features/auth/entities/user_entity.dart';
+import 'package:plant_store/features/auth/domain/entities/user_entity.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 

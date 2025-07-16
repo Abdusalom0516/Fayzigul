@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
-import 'package:plant_store/features/auth/blocs/verify_email/verify_email_bloc.dart';
-import 'package:plant_store/features/auth/blocs/verify_email/verify_email_events.dart';
-import 'package:plant_store/features/auth/blocs/verify_email/verify_email_states.dart';
+import 'package:plant_store/features/auth/presentation/blocs/verify_email/verify_email_bloc.dart';
+import 'package:plant_store/features/auth/presentation/blocs/verify_email/verify_email_events.dart';
+import 'package:plant_store/features/auth/presentation/blocs/verify_email/verify_email_states.dart';
 
 class ConfirmVerificationScreen extends StatelessWidget {
   const ConfirmVerificationScreen({super.key});
