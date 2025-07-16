@@ -152,6 +152,7 @@ class CheckoutScreen extends HookWidget {
               log("Continue Button Clicked.");
               context.read<CheckoutBloc>().add(OnCheckoutClicked(
                     context: context,
+                    listOfCheckoutProducts: checkoutProducts,
                     transactionsModel: TransactionsModel(
                       address: addressController.text.trim(),
                       date: DateTime.now(),
