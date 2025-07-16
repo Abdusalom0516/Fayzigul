@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/errors/firebase_auth_error_codes.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
-import 'package:plant_store/features/auth/blocs/sign_up/sign_up_events.dart';
-import 'package:plant_store/features/auth/blocs/sign_up/sign_up_states.dart';
-import 'package:plant_store/features/auth/screens/confirm_verification_screen.dart';
+import 'package:plant_store/features/auth/presentation/blocs/sign_up/sign_up_events.dart';
+import 'package:plant_store/features/auth/presentation/blocs/sign_up/sign_up_states.dart';
+import 'package:plant_store/features/auth/presentation/screens/confirm_verification_screen.dart';
 
 class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
   SignUpBloc() : super(SignUpInitial()) {

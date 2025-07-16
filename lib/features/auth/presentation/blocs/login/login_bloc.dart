@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/errors/firebase_auth_error_codes.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
-import 'package:plant_store/features/auth/blocs/login/login_events.dart';
-import 'package:plant_store/features/auth/blocs/login/login_states.dart';
+import 'package:plant_store/features/auth/presentation/blocs/login/login_events.dart';
+import 'package:plant_store/features/auth/presentation/blocs/login/login_states.dart';
 import 'package:plant_store/features/main/main_screen.dart';
 
 class LoginBloc extends Bloc<LoginEvents, AuthStates> {
