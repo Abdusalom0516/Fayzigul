@@ -6,4 +6,5 @@ abstract class CartRepository {
 
   // Method to get cart list
   Future<List<CartProductModel>> getCartList();
+
 }
