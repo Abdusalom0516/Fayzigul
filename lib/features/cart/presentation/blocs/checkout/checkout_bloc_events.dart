@@ -17,3 +17,4 @@ class OnCheckoutClicked extends CheckoutBlocEvents {
 }
 
 class OnGetTransactionsClicked extends CheckoutBlocEvents {}
+

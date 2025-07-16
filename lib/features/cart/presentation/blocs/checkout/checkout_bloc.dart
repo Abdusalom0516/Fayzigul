@@ -20,6 +20,9 @@ import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc_events.dart';
 import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc_events.dart';
 import 'package:plant_store/features/cart/presentation/blocs/checkout/checkout_bloc_states.dart';
+import 'package:plant_store/features/home/data/datasources/products_remote_data_sources.dart';
+import 'package:plant_store/features/home/data/repositories/products_repository_implementation.dart';
+import 'package:plant_store/features/home/domain/usecases/update_products_quantity_usecase.dart';
 import 'package:plant_store/features/main/main_screen.dart';
 
 class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
@@ -27,8 +30,12 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
       : super(CheckoutBlocStates(transactionsList: [], isLoading: false)) {
     final repository = TransactionsRepositoryImplementation(
         remoteDatasource: TransactionsRemoteDatasource());
+    final productsRepository = ProductsRepositoryImplementation(
+        remoteDataSources: ProductsRemoteDataSources());
     final saveTransactionsUsecase =
         SaveTransactionUsecase(repository: repository);
+    final updateProductsQuantityUsecase =
+        UpdateProductsQuantityUsecase(repository: productsRepository);
 
     final getTransactionsUsecase =
         GetTransactionsUsecase(repository: repository);
@@ -76,6 +83,9 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
             event.context.read<CartBloc>().add(OnRemoveProductFromCart(
                 product: elem.product, context: event.context));
           }
+
+          await updateProductsQuantityUsecase(
+              productsList: event.listOfCheckoutProducts);
 
           emit(state.copyWith(isLoading: false));
           AppRouter.close();
