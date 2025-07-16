@@ -28,15 +28,14 @@ class ProductsRemoteDataSources {
     var remoteProducts = await instance.collection("products").get();
 
     for (var elem in productsList) {
-      for (var doc in remoteProducts.docs) {
-        final product = ProductModel.fromJson(doc.data());
+      final product = remoteProducts.docs
+          .where((element) =>
+              ProductModel.fromJson(element.data()) == elem.product)
+          .first;
 
-        if (elem.product == product) {
-          doc.reference.update(elem.product
-              .copyWith(quantity: elem.product.quantity - elem.productQuantity)
-              .toJson() as Map<Object, Object?>);
-        }
-      }
+      product.reference.update(elem.product
+          .copyWith(quantity: (elem.product.quantity - elem.productQuantity))
+          .toJson() as Map<Object, Object?>);
     }
   }
 }
