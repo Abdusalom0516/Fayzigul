@@ -1,7 +1,7 @@
 class UserEntity {
   String uid;
-  String? displayName, email;
-  bool emailVerified, isAnonymous, phoneNumber, photoURL, refreshToken, tenanId;
+  String? displayName, email, phoneNumber, photoURL, refreshToken, tenanId;
+  bool emailVerified, isAnonymous;
   DateTime? creationTime, lastSignInTime;
 
   UserEntity({

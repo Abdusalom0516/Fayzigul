@@ -12,10 +12,10 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       displayName: json['displayName'] as String?,
       emailVerified: json['emailVerified'] as bool,
       isAnonymous: json['isAnonymous'] as bool,
-      phoneNumber: json['phoneNumber'] as bool,
-      photoURL: json['photoURL'] as bool,
-      refreshToken: json['refreshToken'] as bool,
-      tenanId: json['tenanId'] as bool,
+      phoneNumber: json['phoneNumber'] as String?,
+      photoURL: json['photoURL'] as String?,
+      refreshToken: json['refreshToken'] as String?,
+      tenanId: json['tenanId'] as String?,
       creationTime: json['creationTime'] == null
           ? null
           : DateTime.parse(json['creationTime'] as String),

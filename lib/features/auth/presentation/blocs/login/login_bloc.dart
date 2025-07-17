@@ -5,12 +5,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/errors/firebase_auth_error_codes.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
+import 'package:plant_store/features/auth/data/datasources/auth_local_data_source.dart';
+import 'package:plant_store/features/auth/data/models/user_model.dart';
+import 'package:plant_store/features/auth/data/repositories/auth_repository_implementation.dart';
+import 'package:plant_store/features/auth/domain/usecases/save_user_usecase.dart';
 import 'package:plant_store/features/auth/presentation/blocs/login/login_events.dart';
 import 'package:plant_store/features/auth/presentation/blocs/login/login_states.dart';
 import 'package:plant_store/features/main/main_screen.dart';
 
 class LoginBloc extends Bloc<LoginEvents, AuthStates> {
   LoginBloc() : super(LoginInitial()) {
+    AuthRepositoryImplementation repository =
+        AuthRepositoryImplementation(localDataSource: AuthLocalDataSource());
+
+    final saveUserUsecase = SaveUserUsecase(repository: repository);
+
     on<OnLoginButtonClicked>(
       (event, emit) async {
         emit(LoginLoading());
@@ -24,6 +33,19 @@ class LoginBloc extends Bloc<LoginEvents, AuthStates> {
           );
 
           if (credential.user != null) {
+            await saveUserUsecase(
+                user: UserModel(
+                    uid: credential.user!.uid,
+                    email: credential.user!.email,
+                    displayName: credential.user!.displayName,
+                    emailVerified: credential.user!.emailVerified,
+                    isAnonymous: credential.user!.isAnonymous,
+                    phoneNumber: credential.user!.phoneNumber,
+                    photoURL: credential.user!.photoURL,
+                    refreshToken: credential.user!.refreshToken,
+                    tenanId: credential.user!.tenantId,
+                    creationTime: credential.user!.metadata.creationTime,
+                    lastSignInTime: credential.user!.metadata.lastSignInTime));
             AppRouter.open(MainScreen());
             emit(LoginSuccess());
           }
