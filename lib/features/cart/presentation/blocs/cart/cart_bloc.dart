@@ -69,7 +69,7 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
             if (event.product.id == cartProductList[i].product.id) {
               cartProductList[i] = cartProductList[i].copyWith(
                   productQuantity:
-                      cartProductList[i].productQuantity + event.quantity);
+                      (cartProductList[i].productQuantity + event.quantity));
 
               emit(
                   CartBlocStates(cartProductsList: List.from(cartProductList)));
