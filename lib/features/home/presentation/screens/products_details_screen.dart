@@ -11,6 +11,7 @@ import 'package:plant_store/core/common/widgets/custom_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_text_button_wd.dart';
 import 'package:plant_store/core/utils/app_network_image.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/core/utils/formatter.dart';
 import 'package:plant_store/features/cart/presentation/blocs/cart/cart_bloc.dart';
@@ -28,6 +29,27 @@ class ProductsDetailsScreen extends HookWidget {
   Widget build(BuildContext context) {
     final quantity = useState(0);
     final pageController = usePageController();
+    useEffect(() {
+      quantity.value = context
+              .read<CartBloc>()
+              .state
+              .cartProductsList
+              .where(
+                (element) => element.product == product,
+              )
+              .isEmpty
+          ? 0
+          : context
+              .read<CartBloc>()
+              .state
+              .cartProductsList
+              .where(
+                (element) => element.product == product,
+              )
+              .first
+              .productQuantity;
+      return null;
+    }, []);
     return AppStateWrapper(
       builder: (colors, texts, images) => Scaffold(
         bottomNavigationBar: bottomNavigationSection(
@@ -205,11 +227,6 @@ class ProductsDetailsScreen extends HookWidget {
                                       product: product, context: context));
                               return;
                             }
-
-                            context.read<CartBloc>().add(OnMinusProductFromCart(
-                                product: product,
-                                quantity: quantity.value,
-                                context: context));
                           },
                           child: Icon(
                             Icons.indeterminate_check_box_outlined,
@@ -268,12 +285,11 @@ class ProductsDetailsScreen extends HookWidget {
                   quantity.value <= 0 ? colors.ffababab : colors.ff007537,
               func: () {
                 log("Add to Cart Button Clicked.");
-                context.read<CartBloc>().add(OnAddMultipleProductsToCart(
+                context.read<CartBloc>().add(OnUpdateProductsQuantityToCart(
                     product: product,
                     quantity: quantity.value,
                     context: context));
-
-                quantity.value = 0;
+                AppRouter.close();
               },
             )
           ],

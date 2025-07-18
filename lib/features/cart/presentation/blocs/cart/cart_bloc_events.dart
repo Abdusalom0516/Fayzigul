@@ -12,15 +12,16 @@ class OnAddProductToCart extends CartBlocEvents {
   final BuildContext context;
   final int quantity;
 
-  OnAddProductToCart({required this.product, required this.quantity, required this.context});
+  OnAddProductToCart(
+      {required this.product, required this.quantity, required this.context});
 }
 
-class OnAddMultipleProductsToCart extends CartBlocEvents {
+class OnUpdateProductsQuantityToCart extends CartBlocEvents {
   final int quantity;
   final ProductModel product;
   final BuildContext context;
 
-  OnAddMultipleProductsToCart(
+  OnUpdateProductsQuantityToCart(
       {required this.product, required this.quantity, required this.context});
 }
 

@@ -22,7 +22,7 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
     final saveCartListUsecase = SaveCartListUsecase(repository: repository);
 
     // Event Handling for OnAddMultipleProductsToCart Event
-    on<OnAddMultipleProductsToCart>(
+    on<OnUpdateProductsQuantityToCart>(
       (event, emit) async {
         // Cart Product List
         List<CartProductModel> cartProductList =
@@ -31,9 +31,8 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
         try {
           for (int i = 0; i < cartProductList.length; i++) {
             if (event.product.id == cartProductList[i].product.id) {
-              cartProductList[i] = cartProductList[i].copyWith(
-                  productQuantity:
-                      (cartProductList[i].productQuantity + event.quantity));
+              cartProductList[i] =
+                  cartProductList[i].copyWith(productQuantity: event.quantity);
 
               emit(
                   CartBlocStates(cartProductsList: List.from(cartProductList)));
