@@ -8,11 +8,19 @@ abstract class CartBlocEvents extends Equatable {
 }
 
 class OnAddProductToCart extends CartBlocEvents {
+  final ProductModel product;
+  final BuildContext context;
+  final int quantity;
+
+  OnAddProductToCart({required this.product, required this.quantity, required this.context});
+}
+
+class OnAddMultipleProductsToCart extends CartBlocEvents {
   final int quantity;
   final ProductModel product;
   final BuildContext context;
 
-  OnAddProductToCart(
+  OnAddMultipleProductsToCart(
       {required this.product, required this.quantity, required this.context});
 }
 
@@ -38,4 +46,4 @@ class OnCleanCart extends CartBlocEvents {
   OnCleanCart({required this.context});
 }
 
-class OnGetCartListClicked extends CartBlocEvents{}
+class OnGetCartListClicked extends CartBlocEvents {}

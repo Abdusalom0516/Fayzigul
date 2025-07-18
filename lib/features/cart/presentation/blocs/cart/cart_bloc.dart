@@ -58,6 +58,43 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
       },
     );
 
+    on<OnAddMultipleProductsToCart>(
+      (event, emit) async {
+        // Cart Product List
+        List<CartProductModel> cartProductList =
+            List<CartProductModel>.from(state.cartProductsList);
+
+        try {
+          for (int i = 0; i < cartProductList.length; i++) {
+            if (event.product.id == cartProductList[i].product.id) {
+              cartProductList[i] = cartProductList[i].copyWith(
+                  productQuantity:
+                      cartProductList[i].productQuantity + event.quantity);
+
+              emit(
+                  CartBlocStates(cartProductsList: List.from(cartProductList)));
+
+              await saveCartListUsecase(cartList: cartProductList);
+
+              Toastification.success(
+                  event.context, texts.productQuantityUpdatedSuc);
+              return;
+            }
+          }
+
+          cartProductList.add(CartProductModel(
+              product: event.product, productQuantity: event.quantity));
+          emit(CartBlocStates(cartProductsList: List.from(cartProductList)));
+          await saveCartListUsecase(cartList: cartProductList);
+          log("${cartProductList.length} length of the list.");
+          Toastification.success(event.context, texts.productAddedSuc);
+        } catch (e) {
+          Toastification.error(
+              event.context, texts.failedToAddProduct(e.toString()));
+        }
+      },
+    );
+
     // Event Handling for OnMinusProductFromCart Event
     on<OnMinusProductFromCart>(
       (event, emit) async {
