@@ -21,8 +21,8 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
     final getCartListUsecase = GetCartListUsecase(repository: repository);
     final saveCartListUsecase = SaveCartListUsecase(repository: repository);
 
-    // Event Handling for OnAddProductEvent Event
-    on<OnAddProductToCart>(
+    // Event Handling for OnAddMultipleProductsToCart Event
+    on<OnAddMultipleProductsToCart>(
       (event, emit) async {
         // Cart Product List
         List<CartProductModel> cartProductList =
@@ -32,7 +32,8 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
           for (int i = 0; i < cartProductList.length; i++) {
             if (event.product.id == cartProductList[i].product.id) {
               cartProductList[i] = cartProductList[i].copyWith(
-                  productQuantity: cartProductList[i].productQuantity + 1);
+                  productQuantity:
+                      (cartProductList[i].productQuantity + event.quantity));
 
               emit(
                   CartBlocStates(cartProductsList: List.from(cartProductList)));
@@ -49,7 +50,7 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
               product: event.product, productQuantity: event.quantity));
           emit(CartBlocStates(cartProductsList: List.from(cartProductList)));
           await saveCartListUsecase(cartList: cartProductList);
-          log("${cartProductList.length} length of the list.");
+
           Toastification.success(event.context, texts.productAddedSuc);
         } catch (e) {
           Toastification.error(
@@ -58,7 +59,8 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
       },
     );
 
-    on<OnAddMultipleProductsToCart>(
+    // Event Handling for OnAddProductEvent Event
+    on<OnAddProductToCart>(
       (event, emit) async {
         // Cart Product List
         List<CartProductModel> cartProductList =
@@ -68,8 +70,7 @@ class CartBloc extends Bloc<CartBlocEvents, CartBlocStates> {
           for (int i = 0; i < cartProductList.length; i++) {
             if (event.product.id == cartProductList[i].product.id) {
               cartProductList[i] = cartProductList[i].copyWith(
-                  productQuantity:
-                      (cartProductList[i].productQuantity + event.quantity));
+                  productQuantity: cartProductList[i].productQuantity + 1);
 
               emit(
                   CartBlocStates(cartProductsList: List.from(cartProductList)));

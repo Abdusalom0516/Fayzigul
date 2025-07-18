@@ -146,141 +146,137 @@ class ProductsDetailsScreen extends HookWidget {
     required ValueNotifier<int> quantity,
     required BuildContext context,
   }) {
-    return TextButton(
-      style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-      onPressed: () {
-        log("Add to Cart Button Clicked");
-        context.read<CartBloc>().add(OnAddMultipleProductsToCart(
-            product: product, quantity: quantity.value, context: context));
-      },
-      child: Card(
-        elevation: 7.5.r,
-        color: colors.ffffffff,
-        child: Container(
-          margin: EdgeInsets.only(bottom: 25.r),
-          height: 167.h,
-          width: double.infinity,
-          padding:
-              EdgeInsetsGeometry.symmetric(horizontal: 24.r, vertical: 15.r),
-          child: Column(
-            children: [
-              // Cart Summary Section
-              Column(
-                spacing: 5.h,
-                children: [
-                  // Number of Items Chosen and Subtotal Section
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.ellipsis,
-                          "${texts.youPicked} ${quantity.value} ${texts.items}",
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
+    return Card(
+      elevation: 7.5.r,
+      color: colors.ffffffff,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 25.r),
+        height: 167.h,
+        width: double.infinity,
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r, vertical: 15.r),
+        child: Column(
+          children: [
+            // Cart Summary Section
+            Column(
+              spacing: 5.h,
+              children: [
+                // Number of Items Chosen and Subtotal Section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                        "${texts.youPicked} ${quantity.value} ${texts.items}",
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.sp,
                         ),
                       ),
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.end,
-                          overflow: TextOverflow.ellipsis,
-                          texts.subtotal,
-                          style: AppTextStyles.lato.medium(
-                            color: colors.ff221fif,
-                            fontSize: 17.sp,
-                          ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        texts.subtotal,
+                        style: AppTextStyles.lato.medium(
+                          color: colors.ff221fif,
+                          fontSize: 17.sp,
                         ),
                       ),
-                    ],
-                  ),
-                  // Cart Quantity and Price Section
-                  Row(
-                    spacing: 15.w,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              quantity.value--;
-                              log("Cart Minus Button Clicked.");
-                              if (quantity.value <= 0) {
-                                context.read<CartBloc>().add(
-                                    OnRemoveProductFromCart(
-                                        product: product, context: context));
-                                return;
-                              }
-
+                    ),
+                  ],
+                ),
+                // Cart Quantity and Price Section
+                Row(
+                  spacing: 15.w,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            quantity.value--;
+                            log("Cart Minus Button Clicked.");
+                            if (quantity.value <= 0) {
                               context.read<CartBloc>().add(
-                                  OnMinusProductFromCart(
-                                      product: product,
-                                      quantity: quantity.value,
-                                      context: context));
-                            },
-                            child: Icon(
-                              Icons.indeterminate_check_box_outlined,
-                              size: 35.r,
-                              color: colors.ffababab,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 75.w,
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              quantity.value.toString(),
-                              style: AppTextStyles.lato.medium(
-                                color: colors.ff221fif,
-                                fontSize: 17.5.sp,
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              log("Cart Plus Button Clicked.");
-                              if (quantity.value >= product.quantity) {
-                                return;
-                              }
-                              quantity.value++;
-                            },
-                            child: Icon(
-                              Icons.add_box_outlined,
-                              size: 35.r,
-                              color: colors.ff221fif,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.end,
-                          overflow: TextOverflow.ellipsis,
-                          "\$${formatNumber((product.price * quantity.value))}",
-                          style: AppTextStyles.lato.bold(
-                            color: colors.ff221fif,
-                            fontSize: 24.w,
+                                  OnRemoveProductFromCart(
+                                      product: product, context: context));
+                              return;
+                            }
+
+                            context.read<CartBloc>().add(OnMinusProductFromCart(
+                                product: product,
+                                quantity: quantity.value,
+                                context: context));
+                          },
+                          child: Icon(
+                            Icons.indeterminate_check_box_outlined,
+                            size: 35.r,
+                            color: colors.ffababab,
                           ),
                         ),
+                        SizedBox(
+                          width: 75.w,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            quantity.value.toString(),
+                            style: AppTextStyles.lato.medium(
+                              color: colors.ff221fif,
+                              fontSize: 17.5.sp,
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            log("Cart Plus Button Clicked.");
+                            if (quantity.value >= product.quantity) {
+                              return;
+                            }
+                            quantity.value++;
+                          },
+                          child: Icon(
+                            Icons.add_box_outlined,
+                            size: 35.r,
+                            color: colors.ff221fif,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.ellipsis,
+                        "\$${formatNumber((product.price * quantity.value))}",
+                        style: AppTextStyles.lato.bold(
+                          color: colors.ff221fif,
+                          fontSize: 24.w,
+                        ),
                       ),
-                    ],
-                  )
-                ],
-              ),
-              Height(height: 15),
-              // Add to Cart Button Section
-              CustomTextButton(
-                buttonText: texts.addToCart,
-                textColor: colors.ffffffff,
-                backgroundColor:
-                    quantity.value <= 0 ? colors.ffababab : colors.ff007537,
-                func: () {
-                  log("Add to Cart Button Clicked.");
-                },
-              )
-            ],
-          ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Height(height: 15),
+            // Add to Cart Button Section
+            CustomTextButton(
+              buttonText: texts.addToCart,
+              textColor: colors.ffffffff,
+              backgroundColor:
+                  quantity.value <= 0 ? colors.ffababab : colors.ff007537,
+              func: () {
+                log("Add to Cart Button Clicked.");
+                context.read<CartBloc>().add(OnAddMultipleProductsToCart(
+                    product: product,
+                    quantity: quantity.value,
+                    context: context));
+
+                quantity.value = 0;
+              },
+            )
+          ],
         ),
       ),
     );
