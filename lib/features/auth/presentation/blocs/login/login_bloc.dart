@@ -35,17 +35,18 @@ class LoginBloc extends Bloc<LoginEvents, AuthStates> {
           if (credential.user != null) {
             await saveUserUsecase(
                 user: UserModel(
-                    uid: credential.user!.uid,
-                    email: credential.user!.email,
-                    displayName: credential.user!.displayName,
-                    emailVerified: credential.user!.emailVerified,
-                    isAnonymous: credential.user!.isAnonymous,
-                    phoneNumber: credential.user!.phoneNumber,
-                    photoURL: credential.user!.photoURL,
-                    refreshToken: credential.user!.refreshToken,
-                    tenanId: credential.user!.tenantId,
-                    creationTime: credential.user!.metadata.creationTime,
-                    lastSignInTime: credential.user!.metadata.lastSignInTime));
+              uid: credential.user!.uid,
+              email: credential.user!.email,
+              displayName: credential.user!.displayName,
+              emailVerified: credential.user!.emailVerified,
+              isAnonymous: credential.user!.isAnonymous,
+              phoneNumber: credential.user!.phoneNumber,
+              photoURL: credential.user!.photoURL,
+              refreshToken: credential.user!.refreshToken,
+              tenanId: credential.user!.tenantId,
+              creationTime: credential.user!.metadata.creationTime,
+              lastSignInTime: credential.user!.metadata.lastSignInTime,
+            ));
             AppRouter.open(MainScreen());
             emit(LoginSuccess());
           }
