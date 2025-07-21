@@ -28,9 +28,8 @@ class HomeCategoryScreen extends HookWidget {
             // Sliver App Bar Section
             sliverAppBarSection(colors),
             // Categotiy Buttons Section
-            categoryTitle == texts.equipments
-                ? SliverHeight(height: 17)
-                : categoryButtonsSection(texts, currentCategoryIndex),
+
+            categoryButtonsSection(texts, currentCategoryIndex),
             // Products GridView.builder Section
             productsGridViewSection(
                 categoryTitle, texts, currentCategoryIndex.value, context),
@@ -41,45 +40,34 @@ class HomeCategoryScreen extends HookWidget {
     );
   }
 
-  SliverToBoxAdapter categoryButtonsSection(
+  Widget categoryButtonsSection(
       ConstTexts texts, ValueNotifier<int> currentCategoryIndex) {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        height: 64.h,
-        width: double.infinity,
-        child: Row(
-          spacing: 3.w,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CategoryCard(
-              title: texts.all,
-              isChosen: currentCategoryIndex.value == 0,
-              func: () {
-                currentCategoryIndex.value = 0;
-              },
-            ),
-            CategoryCard(
-              title: texts.plants,
-              isChosen: currentCategoryIndex.value == 1,
-              func: () {
-                currentCategoryIndex.value = 1;
-              },
-            ),
-            CategoryCard(
-              title: texts.indoor,
-              isChosen: currentCategoryIndex.value == 2,
-              func: () {
-                currentCategoryIndex.value = 2;
-              },
-            ),
-            CategoryCard(
-              title: texts.outdoor,
-              isChosen: currentCategoryIndex.value == 3,
-              func: () {
-                currentCategoryIndex.value = 3;
-              },
-            ),
-          ],
+    return SliverPadding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 16.w),
+      sliver: SliverToBoxAdapter(
+        child: SizedBox(
+          height: 64.h,
+          width: double.infinity,
+          child: Row(
+            spacing: 3.w,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CategoryCard(
+                title: texts.plants,
+                isChosen: currentCategoryIndex.value == 0,
+                func: () {
+                  currentCategoryIndex.value = 0;
+                },
+              ),
+              CategoryCard(
+                title: texts.equipments,
+                isChosen: currentCategoryIndex.value == 1,
+                func: () {
+                  currentCategoryIndex.value = 1;
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
