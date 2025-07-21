@@ -270,7 +270,6 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    
       if (state.productsList.isEmpty) {
         return SliverPadding(
           padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
@@ -302,8 +301,7 @@ class HomeScreen extends HookWidget {
           ),
         ),
       );
-    } 
-  
+    }
   }
 
   SliverPadding homeScreenBottomEquipmentsGridViewSection(

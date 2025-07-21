@@ -59,7 +59,7 @@ class HomeCategoryScreen extends HookWidget {
               },
             ),
             CategoryCard(
-              title: texts.newC,
+              title: texts.plants,
               isChosen: currentCategoryIndex.value == 1,
               func: () {
                 currentCategoryIndex.value = 1;
