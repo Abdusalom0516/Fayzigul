@@ -273,7 +273,7 @@ class ProductsDetailsScreen extends HookWidget {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
             Height(height: 15),

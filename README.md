@@ -56,27 +56,42 @@ flutter run -d emulator-5554
 
 ```text
 lib/
-├── core/             # Constants, utilities
-├── features/         # Feature-based folders
+├── core/
+│   ├── common/          # shared widgets, styles, utils, etc.
+│   ├── error/           # failure classes, exceptions
+│   ├── services/        # global services (e.g., connectivity, analytics)
+│   └── usecases/        # abstract base use cases (optional)
+│
+├── features/
+│   ├── auth/            # Feature: Authentication
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   ├── models/
+│   │   │   └── repositories/
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   ├── repositories/
+│   │   │   └── usecases/
+│   │   └── presentation/
+│   │       ├── bloc/ or cubit/
+│   │       └── screens/
+│   │
 │   ├── home/
-│   ├── plant_details/
-│   ├── cart/
-│   └── care_tips/
-├── models/           # Data models
-├── services/         # Firebase or API services
-└── main.dart         # Entry point
+│   │   └── same as above...
+│
+└── main.dart
+
 ```
 
 ---
 
 ## 🧰 Built With
 
-- **Flutter** – Cross-platform UI toolkit  
-- **Firebase** – Auth, Firestore, Storage  
-- **Riverpod / Provider / BLoC** – State management  
-- **Dio / HTTP** – Networking  
-- **Intl** – Localization  
-- **Hive / SharedPreferences** – Local storage  
+- **Flutter** – Cross-platform UI toolkit
+- **Firebase** – Auth, Firestore, Storage
+- **BLoC** – State management
+- **Dio** – Networking
+- **Hive / SharedPreferences** – Local storage
 
 ---
 
@@ -84,23 +99,9 @@ lib/
 
 The app requires the following permissions:
 
-- Internet access  
-- Notification access (for care reminders)  
-- Storage (optional, for saving images)
+- Internet access
 
 > Make sure to add them in `AndroidManifest.xml` and `Info.plist`.
-
----
-
-## 🌍 Localization
-
-Fayzigul supports:
-
-- 🇺🇿 Uzbek  
-- 🇷🇺 Russian  
-- 🇬🇧 English  
-
-Translations are managed in `lib/l10n/`.
 
 ---
 
@@ -146,7 +147,7 @@ flutter build ios --release
 
 **Abdusalom Gayratov**  
 📧 [abdusalomgayratov7@gmail.com](mailto:abdusalomgayratov7@gmail.com)  
-📱 Telegram: [@yourtelegramhandle](https://t.me/yourtelegramhandle)  
+📱 Telegram: [@yourtelegramhandle](https://t.me/Abdusalom999_16)  
 
 ---
 
