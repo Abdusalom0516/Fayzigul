@@ -75,24 +75,22 @@ class HomeCategoryScreen extends HookWidget {
 
   Widget productsGridViewSection(String categoryTitle, ConstTexts texts,
       int currentCategoryIndex, BuildContext context) {
-    final listOfPlants = context.read<ProductsBloc>().state.productsList;
+    final productsList = context.read<ProductsBloc>().state.productsList;
 
-    final indoorProducts = [
-      ...listOfPlants.where((element) => element.categories.contains("Indoor")),
+    final plantsList = [
+      ...productsList.where((element) => element.categories.contains("Plants")),
     ];
 
-    // final outdoorProducts = [
-    //   ...listOfPlants
-    //       .where((element) => element.categories.contains("Outdoor")),
-    //   ...listOfEquipments
-    //       .where((element) => element.categories.contains("Outdoor")),
-    // ];
+    final equipmentsList = [
+      ...productsList
+          .where((element) => element.categories.contains("Equipments")),
+    ];
 
-    if (currentCategoryIndex == 2) {
+    if (currentCategoryIndex == 0) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverGrid.builder(
-          itemCount: indoorProducts.length,
+          itemCount: plantsList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 155 / 197,
@@ -100,7 +98,7 @@ class HomeCategoryScreen extends HookWidget {
             mainAxisSpacing: 15.h,
           ),
           itemBuilder: (context, index) => EquipmentsCard(
-            product: indoorProducts[index],
+            product: plantsList[index],
           ),
         ),
       );
@@ -109,7 +107,7 @@ class HomeCategoryScreen extends HookWidget {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
-        itemCount: listOfPlants.length,
+        itemCount: equipmentsList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 197,
@@ -117,7 +115,7 @@ class HomeCategoryScreen extends HookWidget {
           mainAxisSpacing: 15.h,
         ),
         itemBuilder: (context, index) => EquipmentsCard(
-          product: listOfPlants[index],
+          product: equipmentsList[index],
         ),
       ),
     );
