@@ -66,6 +66,13 @@ class HomeCategoryScreen extends HookWidget {
                   currentCategoryIndex.value = 1;
                 },
               ),
+              CategoryCard(
+                title: texts.careKit,
+                isChosen: currentCategoryIndex.value == 2,
+                func: () {
+                  currentCategoryIndex.value = 2;
+                },
+              ),
             ],
           ),
         ),
@@ -86,6 +93,10 @@ class HomeCategoryScreen extends HookWidget {
           .where((element) => element.categories.contains("Equipments")),
     ];
 
+    final careKitsList = [
+      ...productsList.where((element) => element.categories.contains("kit")),
+    ];
+
     if (currentCategoryIndex == 0) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
@@ -97,8 +108,25 @@ class HomeCategoryScreen extends HookWidget {
             crossAxisSpacing: 15.w,
             mainAxisSpacing: 15.h,
           ),
-          itemBuilder: (context, index) => EquipmentsCard(
+          itemBuilder: (context, index) => ProductsCard(
             product: plantsList[index],
+          ),
+        ),
+      );
+    }
+    if (currentCategoryIndex == 1) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverGrid.builder(
+          itemCount: equipmentsList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 155 / 197,
+            crossAxisSpacing: 15.w,
+            mainAxisSpacing: 15.h,
+          ),
+          itemBuilder: (context, index) => ProductsCard(
+            product: equipmentsList[index],
           ),
         ),
       );
@@ -107,15 +135,15 @@ class HomeCategoryScreen extends HookWidget {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
-        itemCount: equipmentsList.length,
+        itemCount: careKitsList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 197,
           crossAxisSpacing: 15.w,
           mainAxisSpacing: 15.h,
         ),
-        itemBuilder: (context, index) => EquipmentsCard(
-          product: equipmentsList[index],
+        itemBuilder: (context, index) => ProductsCard(
+          product: careKitsList[index],
         ),
       ),
     );

@@ -7,8 +7,8 @@ import 'package:plant_store/core/utils/app_state_wrapper.dart';
 import 'package:plant_store/features/home/data/models/product_model.dart';
 import 'package:plant_store/features/home/presentation/screens/products_details_screen.dart';
 
-class EquipmentsCard extends StatelessWidget {
-  const EquipmentsCard({super.key, required this.product});
+class ProductsCard extends StatelessWidget {
+  const ProductsCard({super.key, required this.product});
   final ProductModel product;
 
   @override

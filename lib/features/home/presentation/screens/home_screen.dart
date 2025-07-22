@@ -72,7 +72,8 @@ class HomeScreen extends HookWidget {
               homeScreenBottomPlantsTitleSection(texts, colors, texts.careKit),
               SliverHeight(height: 9),
               // Home Screen Bottom Kits ListView.builder Section
-              homeScreenBottomKitsListViewBuilderSection(),
+              homeScreenBottomKitsListViewBuilderSection(
+                  colors: colors, texts: texts, state: state),
               SliverHeight(height: 5),
             ],
           ),
@@ -81,12 +82,65 @@ class HomeScreen extends HookWidget {
     );
   }
 
-  SliverPadding homeScreenBottomKitsListViewBuilderSection() {
+  SliverPadding homeScreenBottomKitsListViewBuilderSection(
+      {required ConstColors colors,
+      required ConstTexts texts,
+      required ProductsBlocStates state}) {
+    if (state.isLoading) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: CustomLoading(),
+        ),
+      );
+    }
+    if (state.errorMessage != null) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              state.errorMessage!,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    final productsList = state.productsList;
+
+    final careKitsList = [
+      ...productsList.where((element) => element.categories.contains("kit")),
+    ];
+
+    if (careKitsList.isEmpty) {
+      return SliverPadding(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              texts.noProductsFound,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.r),
       sliver: SliverList.builder(
         itemCount: 3,
-        itemBuilder: (context, index) => KitCard(),
+        itemBuilder: (context, index) => KitCard(
+          product: careKitsList[index],
+        ),
       ),
     );
   }
@@ -269,7 +323,14 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
-    if (state.productsList.isEmpty) {
+
+    final productsList = state.productsList;
+
+    final plantsList = [
+      ...productsList.where((element) => element.categories.contains("Plants")),
+    ];
+
+    if (plantsList.isEmpty) {
       return SliverPadding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
         sliver: SliverToBoxAdapter(
@@ -285,10 +346,11 @@ class HomeScreen extends HookWidget {
         ),
       );
     }
+
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
-        itemCount: state.productsList.length,
+        itemCount: plantsList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 217,
@@ -296,7 +358,7 @@ class HomeScreen extends HookWidget {
           mainAxisSpacing: 15.h,
         ),
         itemBuilder: (context, index) => PlantCard(
-          product: state.productsList[index],
+          product: plantsList[index],
         ),
       ),
     );
@@ -348,18 +410,25 @@ SliverPadding homeScreenBottomEquipmentsGridViewSection(
       ),
     );
   } else {
+    final productsList = state.productsList;
+
+    final equipmentsList = [
+      ...productsList
+          .where((element) => element.categories.contains("Equipments")),
+    ];
+
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
-        itemCount: state.productsList.length,
+        itemCount: equipmentsList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 155 / 197,
           crossAxisSpacing: 15.w,
           mainAxisSpacing: 15.h,
         ),
-        itemBuilder: (context, index) => EquipmentsCard(
-          product: state.productsList[index],
+        itemBuilder: (context, index) => ProductsCard(
+          product: equipmentsList[index],
         ),
       ),
     );

@@ -17,28 +17,25 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppStateWrapper(
-      builder: (colors, texts, images) => Expanded(
-        child: TextButton(
-          style: ButtonStyle(
-              padding: WidgetStatePropertyAll(EdgeInsets.zero),
-              backgroundColor: WidgetStatePropertyAll(
-                  isChosen ? colors.ff007537 : colors.transparent),
-              shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r)),
-              )),
-          onPressed: func,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15.r, vertical: 5.r),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Text(
-              title,
-              style: AppTextStyles.lato.semiBold(
-                color: !isChosen ? colors.ffababab : colors.ffffffff,
-                fontSize: 17.sp,
-              ),
+      builder: (colors, texts, images) => TextButton(
+        style: ButtonStyle(
+            padding: WidgetStatePropertyAll(EdgeInsets.zero),
+            backgroundColor: WidgetStatePropertyAll(
+                isChosen ? colors.ff007537 : colors.transparent),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+            )),
+        onPressed: func,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15.r, vertical: 5.r),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Text(
+            title,
+            style: AppTextStyles.lato.semiBold(
+              color: !isChosen ? colors.ffababab : colors.ffffffff,
+              fontSize: 17.sp,
             ),
           ),
         ),
