@@ -394,7 +394,14 @@ SliverPadding homeScreenBottomEquipmentsGridViewSection(
     );
   }
 
-  if (state.productsList.isEmpty) {
+  final productsList = state.productsList;
+
+  final equipmentsList = [
+    ...productsList
+        .where((element) => element.categories.contains("Equipments")),
+  ];
+
+  if (equipmentsList.isEmpty) {
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverToBoxAdapter(
@@ -410,13 +417,6 @@ SliverPadding homeScreenBottomEquipmentsGridViewSection(
       ),
     );
   } else {
-    final productsList = state.productsList;
-
-    final equipmentsList = [
-      ...productsList
-          .where((element) => element.categories.contains("Equipments")),
-    ];
-
     return SliverPadding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 24.w),
       sliver: SliverGrid.builder(
