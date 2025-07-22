@@ -145,7 +145,7 @@ flutter build ios --release
 
 **Abdusalom Gayratov**  
 📧 [abdusalomgayratov7@gmail.com](mailto:abdusalomgayratov7@gmail.com)  
-📱 Telegram: [@yourtelegramhandle](https://t.me/Abdusalom999_16)  
+📱 Telegram: [@yourtelegramhandle](https://t.me/freedom999_16)  
 
 ---
 
