@@ -229,38 +229,15 @@ class HomeScreen extends HookWidget {
         spacing: 11.h,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Text
-              SizedBox(
-                width: 223.w,
-                child: Text(
-                  texts.plantaShining,
-                  style: AppTextStyles.lato.medium(
-                    color: colors.ff221fif,
-                    fontSize: 24.sp,
-                  ),
-                ),
+          SizedBox(
+            width: 223.w,
+            child: Text(
+              texts.plantaShining,
+              style: AppTextStyles.lato.medium(
+                color: colors.ff221fif,
+                fontSize: 24.sp,
               ),
-              // Cart Button
-              // Transform.translate(
-              //   offset: Offset(0, -15.h),
-              //   child: Container(
-              //     height: 48.h,
-              //     width: 48.w,
-              //     decoration: BoxDecoration(
-              //       color: colors.ff221fif,
-              //       shape: BoxShape.circle,
-              //     ),
-              //     child: Icon(
-              //       Icons.shopping_cart,
-              //       color: colors.fff6f6f6,
-              //       size: 24.r,
-              //     ),
-              //   ),
-              // )
-            ],
+            ),
           ),
           // See New Arrivals Button
           TextButton(
