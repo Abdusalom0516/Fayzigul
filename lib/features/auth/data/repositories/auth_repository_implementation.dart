@@ -16,4 +16,9 @@ class AuthRepositoryImplementation extends AuthRepository {
   Future<void> saveUserData({required UserModel user}) async {
     await localDataSource.saveUserToLocalDatabase(user);
   }
+
+  @override
+  Future<void> removeUserData() async {
+    await localDataSource.removeUserFromLocalDatabase();
+  }
 }

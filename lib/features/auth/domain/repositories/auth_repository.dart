@@ -6,4 +6,7 @@ abstract class AuthRepository {
 
   // Method to save user data
   Future<void> saveUserData({required UserModel user});
+
+  // Method to remove user data
+  Future<void> removeUserData();
 }
