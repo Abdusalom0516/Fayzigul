@@ -36,7 +36,6 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
         SaveTransactionUsecase(repository: repository);
     final updateProductsQuantityUsecase =
         UpdateProductsQuantityUsecase(repository: productsRepository);
-
     final getTransactionsUsecase =
         GetTransactionsUsecase(repository: repository);
 
