@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/utils/app_network_image.dart';
+import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
+import 'package:plant_store/features/home/data/models/product_model.dart';
+import 'package:plant_store/features/home/presentation/screens/products_details_screen.dart';
 
 class KitCard extends StatelessWidget {
-  const KitCard({
-    super.key,
-  });
+  const KitCard({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class KitCard extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          // AppRouter.go(ProductsDetailsScreen());
+          AppRouter.go(ProductsDetailsScreen(product: product));
         },
         child: Container(
           width: double.infinity,
@@ -44,7 +48,7 @@ class KitCard extends StatelessWidget {
                     children: [
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        'Lemon Balm Grow Kit',
+                        product.name,
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif,
                           fontSize: 19.sp,
@@ -53,7 +57,7 @@ class KitCard extends StatelessWidget {
                       Text(
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        'Include: Lemon Balm seeds, dung, Planta pot, marker...',
+                        product.description,
                         style: AppTextStyles.lato.medium(
                           color: colors.ff221fif.withValues(alpha: 0.63),
                           fontSize: 15.sp,
@@ -68,11 +72,10 @@ class KitCard extends StatelessWidget {
                   topRight: Radius.circular(8.r),
                   bottomRight: Radius.circular(8.r),
                 ),
-                child: Image.asset(
-                  images.kit,
+                child: AppNetworkImage(
+                  imageUrl: product.images.first,
                   height: 134.h,
                   width: 108.w,
-                  fit: BoxFit.contain,
                 ),
               )
             ],

@@ -18,12 +18,17 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppStateWrapper(
       builder: (colors, texts, images) => TextButton(
-        style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
+        style: ButtonStyle(
+            padding: WidgetStatePropertyAll(EdgeInsets.zero),
+            backgroundColor: WidgetStatePropertyAll(
+                isChosen ? colors.ff007537 : colors.transparent),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+            )),
         onPressed: func,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.r, vertical: 5.r),
           decoration: BoxDecoration(
-            color: isChosen ? colors.ff007537 : colors.transparent,
             borderRadius: BorderRadius.circular(8.r),
           ),
           child: Text(

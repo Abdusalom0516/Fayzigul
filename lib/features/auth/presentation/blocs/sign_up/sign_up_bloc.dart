@@ -1,4 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plant_store/core/errors/firebase_auth_error_codes.dart';
@@ -39,10 +41,14 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
               FirebaseAuthErrorCodes.loginErrorCodes.wrongPassword) {
             Toastification.error(event.context, "Password is incorrect.");
           } else {
-            Toastification.error(event.context, "Failed to Login.");
+            Toastification.error(event.context, "$e");
           }
 
           emit(SignUpFailure(message: e.message.toString()));
+        } catch (e) {
+          Toastification.error(event.context, "An unexpected error occurred.");
+          log("SignUpBloc Error: $e");
+          emit(SignUpFailure(message: e.toString()));
         }
       },
     );

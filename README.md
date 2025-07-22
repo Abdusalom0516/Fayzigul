@@ -18,8 +18,6 @@
 - 📖 Get detailed care instructions for each plant  
 - 🛒 Buy plants and related accessories directly from the app  
 - 🧠 Learn about watering, sunlight, soil, and repotting  
-- 🌍 Multi-language support (Uzbek, Russian, English)  
-- 🔔 Receive care reminders and plant tips  
 - 🔍 Smart search for plant species or symptoms  
 
 ---
@@ -135,19 +133,19 @@ flutter build ios --release
 
 ## 🤝 Contributing
 
-1. Fork the repo  
-2. Create your feature branch: `git checkout -b feature/awesome-feature`  
-3. Commit your changes: `git commit -m 'Add awesome feature'`  
-4. Push to the branch: `git push origin feature/awesome-feature`  
-5. Open a pull request  
+1. Fork the repo
+2. Create your feature branch: `git checkout -b feature/awesome-feature`
+3. Commit your changes: `git commit -m 'Add awesome feature'`
+4. Push to the branch: `git push origin feature/awesome-feature`
+5. Open a pull request
 
 ---
 
 ## 📧 Contact
 
-**Abdusalom Gayratov**  
-📧 [abdusalomgayratov7@gmail.com](mailto:abdusalomgayratov7@gmail.com)  
-📱 Telegram: [@yourtelegramhandle](https://t.me/Abdusalom999_16)  
+**Abdusalom G'ayratov**
+📧 [abdusalomgayratov7@gmail.com](mailto:abdusalomgayratov7@gmail.com)
+📱 Telegram: [@yourtelegramhandle](https://t.me/freedom999_16)
 
 ---
 

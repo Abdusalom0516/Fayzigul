@@ -7,15 +7,9 @@ class ProductsRemoteDataSources {
     List<ProductModel> productsList = [];
     final instance = FirebaseFirestore.instance;
 
-    final equipmentsData = await instance.collection("equipments").get();
+    final products = await instance.collection("products").get();
 
-    final plantsData = await instance.collection("products").get();
-
-    for (var elem in equipmentsData.docs) {
-      productsList.add(ProductModel.fromJson(elem.data()));
-    }
-
-    for (var elem in plantsData.docs) {
+    for (var elem in products.docs) {
       productsList.add(ProductModel.fromJson(elem.data()));
     }
 

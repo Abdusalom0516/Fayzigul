@@ -36,7 +36,6 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
         SaveTransactionUsecase(repository: repository);
     final updateProductsQuantityUsecase =
         UpdateProductsQuantityUsecase(repository: productsRepository);
-
     final getTransactionsUsecase =
         GetTransactionsUsecase(repository: repository);
 
@@ -90,7 +89,11 @@ class CheckoutBloc extends Bloc<CheckoutBlocEvents, CheckoutBlocStates> {
           emit(state.copyWith(isLoading: false));
           AppRouter.close();
           // Showing Go Home Screen Dialog
-          showSuccesDialog(colors, event);
+          if (event.context.mounted) {
+            await showSuccesDialog(colors, event);
+          } else {
+            log("Context is not mounted");
+          }
         } catch (e) {
           emit(state.copyWith(isLoading: false));
           AppRouter.close();

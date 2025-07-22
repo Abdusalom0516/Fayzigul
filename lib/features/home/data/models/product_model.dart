@@ -54,7 +54,7 @@ class ProductModel extends ProductEntity {
       quantity: quantity ?? this.quantity,
       stages: stages ?? this.stages,
       images: images ?? this.images,
-      categories: categories ?? this.images,
+      categories: categories ?? this.categories,
     );
   }
 }

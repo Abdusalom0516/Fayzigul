@@ -20,7 +20,8 @@ class ProdDetCategoryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: Text(
-          categoryTitle,
+          categoryTitle.substring(0, 1).toUpperCase() +
+              categoryTitle.substring(1).toLowerCase(),
           style: AppTextStyles.lato
               .medium(color: colors.ffffffff, fontSize: 17.sp),
         ),

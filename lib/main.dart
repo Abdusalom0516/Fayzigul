@@ -55,7 +55,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: AppRouter.navigatorKey,
           theme: Theme.of(context).copyWith(
-            appBarTheme: AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
+            appBarTheme:
+                AppBarTheme(iconTheme: IconThemeData(size: 24.w)),
             splashColor: Colors.transparent,
             // It remove the unecessary borders
             dividerColor: Colors.transparent,
