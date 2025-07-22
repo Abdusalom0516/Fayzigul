@@ -13,6 +13,6 @@ class AuthLocalDataSource {
     final sharedPreferenceInstance = await SharedPreferences.getInstance();
 
     return UserModel.fromJson(jsonDecode(
-        sharedPreferenceInstance.getString("user") ?? "Unknown - 999"));
+        sharedPreferenceInstance.getString("user") ?? "{}"));
   }
 }
