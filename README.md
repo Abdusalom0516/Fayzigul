@@ -18,8 +18,6 @@
 - 📖 Get detailed care instructions for each plant  
 - 🛒 Buy plants and related accessories directly from the app  
 - 🧠 Learn about watering, sunlight, soil, and repotting  
-- 🌍 Multi-language support (Uzbek, Russian, English)  
-- 🔔 Receive care reminders and plant tips  
 - 🔍 Smart search for plant species or symptoms  
 
 ---

@@ -23,9 +23,6 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpStates> {
             password: event.password,
           );
 
-          log("Credential: $credential");
-          log("User: ${credential.user}");
-
           if (credential.user != null) {
             await credential.user?.sendEmailVerification();
             AppRouter.go(ConfirmVerificationScreen());
