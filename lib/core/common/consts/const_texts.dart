@@ -100,4 +100,6 @@ class ConstTexts {
   String usernameCanNotBeEmpty = "Username can't be empty!";
   String youPaid = "You paid";
   String backtoHomePage = "Back to Homepage";
+  String allProducts = "All Products";
+  String products = "Products";
 }

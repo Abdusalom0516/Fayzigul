@@ -26,9 +26,8 @@ class HomeCategoryScreen extends HookWidget {
         body: CustomScrollView(
           slivers: [
             // Sliver App Bar Section
-            sliverAppBarSection(colors),
+            sliverAppBarSection(texts: texts, colors: colors),
             // Categotiy Buttons Section
-
             categoryButtonsSection(texts, currentCategoryIndex),
             // Products GridView.builder Section
             productsGridViewSection(
@@ -149,14 +148,15 @@ class HomeCategoryScreen extends HookWidget {
     );
   }
 
-  SliverAppBar sliverAppBarSection(ConstColors colors) {
+  SliverAppBar sliverAppBarSection(
+      {required ConstColors colors, required ConstTexts texts}) {
     return SliverAppBar(
       centerTitle: true,
       pinned: true,
       floating: true,
       backgroundColor: colors.ffffffff,
       title: Text(
-        categoryTitle,
+        texts.products,
         style: AppTextStyles.lato.medium(
           color: colors.ff221fif,
           fontSize: 23.sp,

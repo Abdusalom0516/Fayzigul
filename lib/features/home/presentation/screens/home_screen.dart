@@ -244,22 +244,22 @@ class HomeScreen extends HookWidget {
                 ),
               ),
               // Cart Button
-              Transform.translate(
-                offset: Offset(0, -15.h),
-                child: Container(
-                  height: 48.h,
-                  width: 48.w,
-                  decoration: BoxDecoration(
-                    color: colors.ff221fif,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.shopping_cart,
-                    color: colors.fff6f6f6,
-                    size: 24.r,
-                  ),
-                ),
-              )
+              // Transform.translate(
+              //   offset: Offset(0, -15.h),
+              //   child: Container(
+              //     height: 48.h,
+              //     width: 48.w,
+              //     decoration: BoxDecoration(
+              //       color: colors.ff221fif,
+              //       shape: BoxShape.circle,
+              //     ),
+              //     child: Icon(
+              //       Icons.shopping_cart,
+              //       color: colors.fff6f6f6,
+              //       size: 24.r,
+              //     ),
+              //   ),
+              // )
             ],
           ),
           // See New Arrivals Button
@@ -270,13 +270,14 @@ class HomeScreen extends HookWidget {
             ),
             onPressed: () {
               // log("See New Arrivals Clicked");
+              AppRouter.go(
+                  HomeCategoryScreen(categoryTitle: texts.allProducts));
             },
             child: Row(
-              mainAxisSize: MainAxisSize.min,
               spacing: 11.w,
               children: [
                 Text(
-                  texts.seeNewArrivals,
+                  texts.allProducts,
                   style: AppTextStyles.lato.medium(
                     color: colors.ff007537,
                     fontSize: 17.sp,
