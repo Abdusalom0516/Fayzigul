@@ -8,6 +8,7 @@ import 'package:plant_store/features/profile/bloc/profile_screen_bloc_events.dar
 import 'package:plant_store/features/profile/bloc/profile_scren_bloc_states.dart';
 import 'package:plant_store/features/profile/screens/edit_information_screen.dart';
 import 'package:plant_store/features/profile/screens/faqs_screen.dart';
+import 'package:plant_store/features/profile/screens/planting_guides_screen.dart';
 import 'package:plant_store/features/profile/screens/security_policy_screen.dart';
 import 'package:plant_store/features/profile/screens/terms_and_policy_screen.dart';
 import 'package:plant_store/features/profile/screens/transactions_history_screen.dart';
@@ -18,7 +19,9 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
       AppRouter.go(EditInformationScreen());
     });
 
-    on<OnPlantingGuideNavigationClicked>((event, emit) {});
+    on<OnPlantingGuideNavigationClicked>((event, emit) {
+      AppRouter.go(PlantingGuidesScreen());
+    });
 
     on<OnTransactionsHistoryNavigationClicked>((event, emit) {
       AppRouter.go(TransactionsHistoryScreen());
