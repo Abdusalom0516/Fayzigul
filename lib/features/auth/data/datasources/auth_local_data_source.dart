@@ -15,4 +15,9 @@ class AuthLocalDataSource {
     return UserModel.fromJson(jsonDecode(
         sharedPreferenceInstance.getString("user") ?? "{}"));
   }
+
+  Future<void> removeUserFromLocalDatabase() async {
+    final sharedPreferenceInstance = await SharedPreferences.getInstance();
+    await sharedPreferenceInstance.remove("user");
+  }
 }
