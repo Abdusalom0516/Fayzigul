@@ -29,7 +29,7 @@ final data = [
       "4. First Transplant (21\u201328 days)":
           "Transplant: Move seedlings to larger pots once 5\u20137\u202fcm tall."
     },
-    "categories": ["Plants","Low Maintenance", "Air Cleaners"],
+    "categories": ["Plants", "Low Maintenance", "Air Cleaners"],
     "images": ["https://iili.io/FTnp19f.png", "https://iili.io/FToK7PR.png"]
   },
   {
@@ -498,7 +498,7 @@ final data = [
       "3. Cleaning (10m)":
           "Wash with water, dry thoroughly, and store in a dry place."
     },
-    "categories": ["Equipments", "Support", "Structures", "Equipment"],
+    "categories": ["Equipments", "Support", "Structures"],
     "images": [
       "https://iili.io/FuekeGn.png",
       "https://iili.io/Fuev8V1.png",
@@ -531,7 +531,7 @@ final data = [
       "2. Usage (Varies)": "Fill reservoir as needed. Monitor plant health.",
       "3. Cleaning (10m)": "Empty reservoir, clean with mild soap, and dry."
     },
-    "categories": ["Equipments", "Watering", "Planters", "Equipment"],
+    "categories": ["Equipments", "Watering", "Planters"],
     "images": ["https://iili.io/FuePsn4.png", "https://iili.io/FuesJ5X.png"]
   },
   {
@@ -561,7 +561,7 @@ final data = [
       "3. Cleaning (5m)":
           "Wipe blades, dry, and apply light oil to prevent rust."
     },
-    "categories": ["Equipments", "Pruning", "Tools", "Equipment"],
+    "categories": ["Equipments", "Pruning", "Tools"],
     "images": [
       "https://iili.io/Fukfdkg.png",
       "https://iili.io/Fuep7Uv.png",
@@ -594,7 +594,7 @@ final data = [
           "Tie plant loosely to stake to allow natural movement.",
       "3. Cleaning (3m)": "Wash with water, dry, and store in a dry place."
     },
-    "categories": ["Equipments", "Support", "Tools", "Equipment"],
+    "categories": ["Equipments", "Support", "Tools"],
     "images": [
       "https://iili.io/FukTJYQ.png",
       "https://iili.io/FukTZSR.png",
@@ -626,10 +626,107 @@ final data = [
           "Run for 12-16 hours daily, adjusting based on plant needs.",
       "3. Cleaning (5m)": "Unplug, wipe with dry cloth, and store safely."
     },
-    "categories": ["Equipments", "Lighting", "Equipment", "Indoor"],
+    "categories": ["Equipments", "Lighting", "Indoor"],
     "images": [
       "https://iili.io/FukYJaa.png",
       "https://iili.io/Fuk7w2s.png",
     ]
   },
+  //////// kit
+  {
+    "id": 524,
+    "name": "Succulent Starter Pack",
+    "price": 8.79,
+    "origin": "Mexico",
+    "description": "A perfect kit to begin your succulent journey.",
+    "instruction":
+        "Use included gravel, soil, and pot to plant rooted cuttings.",
+    "mass": 0.7,
+    "massType": "kg",
+    "quantity": 150,
+    "images": [
+      "https://iili.io/FNvggg2.png",
+      "https://iili.io/FNvvgus.png",
+    ],
+    "categories": ["care", "kit", "succulent", "cactus"],
+    "basicKnowladge": {
+      "Step 1: Prepare all tools and seeds":
+          "Kit includes small shovel, pot, soil, and rooted cuttings.",
+      "Step 2: Light": "Needs 4–6 hours of direct sunlight daily.",
+      "Step 3: Soil": "Use well-draining cactus mix provided.",
+      "Step 4: Water": "Only water when soil is fully dry."
+    },
+    "stages": {
+      "1. Placement (Day 1)":
+          "Place cutting in center of soil. Do not water immediately.",
+      "2. Rooting Phase (1 week)":
+          "Let roots form naturally. Mist lightly if needed.",
+      "3. Growth Phase (2–3 weeks)": "Water lightly every 5–7 days.",
+      "4. Maintenance": "Remove dried leaves. Provide sunlight.",
+      "5. Decoration": "Add included decorative stones once grown."
+    }
+  },
+  {
+    "id": 525,
+    "name": "Rose Bloom Kit",
+    "price": 14.99,
+    "origin": "Netherlands",
+    "description": "Grow a beautiful mini rose with this indoor kit.",
+    "instruction": "Use the biodegradable pot and natural soil to begin.",
+    "mass": 1.5,
+    "massType": "kg",
+    "quantity": 50,
+    "images": [
+      "https://iili.io/FNvibHl.png",
+      "https://iili.io/FNvLYrb.png"
+    ],
+    "categories": ["care", "kit", "rose", "flowers"],
+    "basicKnowladge": {
+      "Step 1: Prepare all tools and seeds":
+          "Kit has pot, rose seeds, gloves, and soil pack.",
+      "Step 2: Light": "Keep under full sun for 6 hours minimum.",
+      "Step 3: Soil": "Nutrient-rich, moist soil included.",
+      "Step 4: Water": "Use watering can provided; water every 3 days."
+    },
+    "stages": {
+      "1. Seed Preparation": "Soak rose seeds in water for 24 hours.",
+      "2. Germination Phase (2–4 weeks)":
+          "Keep pot in sunny window, moist soil.",
+      "3. Seedling Care": "Thin out weaker sprouts.",
+      "4. Growth Phase": "Fertilize once every 10 days.",
+      "5. Blooming": "Expect blooms in 8–10 weeks."
+    }
+  },
+  {
+    "id": 527,
+    "name": "Sunflower Joy Kit",
+    "price": 7.99,
+    "origin": "USA",
+    "description":
+        "Bring sunlight to your room by growing cheerful sunflowers.",
+    "instruction": "Plant seeds in biodegradable pot and water daily.",
+    "mass": 1.2,
+    "massType": "kg",
+    "quantity": 200,
+    "images": [
+      "https://iili.io/FNvm5CB.png",
+      "https://iili.io/FNvmQyb.png"
+    ],
+    "categories": ["care", "kit", "sunflower", "joy"],
+    "basicKnowladge": {
+      "Step 1: Prepare all tools and seeds":
+          "Kit includes organic seeds, pot, soil, and stick label.",
+      "Step 2: Light": "Needs 6–8 hours of direct sun.",
+      "Step 3: Soil": "Use moist, rich compost provided.",
+      "Step 4: Water": "Keep soil moist; avoid waterlogging."
+    },
+    "stages": {
+      "1. Germination Phase (5–10 days)":
+          "Keep pot covered with plastic wrap until sprout.",
+      "2. Growth Phase": "Thin out seedlings once 5cm tall.",
+      "3. Maintenance": "Fertilize once a week.",
+      "4. Flowering": "Expect blooms in 7–8 weeks.",
+      "5. Seed Collection": "Dry heads and store seeds."
+    }
+  }
 ];
