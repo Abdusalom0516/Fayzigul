@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plant_store/core/common/consts/const_colors.dart';
 import 'package:plant_store/core/common/consts/const_text_styles.dart';
+import 'package:plant_store/core/common/consts/const_texts.dart';
 import 'package:plant_store/core/common/widgets/custom_loading_wd.dart';
 import 'package:plant_store/core/common/widgets/custom_sliver_height_wd.dart';
 import 'package:plant_store/core/utils/app_state_wrapper.dart';
@@ -26,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
           return CustomScrollView(
             slivers: [
               // Sliver Appbar Section
-              sliverAppBarSection(colors),
+              sliverAppBarSection(colors: colors, texts: texts),
               // Profile Image, Name & Email Section
               profileImageNameAndEmailSection(colors),
               SliverHeight(height: 35),
@@ -175,14 +176,15 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  SliverAppBar sliverAppBarSection(ConstColors colors) {
+  SliverAppBar sliverAppBarSection(
+      {required ConstColors colors, required ConstTexts texts}) {
     return SliverAppBar(
       centerTitle: true,
       pinned: true,
       floating: true,
       backgroundColor: colors.ffffffff,
       title: Text(
-        "Profile",
+        texts.profile,
         style: AppTextStyles.lato.medium(
           color: colors.ff221fif,
           fontSize: 23.sp,

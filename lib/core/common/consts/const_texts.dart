@@ -102,4 +102,6 @@ class ConstTexts {
   String backtoHomePage = "Back to Homepage";
   String allProducts = "All Products";
   String products = "Products";
+  String comingSoon = "Coming Soon...";
+  String profile = "Profile";
 }

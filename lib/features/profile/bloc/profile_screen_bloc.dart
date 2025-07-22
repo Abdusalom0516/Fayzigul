@@ -1,13 +1,14 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:plant_store/core/utils/app_router.dart';
 import 'package:plant_store/core/utils/toastification.dart';
+import 'package:plant_store/features/auth/presentation/screens/login_screen.dart';
 import 'package:plant_store/features/profile/bloc/profile_screen_bloc_events.dart';
 import 'package:plant_store/features/profile/bloc/profile_scren_bloc_states.dart';
 import 'package:plant_store/features/profile/screens/edit_information_screen.dart';
 import 'package:plant_store/features/profile/screens/faqs_screen.dart';
+import 'package:plant_store/features/profile/screens/terms_and_policy_screen.dart';
 import 'package:plant_store/features/profile/screens/transactions_history_screen.dart';
 
 class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
@@ -26,7 +27,9 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
       AppRouter.go(FaqsScreen());
     });
 
-    on<OnTermsAndSecurityNavigationClicked>((event, emit) {});
+    on<OnTermsAndSecurityNavigationClicked>((event, emit) {
+      AppRouter.go(TermsAndPolicyScreen());
+    });
 
     on<OnSecurityPolicyNavigationClicked>((event, emit) {});
 
@@ -38,11 +41,7 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
         final auth = FirebaseAuth.instance;
         await auth.signOut();
 
-        if (event.context.mounted) {
-          Phoenix.rebirth(event.context);
-        } else {
-          log("Context is not mounted, cannot navigate.");
-        }
+        AppRouter.open(LoginScreen());
       } catch (e) {
         if (event.context.mounted) {
           log("Error during logout: $e");
