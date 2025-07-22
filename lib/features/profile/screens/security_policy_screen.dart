@@ -45,7 +45,7 @@ class SecurityPolicyScreen extends StatelessWidget {
       floating: true,
       backgroundColor: colors.ffffffff,
       title: Text(
-        texts.term,
+        texts.secPol,
         style:
             AppTextStyles.lato.medium(color: colors.ff221fif, fontSize: 23.sp),
       ),

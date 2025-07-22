@@ -8,6 +8,7 @@ import 'package:plant_store/features/profile/bloc/profile_screen_bloc_events.dar
 import 'package:plant_store/features/profile/bloc/profile_scren_bloc_states.dart';
 import 'package:plant_store/features/profile/screens/edit_information_screen.dart';
 import 'package:plant_store/features/profile/screens/faqs_screen.dart';
+import 'package:plant_store/features/profile/screens/security_policy_screen.dart';
 import 'package:plant_store/features/profile/screens/terms_and_policy_screen.dart';
 import 'package:plant_store/features/profile/screens/transactions_history_screen.dart';
 
@@ -31,7 +32,9 @@ class ProfileScreenBloc extends Bloc<ProfileScreenEvents, ProfileScreenStates> {
       AppRouter.go(TermsAndPolicyScreen());
     });
 
-    on<OnSecurityPolicyNavigationClicked>((event, emit) {});
+    on<OnSecurityPolicyNavigationClicked>((event, emit) {
+      AppRouter.go(SecurityPolicyScreen());
+    });
 
     on<OnLogOutClicked>((event, emit) async {
       emit(ProfileScreenLoadingState());

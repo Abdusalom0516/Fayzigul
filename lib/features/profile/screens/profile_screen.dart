@@ -29,20 +29,20 @@ class ProfileScreen extends StatelessWidget {
               // Sliver Appbar Section
               sliverAppBarSection(colors: colors, texts: texts),
               // Profile Image, Name & Email Section
-              profileImageNameAndEmailSection(colors),
+              // profileImageNameAndEmailSection(colors),
               SliverHeight(height: 35),
               // Profile General Part Title Section
               profileTitleSection(colors, texts.general),
               SliverHeight(height: 5),
               // Profile General Part Cards Section
-              ProfileCard(
-                title: texts.editInfo,
-                func: () {
-                  context
-                      .read<ProfileScreenBloc>()
-                      .add(OnEditInformationNavigationClicked());
-                },
-              ),
+              // ProfileCard(
+              //   title: texts.editInfo,
+              //   func: () {
+              //     context
+              //         .read<ProfileScreenBloc>()
+              //         .add(OnEditInformationNavigationClicked());
+              //   },
+              // ),
               ProfileCard(
                 title: texts.plantGuide,
                 func: () {
